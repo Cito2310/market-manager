@@ -12,7 +12,7 @@ function createWindow() {
         // width: 520, // Ancho de la ventana
         // height: 660,  // Altura de la ventana
 
-        backgroundColor: "#282828", // Color de fondo
+        backgroundColor: "#ffffff", // Color de fondo
         titleBarStyle: 'hidden',
         fullscreen: true,
 
@@ -25,7 +25,7 @@ function createWindow() {
         // fullscreenable: true, // La ventana se puede redimensionar
         // maximizable: boolean, // La ventana se puede maximizar
         // minimizable: boolean, // La ventana se puede minimizar
-        // movable: boolean, // La ventana se puede mover
+        movable: true, // La ventana se puede mover
 
         // alwaysOnTop: boolean, // La ventana siempre se encuentra encima
         // kiosk: boolean, // La ventana se pone en modo kiosko

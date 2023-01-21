@@ -7,6 +7,5 @@ export const detectKeyUp = (
         document.removeEventListener("keyup", handlerWithReset)
         handler(event);
     }
-    console.log("Hola")
     document.addEventListener("keyup", handlerWithReset)
 }

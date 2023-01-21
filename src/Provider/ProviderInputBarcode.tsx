@@ -19,7 +19,7 @@ export const ProviderBarcode = ({ children }: props ) => {
     useLayoutEffect(() => {
         detectKeyUp(
             (event)=>{setBarcode(barcode + event!.key)},
-            /[0-9]/g
+            /^[0-9]+$/g
         )
     }, [barcode])
 
