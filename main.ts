@@ -9,11 +9,12 @@ function createWindow() {
     const mainWindow = new BrowserWindow({
         // title: string, // El nombre de la ventana
         // icon: string, // El icono de la ventana
-        width: 520, // Ancho de la ventana
-        height: 660,  // Altura de la ventana
+        // width: 520, // Ancho de la ventana
+        // height: 660,  // Altura de la ventana
 
         backgroundColor: "#282828", // Color de fondo
         titleBarStyle: 'hidden',
+        fullscreen: true,
 
         // minWidth: number, // Ancho minimo
         // minHeight: number, // Altura minimo
@@ -35,7 +36,6 @@ function createWindow() {
             preload: path.join(__dirname, "preload.ts")
         }
     })
-    
     attachTitlebarToWindow(mainWindow);
     // and load the index.html of the app.
     mainWindow.loadURL('http://localhost:5173')
@@ -46,8 +46,6 @@ app.whenReady().then(() => {
     createWindow()
 
     app.on('activate', function () {
-        // On macOS it's common to re-create a window in the app when the
-        // dock icon is clicked and there are no other windows open.
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
 })

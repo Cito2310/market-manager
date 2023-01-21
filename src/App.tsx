@@ -1,7 +1,13 @@
+import { useContext } from "react";
+
+import { ContextBarcode } from './Input_Barcode/ProviderInputBarcode';
+
 function App() {
+  const { barcode, setBarcode } = useContext(ContextBarcode)
+
   return (
     <div className="App">
-      Hello World
+      <h1>{ barcode }</h1>
     </div>
   )
 }
