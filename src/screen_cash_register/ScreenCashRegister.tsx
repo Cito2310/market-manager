@@ -10,7 +10,7 @@ export const ScreenCashRegister = () => {
     useEffect(()=>{
         const callApiProduct = async() => {
             // @ts-ignore
-            console.log(await window.electron.readApi());
+            // console.log(await window.electron.readApi());
         }
         callApiProduct()
     },[])
