@@ -1,0 +1,20 @@
+[
+    {
+        "barcode":"7794000006195",
+        "brand":"Hellmann's",
+        "type":"Ketchup",
+        "size":"60g"
+    },
+    {
+        "barcode":"7794000005013",
+        "brand":"Savora",
+        "type":"Mostaza",
+        "size":"60g"
+    },
+    {
+        "barcode":"7794000006096",
+        "brand":"Hellmann's",
+        "type":"Mayonesa",
+        "size":"125g"
+    }
+]

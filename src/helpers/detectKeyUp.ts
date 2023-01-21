@@ -3,10 +3,10 @@ export const detectKeyUp = (
     regex: RegExp
 ) => {
     const handlerWithReset = (event: KeyboardEvent) => {
-        document.removeEventListener("keyup", handlerWithReset)
         if (!regex.test(event.key)) return;
+        document.removeEventListener("keyup", handlerWithReset)
         handler(event);
     }
-
+    console.log("Hola")
     document.addEventListener("keyup", handlerWithReset)
 }
