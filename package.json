@@ -1,7 +1,7 @@
 {
   "name": "react-electron-ts-initial-project",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.1.0",
   "type": "module",
   "main": "main.ts",
   "scripts": {

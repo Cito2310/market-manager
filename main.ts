@@ -1,6 +1,7 @@
+const { readFileSync } =  require('fs');
 const path = require("path");
-const { app, BrowserWindow } = require('electron');
 const { setupTitlebar, attachTitlebarToWindow } = require("custom-electron-titlebar/main");
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 setupTitlebar()
 
@@ -52,4 +53,8 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') app.quit()
+})
+
+ipcMain.handle("read-api", async()=> {
+    return JSON.parse(readFileSync("./API_DATA_TEST.json", {encoding: "utf-8"}))
 })

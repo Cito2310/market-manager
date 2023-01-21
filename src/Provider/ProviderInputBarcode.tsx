@@ -1,4 +1,4 @@
-import { createContext, useState, useLayoutEffect, useMemo } from 'react';
+import { createContext, useState, useLayoutEffect } from 'react';
 import { detectKeyUp } from '../helpers/detectKeyUp';
 
 export const ContextBarcode = createContext({} as IBarcode);
