@@ -62,6 +62,10 @@ export const ScreenCashRegister = () => {
                     Total: { getTotalPrices() }
                 </h2>
             </div>
+
+            <button onClick={()=>{window.print()}}>
+                Print
+            </button>
         
         </>
 
