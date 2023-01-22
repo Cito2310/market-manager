@@ -1,5 +1,6 @@
 import { createContext, useState, useLayoutEffect } from 'react';
 import { IProduct } from '../interfaces/IProduct';
+import { productsData } from '../../data/products';
 
 export const ContextProducts = createContext({} as IProducts);
 
@@ -14,9 +15,10 @@ interface props {
 
 export const ProviderProducts = ({ children }: props ) => {
     const [products, setProducts] = useState<IProduct[]>([]);
-
-    useLayoutEffect(() => {
-    }, [])
+    
+    useLayoutEffect(()=>{
+        setProducts(productsData)
+    },[])
 
     return(
         <ContextProducts.Provider value={{ products }}>

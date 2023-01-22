@@ -8,7 +8,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>{ barcode }</h1>
       <ScreenCashRegister></ScreenCashRegister>
     </div>
   )

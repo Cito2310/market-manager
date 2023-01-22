@@ -3,4 +3,5 @@ export interface IProduct {
     brand: string,
     size: string,
     type: string,
+    price: number,
 }
