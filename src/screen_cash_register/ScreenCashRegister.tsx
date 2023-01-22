@@ -34,12 +34,11 @@ export const ScreenCashRegister = () => {
     }, [barcode])
 
     const getTotalPrices = (): number => {
-        const arrPrices: number[] = listProduct.map(product => product.price); 
-        return arrPrices.reduce((acc, cur) => acc + cur, 0
+        const arrPricesAmount: [number, number][] = listProduct.map(product => [product.price, product.amount || 1]); 
+        return arrPricesAmount.reduce((acc, cur) => acc + (cur[0]*cur[1]), 0
         )
     }
     
-
     return (
         <>
             <div>{barcode}</div>
