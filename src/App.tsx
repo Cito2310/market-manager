@@ -1,7 +1,9 @@
+import { ScreenCashRegister } from './screen_cash_register/ScreenCashRegister';
+
 function App() {
   return (
     <div className="App">
-      hello world
+      <ScreenCashRegister/>
     </div>
   );
 }

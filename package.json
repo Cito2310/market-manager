@@ -1,6 +1,6 @@
 {
   "name": "market-manager",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "",
   "description": "",
   "keywords": [
@@ -19,7 +19,10 @@
   },
   "scripts": {
     "dev": "concurrently \"cross-env BROWSER=none react-scripts start\" \"wait-on http://127.0.0.1:3000 && tsc -p electron -w\" \"wait-on http://127.0.0.1:3000 && tsc -p electron && electron .\"",
-    "build": "react-scripts build && tsc -p electron && electron-builder"
+    "build": "react-scripts build && tsc -p electron && electron-builder",
+    "update-patch": "npm version --force --no-git-tag-version patch",
+    "update-minor": "npm version --force --no-git-tag-version minor",
+    "update-major": "npm version --force --no-git-tag-version major"
   },
   "build": {
     "extends": null,
