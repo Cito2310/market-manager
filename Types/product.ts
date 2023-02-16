@@ -7,3 +7,7 @@ export interface IProduct {
     price: number,
     size: string,
 }
+
+export interface IProductWithAmount extends IProduct {
+    amount: number,
+}
