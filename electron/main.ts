@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
+import { ipcConnections } from './ipcConnection';
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -7,6 +8,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       // contextIsolation: false,
+      // sandbox: false,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -36,3 +38,5 @@ app.whenReady().then(() => {
     }
   });
 });
+
+ipcConnections();
