@@ -1,14 +1,24 @@
-import { ipcMain, ipcRenderer } from 'electron';
+import { ipcMain } from 'electron';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
-
-import { ipcNames } from '../Types/ipcNames';
-import * as path from 'path';
 import axios from 'axios';
 
+import { ipcNames } from '../Types/ipcNames';
+import { IProduct } from '../Types/product';
+
+
 export const ipcConnections = () => {
-    ipcMain.on("get-data-products" as ipcNames, async (e, args) => {
+
+    ipcMain.handle("save-data-products" as ipcNames, async (e, args) => {
         if (!existsSync("./database")) mkdirSync("./database");
-        const resp = await axios.get("https://market-product-rest.onrender.com/api/product/", {headers: {token: args}})
-        writeFileSync("./database/data_products.json", JSON.stringify(resp.data))
+        const { status, data } = await axios.get<IProduct[]>("https://market-product-rest.onrender.com/api/product/", {headers: {token: args}});
+
+        if (status !== 200) {
+            const response = await axios.get<IProduct[]>("./database/data_products.json");
+            return response.data;
+        }
+        
+        writeFileSync("./database/data_products.json", JSON.stringify(data));
+        return data;
     })
+
 }

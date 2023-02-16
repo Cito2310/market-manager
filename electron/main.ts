@@ -37,6 +37,7 @@ app.whenReady().then(() => {
       app.quit();
     }
   });
-});
+  
+  ipcConnections();
 
-ipcConnections();
+});

@@ -2,6 +2,6 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 import { ipcNames } from '../Types/ipcNames';
 
-contextBridge.exposeInMainWorld( "electronApi", {
-    saveProductsList: ( token: string ) => ipcRenderer.send( "get-data-products" as ipcNames, token )
+contextBridge.exposeInMainWorld( "electronAPI", {
+    saveDataProduct: ( token: string ) => ipcRenderer.invoke( "save-data-products" as ipcNames, token )
 })

@@ -1,1 +1,1 @@
-export type ipcNames = "get-data-products" | "";
+export type ipcNames = "save-data-products" | "";

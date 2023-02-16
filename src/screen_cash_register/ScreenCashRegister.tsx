@@ -4,9 +4,25 @@ import axios from "axios";
 import { detectKeyUp } from './detectKeyUp';
 
 import { loginResp } from '../../Types/axiosResponse';
+import { IProduct } from '../../Types/product';
 
 export const ScreenCashRegister = () => {
+    const [dataProduct, setDataProduct] = useState<IProduct[]>([]);
     const [barcode, setBarcode] = useState<string>("");
+
+    useEffect(() => {
+        const funcGetProducts = async() => {
+            const resp: loginResp = await axios.post("https://market-product-rest.onrender.com/api/user/login", {
+                username: "adminUser",
+                password: "adminUser",
+            })
+            if (resp.status === 200) {
+                const data = await window.electronAPI.saveDataProduct(resp.data.token);
+                setDataProduct(data);
+            }
+        }
+        funcGetProducts();
+    }, [])
 
     useEffect(() => {
         detectKeyUp(
@@ -20,21 +36,11 @@ export const ScreenCashRegister = () => {
         }
     }, [barcode])
 
-    const onTest = async() => {
-        const resp: loginResp = await axios.post("https://market-product-rest.onrender.com/api/user/login", {
-            username: "adminUser",
-            password: "adminUser",
-        })
-        if ( resp.status === 200 ) {
-            // @ts-ignore
-            window.electronApi.saveProductsList(resp.data.token)
-        }
-    }
 
     return (
         <>
-        <button onClick={onTest} >CLICK</button>
-        <div>Hola: {barcode}</div>
+            <div>{JSON.stringify(dataProduct)}</div>
+            <div>Hola: {barcode}</div>
         </>
     )
 }

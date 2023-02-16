@@ -1,7 +1,9 @@
 export interface IProduct {
+    _id: string,
     barcode: string,
     brand: string,
-    size: string,
-    type: string,
+    category: string,
+    name: string,
     price: number,
+    size: string,
 }
