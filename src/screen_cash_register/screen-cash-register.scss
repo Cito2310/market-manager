@@ -12,16 +12,16 @@
         .product-item-top {
             background-color: #282828;
             color: #fff;
-            font-weight: 800;
+            font-weight: 700;
         }
 
         .product-item {
             border-bottom: 1px #b3b3b3 solid;
             display: grid;
             font-size: 1.2em;
-            grid-template-columns: 1fr 7em 7em 4em;
+            grid-template-columns: 1fr 7em 7em 7em;
             height: 1em;
-            padding: 0.2em 0.8em;
+            padding: 0.2em 0.8em 0.4em;
             word-break:break-all;
 
             p {all: unset}

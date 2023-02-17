@@ -7,6 +7,7 @@ import { loginResp } from '../../Types/axiosResponse';
 import { IProduct, IProductWithAmount } from '../../Types/product';
 
 import "./screen-cash-register.scss"
+import { priceFormat } from '../helpers/priceFormat';
 
 export const ScreenCashRegister = () => {
     const [dataProduct, setDataProduct] = useState<IProduct[]>([]);
@@ -76,36 +77,17 @@ export const ScreenCashRegister = () => {
                     { shoppingCart.map( 
                             ({ _id, barcode, brand, category, name, price, size, amount }, index) => <li key={barcode} className='product-item'>
                                 <p className='product-item-text'>{`${brand} ${name} ${size}`}</p>
-                                <p className='product-item-text'>{price}</p>
+                                <p className='product-item-text'>{priceFormat( price )}</p>
                                 <p className='product-item-text'>{amount}</p>
-                                <p className='product-item-text'>{amount*price}</p>
+                                <p className='product-item-text'>{priceFormat( amount*price )}</p>
                             </li>
                     ) }
-
-                    {/* <li className='product-item product-item-even'>
-                        <p className='product-item-text'>ARCOR NARANJA 18G</p>
-                        <p className='product-item-text'>500</p>
-                        <p className='product-item-text'>2</p>
-                        <p className='product-item-text'>1000</p>
-                    </li>
-                    <li className='product-item product-item-odd'>
-                        <p className='product-item-text'>TANG MANZANA 15G</p>
-                        <p className='product-item-text'>420</p>
-                        <p className='product-item-text'>2</p>
-                        <p className='product-item-text'>840</p>
-                    </li>
-                    <li className='product-item product-item-even'>
-                        <p className='product-item-text'>TANG NARANJA 15G</p>
-                        <p className='product-item-text'>500</p>
-                        <p className='product-item-text'>2</p>
-                        <p className='product-item-text'>1000</p>
-                    </li> */}
                 </ul>
             </section>
 
             <section className='section-total'>
                 <p className='total-price'>
-                    TOTAL : { shoppingCart.reduce((prev, curr) => prev + curr.price*curr.amount,0) }
+                    TOTAL : $ { priceFormat(shoppingCart.reduce((prev, curr) => prev + curr.price*curr.amount,0)) }
                 </p>
             </section>
         </div>
