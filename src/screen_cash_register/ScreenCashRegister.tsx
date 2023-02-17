@@ -66,23 +66,48 @@ export const ScreenCashRegister = () => {
         <div className='screen-cash-register'>
             <section className='section-shopping-cart'>
                 <ul>
-                    {
-                        shoppingCart.map( 
-                            ({ _id, barcode, brand, category, name, price, size, amount }) => <li key={barcode} className='product-item'>
-                                <p>{`${brand} ${name} ${size}`}</p>
-                                <p>{price}</p>
-                                <p>{amount}</p>
+                    <li className='product-item product-item-top'>
+                        <p className='product-item-text'>PRODUCTO</p>
+                        <p className='product-item-text'>PRECIO X U</p>
+                        <p className='product-item-text'>CANTIDAD</p>
+                        <p className='product-item-text'>TOTAL</p>
+                    </li>
+
+                    { shoppingCart.map( 
+                            ({ _id, barcode, brand, category, name, price, size, amount }, index) => <li key={barcode} className='product-item'>
+                                <p className='product-item-text'>{`${brand} ${name} ${size}`}</p>
+                                <p className='product-item-text'>{price}</p>
+                                <p className='product-item-text'>{amount}</p>
+                                <p className='product-item-text'>{amount*price}</p>
                             </li>
-                        )
-                    }
+                    ) }
+
+                    {/* <li className='product-item product-item-even'>
+                        <p className='product-item-text'>ARCOR NARANJA 18G</p>
+                        <p className='product-item-text'>500</p>
+                        <p className='product-item-text'>2</p>
+                        <p className='product-item-text'>1000</p>
+                    </li>
+                    <li className='product-item product-item-odd'>
+                        <p className='product-item-text'>TANG MANZANA 15G</p>
+                        <p className='product-item-text'>420</p>
+                        <p className='product-item-text'>2</p>
+                        <p className='product-item-text'>840</p>
+                    </li>
+                    <li className='product-item product-item-even'>
+                        <p className='product-item-text'>TANG NARANJA 15G</p>
+                        <p className='product-item-text'>500</p>
+                        <p className='product-item-text'>2</p>
+                        <p className='product-item-text'>1000</p>
+                    </li> */}
                 </ul>
             </section>
 
             <section className='section-total'>
-
+                <p className='total-price'>
+                    TOTAL : { shoppingCart.reduce((prev, curr) => prev + curr.price*curr.amount,0) }
+                </p>
             </section>
-            {/* <div>{JSON.stringify(sdataProduct)}</div> */}
-            <div>Hola: {barcode}</div>
         </div>
     )
 }

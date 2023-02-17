@@ -1,3 +1,46 @@
 .screen-cash-register {
-    background-color: red;
+    display: grid;
+    grid-template-rows: 1fr 4em;
+    height: 100vh;
+
+    .section-shopping-cart {
+        background-color: #e9e9e9;
+        height: 90%;
+    
+        ul {all:unset}
+
+        .product-item-top {
+            background-color: #282828;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .product-item {
+            border-bottom: 1px #b3b3b3 solid;
+            display: grid;
+            font-size: 1.2em;
+            grid-template-columns: 1fr 7em 7em 4em;
+            height: 1em;
+            padding: 0.2em 0.8em;
+            word-break:break-all;
+
+            p {all: unset}
+        }
+
+        .product-item-even { background-color: #dadada }
+        .product-item-odd { background-color: #ebebeb }
+    }
+
+    .section-total {
+        display: flex;
+        flex-direction: row-reverse;
+        background-color: #c9c9c9;
+        font-weight: 800;
+        padding: 1em;
+
+        .total-price {
+            margin: auto 0;
+            font-size: 2em;
+        }
+    }
 }
