@@ -8,6 +8,7 @@ import { IProduct, IProductWithAmount } from '../../Types/product';
 
 import "./screen-cash-register.scss"
 import { priceFormat } from '../helpers/priceFormat';
+// import { ModalNotFoundProduct } from '../modals/ModalNotFoundProduct';
 
 export const ScreenCashRegister = () => {
     const [dataProduct, setDataProduct] = useState<IProduct[]>([]);
@@ -64,6 +65,8 @@ export const ScreenCashRegister = () => {
 
 
     return (
+        <>
+            {/* <ModalNotFoundProduct/> */}
         <div className='screen-cash-register'>
             <section className='section-shopping-cart'>
                 <ul>
@@ -91,5 +94,6 @@ export const ScreenCashRegister = () => {
                 </p>
             </section>
         </div>
+        </>
     )
 }
