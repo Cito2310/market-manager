@@ -1,0 +1,28 @@
+$grey-0: #dadada;
+$grey-1: #c5c5c5;
+$grey-2: #afafaf;
+
+.input-container {
+    label, input, select, option  { all: unset }
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label { margin: 0 4px }
+
+
+    input, select, option {
+        background-color: $grey-0;
+        border-radius: 6px;
+        border: 1px $grey-1 solid;
+        padding: 4px 6px;
+
+        &::placeholder { color: $grey-2; }
+    }
+
+    select {
+        cursor: pointer;
+        &:focus { border-radius: 6px 6px 0 0 }
+    }
+}
