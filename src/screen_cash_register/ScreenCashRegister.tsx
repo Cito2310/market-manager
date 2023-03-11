@@ -7,7 +7,7 @@ import { loginResp } from '../../Types/axiosResponse';
 import { IProduct, IProductWithAmount } from '../../Types/product';
 
 import "./screen-cash-register.scss"
-import { priceFormat } from '../helpers/priceFormat';
+import { priceFormat } from '../helpersAndHooks/priceFormat';
 // import { ModalNotFoundProduct } from '../modals/ModalNotFoundProduct';
 
 export const ScreenCashRegister = () => {

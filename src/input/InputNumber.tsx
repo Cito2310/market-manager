@@ -5,9 +5,12 @@ interface props {
     placeholder: number
     length?: { min?: number, max?: number }
     defaultValue?: number
+    name: string
+    value: string
+    onChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const InputNumber = ({ label, placeholder, length, defaultValue }: props) => {
+export const InputNumber = ({ label, placeholder, length, defaultValue, value, name, onChange }: props) => {
     return (
         <div className="input-container">
             <label>{label}</label>
@@ -17,6 +20,9 @@ export const InputNumber = ({ label, placeholder, length, defaultValue }: props)
                 placeholder={String(placeholder)}
                 max={length?.max}
                 min={length?.min}
+                name={name}
+                value={value}
+                onChange={onChange}
             />
         </div>
     )

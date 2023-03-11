@@ -76,7 +76,12 @@ $t-transition: 0.2s;
         .title-modal, .btn-exit-modal { margin: auto 0 }
     }
 
-    .modal-div-body { margin-bottom: 6px }
+    .modal-div-body {
+        margin-bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
     .modal-div-footer {
         display: flex;
         flex-direction: row-reverse; 

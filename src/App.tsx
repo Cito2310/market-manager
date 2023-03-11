@@ -4,25 +4,22 @@ import "./config.scss"
 import { InputText } from './input/InputText';
 import { InputSelect } from './input/InputSelect';
 import { InputNumber } from './input/InputNumber';
+import { ModalFormCreateProduct } from './modals/ModalFormCreateProduct';
 
 function App() {
   return (
     <div className="App">
       {/* <ScreenCashRegister/> */}
-      <InputText
-        label='Nombre'
-        placeholder='Nombre'
-      />
-
-      <InputSelect
-        label='select'
-      />
-
-      <InputNumber
-        label='number'
-        placeholder={225}
-        defaultValue={20}
-        length={{min: 0}}
+      <ModalFormCreateProduct
+        buttons={[
+          {
+            color: "primary",
+            handler: () => {console.log("Hola")},
+            label: "Hola"
+          }
+        ]}
+        funcExit={()=>{console.log("exit")}}
+        title="Crear Producto"
       />
     </div>
   );

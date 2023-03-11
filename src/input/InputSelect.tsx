@@ -2,16 +2,27 @@ import "./input-style.scss"
 
 interface props {
     label: string
+    option: option[]
+    name: string
+    value: string
+    onChange: ({ target }: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const InputSelect = ({ label }: props) => {
+interface option {
+    label: string
+    value: string
+}
+
+export const InputSelect = ({ label, option, name, value, onChange }: props) => {
     return (
         <div className="input-container">
             <label>{label}</label>
-            <select>
-                <option>option 1</option>
-                <option>option 2</option>
-                <option>option 3</option>
+            <select name={name} value={value} onChange={onChange}>
+                { option.map(( { label, value }, index )=> 
+                    <option key={index+"option"+value} value={value}>
+                        {label}
+                    </option>
+                )}
             </select>
         </div>
     )
