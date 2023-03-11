@@ -2,7 +2,7 @@ import "./input-style.scss"
 
 interface props {
     label: string
-    placeholder: number
+    placeholder: string
     length?: { min?: number, max?: number }
     defaultValue?: number
     name: string
@@ -17,7 +17,7 @@ export const InputNumber = ({ label, placeholder, length, defaultValue, value, n
             <input 
                 defaultValue={defaultValue}
                 type="number"
-                placeholder={String(placeholder)}
+                placeholder={placeholder}
                 max={length?.max}
                 min={length?.min}
                 name={name}
