@@ -1,0 +1,48 @@
+@use "../clr";
+
+.card-product {
+    p, button {all:unset}
+
+    background-color: clr.$white-0;
+    border-radius: 12px;
+    border: 1px clr.$white-2 solid;
+    box-shadow: 3px 3px 6px #00000036;
+    color: clr.$black-0;
+    display: flex;
+    flex-basis: 0;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 16em;
+    padding: 12px;
+
+    .container-btn {
+        display: flex;
+        gap: 6px;
+
+        button {
+            align-items: center;
+            background-color: clr.$white-1;
+            border-radius: 6px;
+            color: clr.$white-3;
+            cursor: pointer;
+            display: flex;
+            height: 1.7em;
+            justify-content: center;
+            transition: color 0.2s, background-color 0.2s;
+            width: 1.7em;
+
+            &:hover { color: clr.$grey-0; background-color: clr.$white-3 }
+            &:active { color: clr.$grey-2; background-color: clr.$grey-0 }
+        }
+    }
+
+    .txt-barcode { color: clr.$grey-0; font-size: 0.7em }
+    .txt-category { font-size: 0.9em }
+    .txt-price { color: clr.$grey-0; font-size: 1.2em; font-weight: 600 }
+    .txt-product { font-weight: 500 }
+
+    .align-center { align-items: center }
+    .align-end { align-items: end }
+    .column { display: flex; flex-direction: column }
+    .row-sb { display: flex; flex-direction: row; justify-content: space-between }
+}
