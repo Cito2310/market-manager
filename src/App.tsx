@@ -10,6 +10,7 @@ import { ContextModal } from './providers/Modal/ProviderModal';
 import "./config.scss"
 import { ModalFormLoginProduct } from './modals/ModalFormLoginProduct';
 import { ScreenAllProducts } from './screen/ScreenAllProducts';
+import { ModalModifyProduct } from './components/ModalModifyProduct';
 
 
 function App() {
@@ -20,6 +21,13 @@ function App() {
   console.log(loginToken)
   return (
         <div className="App">
+          {/* <ModalModifyProduct token={loginToken}/> */}
+          {
+            currentModal === "create" ? <ModalFormCreateProduct/>
+            : currentModal === "modify" ? <ModalModifyProduct token={loginToken}/>
+            // currentModal === "create" ? <ModalFormCreateProduct/>
+            : null
+          }
           {/* {
             !loginToken ? <ModalFormLoginProduct setLoginToken={ setLoginToken }/> : 
 

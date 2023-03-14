@@ -29,7 +29,7 @@ $t-transition: 0.2s;
     right: 0;
     top: 0;
     width: 100vw;
-    z-index: -1;
+    z-index: 5;
 }
 
 .modal-container {
@@ -44,6 +44,7 @@ $t-transition: 0.2s;
     font-weight: 500;
     max-width: 400px;
     padding: 12px 20px 16px;
+    z-index: 6;
 
     left: 0;
     margin: 3em auto auto auto;

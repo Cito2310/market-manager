@@ -23,7 +23,7 @@ export const ScreenAllProducts = ({ token }: props) => {
     return (
         <section className="screen-all-products">
             {
-                products.map( product => <CardProduct product={product}/> )
+                products.map((product, index) => <CardProduct key={index+"cardProduct"} product={product}/> )
             }
         </section>
     )

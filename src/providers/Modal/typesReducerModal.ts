@@ -9,6 +9,6 @@ type TypeModalTypes =   "Change modal-create-product"
 
 export interface InterfaceContextModal {
     currentModal: "none" | "delete" | "modify" | "create",
-    productSelected: IProduct | {},
+    productSelected: IProduct,
     dispatchModal: React.Dispatch<InterfaceModalAction>
 }
