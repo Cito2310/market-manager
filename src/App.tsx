@@ -11,6 +11,8 @@ import "./config.scss"
 import { ModalFormLoginProduct } from './modals/ModalFormLoginProduct';
 import { ScreenAllProducts } from './screen/ScreenAllProducts';
 import { ModalModifyProduct } from './components/ModalModifyProduct';
+import { BottomBar } from './components/BottomBar';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 
 function App() {
@@ -21,6 +23,12 @@ function App() {
   console.log(loginToken)
   return (
         <div className="App">
+          <Routes>
+            <Route path='/cash-register' element={ <ScreenCashRegister/> }/>
+            <Route path='/all-products' element={ <ScreenAllProducts token={loginToken}/> }/>
+
+            <Route path='/*' element={ <Navigate to="/cash-register"/> }/>
+          </Routes>
           {/* <ModalModifyProduct token={loginToken}/> */}
           {
             currentModal === "create" ? <ModalFormCreateProduct token={loginToken}/>
@@ -44,8 +52,9 @@ function App() {
             </>
           } */}
           {/* <ModalFormLoginProduct setLoginToken={ setLoginToken }/> */}
-          <ScreenAllProducts token={loginToken}/>
           {/* <ScreenCashRegister/> */}
+
+          <BottomBar/>
         </div>
   );
 }
