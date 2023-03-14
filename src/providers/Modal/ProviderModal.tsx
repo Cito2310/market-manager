@@ -8,7 +8,7 @@ export const ContextModal = createContext({} as InterfaceContextModal);
 
 const initialState: InterfaceContextModal = {
     currentModal: "none",
-    selectBarcode: "",
+    productSelected: {},
     dispatchModal: () => {}
 }
 
@@ -21,7 +21,7 @@ export const ProviderModal = ({children}: props) => {
     return (
         <ContextModal.Provider value={{
             currentModal: state.currentModal,
-            selectBarcode: state.selectBarcode,
+            productSelected: state.productSelected,
             dispatchModal: dispatch,
         }}>
             {children}
