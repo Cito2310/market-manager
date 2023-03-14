@@ -16,14 +16,14 @@ import { ModalModifyProduct } from './components/ModalModifyProduct';
 function App() {
   const { currentModal, dispatchModal } = useContext(ContextModal);
   // const [loginToken, setLoginToken] = useState<string>("")
-  const [loginToken, setLoginToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGVhOTUxODNjZDdiZmY0YjUzNWE2ZCIsImlhdCI6MTY3ODgxNTE1MCwiZXhwIjoxNjc4ODI5NTUwfQ.3pQts0PDZg2IgmgbA9qI_ftpBbFVBDh44Hiuuc9m7FA")
+  const [loginToken, setLoginToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGVhOTUxODNjZDdiZmY0YjUzNWE2ZCIsImlhdCI6MTY3ODgzNDMxNCwiZXhwIjoxNjc4ODQ4NzE0fQ.PGIQ0OVt8gGzoPnY_AfIbzelkcTvlUgZFu2Q2R_KYC0")
   
   console.log(loginToken)
   return (
         <div className="App">
           {/* <ModalModifyProduct token={loginToken}/> */}
           {
-            currentModal === "create" ? <ModalFormCreateProduct/>
+            currentModal === "create" ? <ModalFormCreateProduct token={loginToken}/>
             : currentModal === "modify" ? <ModalModifyProduct token={loginToken}/>
             // currentModal === "create" ? <ModalFormCreateProduct/>
             : null
