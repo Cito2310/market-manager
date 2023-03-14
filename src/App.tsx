@@ -1,27 +1,39 @@
+import { useContext, useState } from 'react';
+import axios from 'axios';
+
 import { ScreenCashRegister } from './screen_cash_register/ScreenCashRegister';
 
-import "./config.scss"
-import { InputText } from './input/InputText';
-import { InputSelect } from './input/InputSelect';
-import { InputNumber } from './input/InputNumber';
 import { ModalFormCreateProduct } from './modals/ModalFormCreateProduct';
 
+import { ContextModal } from './providers/Modal/ProviderModal';
+
+import "./config.scss"
+import { ModalFormLoginProduct } from './modals/ModalFormLoginProduct';
+
+
 function App() {
+  const { currentModal, dispatchModal } = useContext(ContextModal);
+  const [loginToken, setLoginToken] = useState<string>("")
+  
   return (
-    <div className="App">
-      {/* <ScreenCashRegister/> */}
-      <ModalFormCreateProduct
-        buttons={[
+        <div className="App">
           {
-            color: "primary",
-            handler: () => {console.log("Hola")},
-            label: "Hola"
+            !loginToken ? <ModalFormLoginProduct setLoginToken={ setLoginToken }/> : 
+
+            <>
+            {
+              currentModal === "create" ? <ModalFormCreateProduct/>
+              : null
+            }
+            <button onClick={()=>{dispatchModal({type: "Change modal-create-product"})}}>Modal create</button>
+            
+            
+            
+            
+            </>
           }
-        ]}
-        funcExit={()=>{console.log("exit")}}
-        title="Crear Producto"
-      />
-    </div>
+          {/* <ScreenCashRegister/> */}
+        </div>
   );
 }
 

@@ -1,0 +1,26 @@
+.spinner-loader {
+    font-size: 1.4em;
+    animation: rotation360 1s infinite linear;
+    align-self: center;
+}
+
+.done-svg {
+    color: #43d336;
+    align-self: center;
+    font-size: 1.4em;
+}
+
+.container-error {
+    display: flex;
+    color: #d62a2a;
+
+    svg {font-size: 1.6em; align-self: center}
+
+    p {align-self: center; margin-right: 4px}
+}
+
+@keyframes rotation360 {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+

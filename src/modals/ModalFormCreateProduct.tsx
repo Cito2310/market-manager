@@ -1,54 +1,65 @@
+import { useContext } from "react";
+import axios from 'axios';
+
 import { InputText } from "../input/InputText"
-import "./modal-simple.scss"
-import { useForm } from '../helpersAndHooks/useForm';
 import { InputSelect } from '../input/InputSelect';
 import { InputNumber } from '../input/InputNumber';
 
-interface props {
-    buttons: btnFunc[]
-    title: string,
-    funcExit: () => void
-}
+import { ContextModal } from '../providers/Modal/ProviderModal';
 
-interface btnFunc {
-    color: "primary" | "danger" | "secundary"
-    handler: () => void
-    label: string
-}
+import { useForm } from '../helpersAndHooks/useForm';
 
-export const ModalFormCreateProduct = ({ title, buttons, funcExit }: props) => {
+import "./modal-simple.scss"
+
+
+export const ModalFormCreateProduct = () => {
     const {
+        barcode,
         brand,
         category,
+        price,
         size,
         type,
         unitType,
-        price,
 
         onInputChange,
-        onResetForm,
-        formState
     } = useForm({
+        barcode: "",
         brand: "",
         category: "spiderman",
-        size: "",
+        price: "0",
+        size: "0",
         type: "",
         unitType: "g",
-        price: "",
     })
+
+    const { dispatchModal } = useContext(ContextModal);
+    const exitModal = () => { dispatchModal({type: "Change modal-none"}) };
+
+    // const createProductFetch = async () => {
+    //     axios.post("", {Headers})
+    // }
 
     return (
         <>
             <div className="modal-container">
                 <div className="modal-div-top">
-                    <h2 className="title-modal">{title}</h2>
+                    <h2 className="title-modal">Crear Producto</h2>
 
-                    <button className="btn-exit-modal" onClick={funcExit}>
+                    <button className="btn-exit-modal" onClick={ exitModal }>
                         <i className="fa-solid fa-xmark" />
                     </button>
                 </div>
 
                 <form className="modal-div-body">
+                    <InputText
+                        label="Codigo de Barra"
+                        placeholder="Inserte el codigo de barra"
+                        name="barcode"
+                        value={barcode}
+                        onChange={onInputChange}
+                    />
+
                     <InputSelect
                         value={category}
                         name="category"
@@ -85,7 +96,6 @@ export const ModalFormCreateProduct = ({ title, buttons, funcExit }: props) => {
                             name="size"
                             value={size}
                             onChange={onInputChange}
-                            defaultValue={0}
                         />
 
                         <InputSelect
@@ -116,14 +126,8 @@ export const ModalFormCreateProduct = ({ title, buttons, funcExit }: props) => {
                 </form>
 
                 <div className="modal-div-footer">
-                    {buttons.map(({ color, handler, label }, index) => <button
-                        key={index + "BTN-MODAL"}
-                        className={`btn-modal ${color === "primary" ? "primary"
-                                : color === "secundary" ? "secundary"
-                                    : color === "danger" ? "danger" : null
-                            }`}
-                        onClick={handler}
-                    >{label}</button>)}
+                    <button className="btn-modal primary" onClick={()=>{}}>Crear</button>
+                    <button className="btn-modal secundary" onClick={exitModal}>Rechazar</button>
                 </div>
             </div>
 
