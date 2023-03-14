@@ -7,7 +7,7 @@
     border-radius: 12px;
     border: 1px clr.$white-2 solid;
     box-shadow: 3px 3px 6px #00000036;
-    color: clr.$black-0;
+    color: clr.$black-1;
     display: flex;
     flex-basis: 0;
     flex-direction: column;
@@ -38,7 +38,7 @@
 
     .txt-barcode { color: clr.$grey-0; font-size: 0.7em }
     .txt-category { font-size: 0.9em }
-    .txt-price { color: clr.$grey-0; font-size: 1.2em; font-weight: 600 }
+    .txt-price { color: clr.$black-0; font-size: 1.2em; font-weight: 600 }
     .txt-product { font-weight: 500 }
 
     .align-center { align-items: center }

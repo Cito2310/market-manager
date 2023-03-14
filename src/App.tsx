@@ -15,8 +15,9 @@ import { ScreenAllProducts } from './screen/ScreenAllProducts';
 function App() {
   const { currentModal, dispatchModal } = useContext(ContextModal);
   // const [loginToken, setLoginToken] = useState<string>("")
-  const [loginToken, setLoginToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGVhOTUxODNjZDdiZmY0YjUzNWE2ZCIsImlhdCI6MTY3ODc2NzE1NiwiZXhwIjoxNjc4NzgxNTU2fQ.3TP2LuP8qcoEV3412nTyTcYvDBpCgzGkkTJolSjOU8A")
+  const [loginToken, setLoginToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGVhOTUxODNjZDdiZmY0YjUzNWE2ZCIsImlhdCI6MTY3ODgxNTE1MCwiZXhwIjoxNjc4ODI5NTUwfQ.3pQts0PDZg2IgmgbA9qI_ftpBbFVBDh44Hiuuc9m7FA")
   
+  console.log(loginToken)
   return (
         <div className="App">
           {/* {
