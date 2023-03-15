@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
+import { IRespState } from '../../Types/respState';
+
 export const useResponseState = () => {
-    interface IRespState {
-        status: "error" | "await" | "done" | "none"
-        errorMsg: string
-    }
     const [respState, setRespState] = useState<IRespState>({
         status: "none",
         errorMsg: ""

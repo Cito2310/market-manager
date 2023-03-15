@@ -5,9 +5,13 @@ export interface IProduct {
     category: string,
     name: string,
     price: number,
-    size: string,
+    size: number,
 }
 
-export interface IProductWithAmount extends IProduct {
+export interface IProductFormat extends IProduct {
+    sizeUnit: [number, string],
+}
+
+export interface IProductWithAmount extends IProductFormat {
     amount: number,
 }

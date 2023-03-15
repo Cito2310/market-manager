@@ -36,7 +36,7 @@ export const ModalModifyProduct = ({ token }: props) => {
         barcode: productSelected.barcode,
         brand: productSelected.brand,
         category: productSelected.category,
-        price: String(productSelected.price),
+        price: productSelected.price,
         size: productSelected.size,
         type: productSelected.name,
         unitType: "g",

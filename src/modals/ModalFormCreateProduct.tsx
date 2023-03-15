@@ -33,8 +33,8 @@ export const ModalFormCreateProduct = ({ token }: props) => {
         barcode: "",
         brand: "",
         category: "spiderman",
-        price: "0",
-        size: "0",
+        price: 0,
+        size: 0,
         name: "",
         unitType: "g",
     })

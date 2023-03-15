@@ -6,7 +6,7 @@ interface props {
     length?: { min?: number, max?: number }
     defaultValue?: number
     name: string
-    value: string
+    value: number
     onChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void
 }
 

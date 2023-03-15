@@ -1,58 +1,49 @@
-import { useContext, useLayoutEffect, useState } from 'react';
-import axios from 'axios';
+import { useContext, useState } from 'react';
 
-import { ScreenCashRegister } from './screen_cash_register/ScreenCashRegister';
+// import { ScreenCashRegister } from './screen_cash_register/ScreenCashRegister';
 
-import { ModalFormCreateProduct } from './modals/ModalFormCreateProduct';
+// import { ModalFormCreateProduct } from './modals/ModalFormCreateProduct';
 
 import { ContextModal } from './providers/Modal/ProviderModal';
 
 import "./config.scss"
 import { ModalFormLoginProduct } from './modals/ModalFormLoginProduct';
 import { ScreenAllProducts } from './screen/ScreenAllProducts';
-import { ModalModifyProduct } from './components/ModalModifyProduct';
+// import { ModalModifyProduct } from './components/ModalModifyProduct';
 import { BottomBar } from './components/BottomBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { ContextProducts } from './providers/Products/ProviderProducts';
 
 
 function App() {
   const { currentModal, dispatchModal } = useContext(ContextModal);
-  // const [loginToken, setLoginToken] = useState<string>("")
-  const [loginToken, setLoginToken] = useState<string>("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGVhOTUxODNjZDdiZmY0YjUzNWE2ZCIsImlhdCI6MTY3ODgzNDMxNCwiZXhwIjoxNjc4ODQ4NzE0fQ.PGIQ0OVt8gGzoPnY_AfIbzelkcTvlUgZFu2Q2R_KYC0")
-  
-  console.log(loginToken)
+  const { setToken, token } = useContext(ContextProducts);
+
   return (
         <div className="App">
-          <Routes>
-            <Route path='/cash-register' element={ <ScreenCashRegister/> }/>
-            <Route path='/all-products' element={ <ScreenAllProducts token={loginToken}/> }/>
-
-            <Route path='/*' element={ <Navigate to="/cash-register"/> }/>
-          </Routes>
-          {/* <ModalModifyProduct token={loginToken}/> */}
           {
-            currentModal === "create" ? <ModalFormCreateProduct token={loginToken}/>
-            : currentModal === "modify" ? <ModalModifyProduct token={loginToken}/>
-            // currentModal === "create" ? <ModalFormCreateProduct/>
-            : null
-          }
-          {/* {
-            !loginToken ? <ModalFormLoginProduct setLoginToken={ setLoginToken }/> : 
-
+            !token ? 
             <>
-            {
-              currentModal === "create" ? <ModalFormCreateProduct/>
-              : null
-            }
-            <button onClick={()=>{dispatchModal({type: "Change modal-create-product"})}}>Modal create</button>
-            
-            
-            
-            
+              <ModalFormLoginProduct setLoginToken={ setToken }/>
             </>
-          } */}
-          {/* <ModalFormLoginProduct setLoginToken={ setLoginToken }/> */}
-          {/* <ScreenCashRegister/> */}
+            :
+            <>
+              <Routes>
+                {/* <Route path='/cash-register' element={ <ScreenCashRegister/> }/> */}
+                <Route path='/all-products' element={ <ScreenAllProducts token={token}/> }/>
+
+                <Route path='/*' element={ <Navigate to="/all-products"/> }/>
+                {/* <Route path='/*' element={ <Navigate to="/cash-register"/> }/> */}
+              </Routes>
+            </>
+          }
+        
+          {
+            // currentModal === "create" ? <ModalFormCreateProduct token={token}/>
+            // : currentModal === "modify" ? <ModalModifyProduct token={token}/>
+            // currentModal === "create" ? <ModalFormCreateProduct/>
+            // : null
+          }
 
           <BottomBar/>
         </div>
