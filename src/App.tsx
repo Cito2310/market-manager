@@ -1,24 +1,25 @@
 import { useContext, useState } from 'react';
 
-// import { ScreenCashRegister } from './screen_cash_register/ScreenCashRegister';
+// // import { ScreenCashRegister } from './screen_cash_register/ScreenCashRegister';
 
-// import { ModalFormCreateProduct } from './modals/ModalFormCreateProduct';
+// // import { ModalFormCreateProduct } from './modals/ModalFormCreateProduct';
 
-import { ContextModal } from './providers/Modal/ProviderModal';
+// import { ContextModal } from './providers/Modal/ProviderModal';
 
 import "./config.scss"
 import { ModalFormLoginProduct } from './modals/ModalFormLoginProduct';
-import { ScreenAllProducts } from './screen/ScreenAllProducts';
-// import { ModalModifyProduct } from './components/ModalModifyProduct';
+// import { ScreenAllProducts } from './screen/ScreenAllProducts';
+// // import { ModalModifyProduct } from './components/ModalModifyProduct';
 import { BottomBar } from './components/BottomBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { ContextProducts } from './providers/Products/ProviderProducts';
+// import { ContextProducts } from './providers/Database/ProviderProducts';
 import { LoaderComponent } from './components/LoaderComponent';
+import { ContextDatabase } from './providers/Database/ProviderDatabase';
 
 
 function App() {
-  const { currentModal, dispatchModal } = useContext(ContextModal);
-  const { setToken, token, respStateProducts } = useContext(ContextProducts);
+  // const { currentModal, dispatchModal } = useContext(ContextModal);
+  const { setToken, token, statusDB } = useContext(ContextDatabase);
 
   return (
         <div className="App">
@@ -26,13 +27,13 @@ function App() {
             !token ? 
               <ModalFormLoginProduct setLoginToken={ setToken }/>
             :
-              respStateProducts.status === "await" || respStateProducts.status === "error" ? <LoaderComponent status={respStateProducts.status} /> :
+              statusDB === "await" ? <LoaderComponent /> :
               
               <Routes>
                 {/* <Route path='/cash-register' element={ <ScreenCashRegister/> }/> */}
-                <Route path='/all-products' element={ <ScreenAllProducts token={token}/> }/>
+                {/* <Route path='/all-products' element={ <ScreenAllProducts token={token}/> }/> */}
 
-                <Route path='/*' element={ <Navigate to="/all-products"/> }/>
+                {/* <Route path='/*' element={ <Navigate to="/all-products"/> }/> */}
                 {/* <Route path='/*' element={ <Navigate to="/cash-register"/> }/> */}
               </Routes>
           }

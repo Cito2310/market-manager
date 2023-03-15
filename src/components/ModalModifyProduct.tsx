@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { useForm } from '../helpersAndHooks/useForm';
+import { useForm } from '../hooks/useForm';
 
 import { ContextModal } from '../providers/Modal/ProviderModal';
 

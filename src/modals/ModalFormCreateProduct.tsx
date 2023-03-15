@@ -7,7 +7,7 @@ import { InputNumber } from '../input/InputNumber';
 
 import { ContextModal } from '../providers/Modal/ProviderModal';
 
-import { useForm } from '../helpersAndHooks/useForm';
+import { useForm } from '../hooks/useForm';
 
 import "./modal-simple.scss"
 import { ItemsResponse } from "../components/ItemsResponse";

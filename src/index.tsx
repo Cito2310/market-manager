@@ -4,8 +4,8 @@ import { HashRouter } from 'react-router-dom';
 
 import App from './App';
 
+import { ProviderDatabase } from './providers/Database/ProviderDatabase';
 import { ProviderModal } from './providers/Modal/ProviderModal';
-import { ProviderProducts } from './providers/Products/ProviderProducts';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -13,11 +13,11 @@ root.render(
   // <React.StrictMode>
   <HashRouter>
 
-    <ProviderProducts>
+    <ProviderDatabase>
     <ProviderModal>
       <App />
     </ProviderModal>
-    </ProviderProducts>
+    </ProviderDatabase>
 
   </HashRouter>
 

@@ -4,7 +4,7 @@ import { InputText } from "../input/InputText"
 
 import { ItemsResponse } from '../components/ItemsResponse';
 
-import { useForm } from '../helpersAndHooks/useForm';
+import { useForm } from '../hooks/useForm';
 import { useResponseState } from '../hooks/useResponseState';
 
 import "./modal-simple.scss"
