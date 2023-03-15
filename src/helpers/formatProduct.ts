@@ -17,9 +17,9 @@ export const formatProduct = ( product: IProduct ): IProductFormat => {
     const newProduct: IProductFormat = {
         _id: product._id,
         barcode: product.barcode,
-        brand: capitalizeText( product.brand ),
+        brand: product.brand,
         category: capitalizeText( product.category ),
-        name: capitalizeText( product.name ),
+        name: product.name,
         price: product.price,
         size: product.size,
         sizeUnit: getUnitAndSize(product.size),

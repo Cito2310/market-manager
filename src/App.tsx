@@ -13,21 +13,21 @@ import { ScreenAllProducts } from './screen/ScreenAllProducts';
 import { BottomBar } from './components/BottomBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ContextProducts } from './providers/Products/ProviderProducts';
+import { LoaderComponent } from './components/LoaderComponent';
 
 
 function App() {
   const { currentModal, dispatchModal } = useContext(ContextModal);
-  const { setToken, token } = useContext(ContextProducts);
+  const { setToken, token, respStateProducts } = useContext(ContextProducts);
 
   return (
         <div className="App">
           {
             !token ? 
-            <>
               <ModalFormLoginProduct setLoginToken={ setToken }/>
-            </>
             :
-            <>
+              respStateProducts.status === "await" || respStateProducts.status === "error" ? <LoaderComponent status={respStateProducts.status} /> :
+              
               <Routes>
                 {/* <Route path='/cash-register' element={ <ScreenCashRegister/> }/> */}
                 <Route path='/all-products' element={ <ScreenAllProducts token={token}/> }/>
@@ -35,7 +35,6 @@ function App() {
                 <Route path='/*' element={ <Navigate to="/all-products"/> }/>
                 {/* <Route path='/*' element={ <Navigate to="/cash-register"/> }/> */}
               </Routes>
-            </>
           }
         
           {

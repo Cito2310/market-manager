@@ -54,6 +54,7 @@ export const ProviderProducts = ({children}: props) => {
             { headers: { token }}
         )
             .then(({ data }: { data:IProduct[] }) => {
+                controllerRespState.setStatusDone();
                 const sortProducts = data.map( formatProduct ).sort( sortFuncProducts );
                 setProducts( sortProducts );
             })
