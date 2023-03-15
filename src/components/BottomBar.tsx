@@ -14,13 +14,7 @@ export const BottomBar = () => {
                 <NavLink to="/all-products">All Products</NavLink>
             </div>
 
-            <p>status server :
-                {
-                    statusDB === "await" ? " await" :
-                    statusDB === "offline" ? " offline" :
-                    statusDB === "online" ? " online" : null
-                }
-            </p>
+            <p>status server : { statusDB }</p>
         </div>
     )
 }

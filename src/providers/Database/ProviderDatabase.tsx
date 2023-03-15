@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
+
+import { useInterval } from '../../hooks/useInterval';
 import { formatProduct } from '../../helpers/formatProduct';
 import { sortABCProducts } from '../../helpers/sortABCProducts';
 
@@ -13,7 +15,7 @@ interface IContextDatabase {
     statusDB: TStatusDB,
     token: string,
 }
-type TStatusDB = "await" | "online" | "offline";
+type TStatusDB = "await" | "online" | "offline" | "checking";
 
 interface IControllerProducts {
     add: ( productFormat: IProductFormat ) => void
@@ -33,10 +35,14 @@ export const ProviderDatabase = ({ children }: props) => {
     // FUNC CALL API PRODUCTS
     const [firstCall, setFirstCall] = useState(true);
     const checkDB = () => {
+        if ( !token ) return; // Check exist token
+
+        if ( !firstCall ) setStatusDB("checking");
+
         // call api get all product
         if ( firstCall ) {
 
-            axios.get( "https://market-product-rest.onrender.com/api/product/7623201814851", { headers: { token } })
+            axios.get( "https://market-product-rest.onrender.com/api/product/", { headers: { token } })
                 .then(({ data }) => {
                     setFirstCall(false);
                     window.electronAPI.saveDataProduct( token );
@@ -53,12 +59,14 @@ export const ProviderDatabase = ({ children }: props) => {
                 .then(()=> { setStatusDB("online") })
                 .catch(()=> { setStatusDB("offline") })
         }
+    
     }
+
+    useInterval(checkDB, 300000 );
     useEffect(() => {
         if ( !token ) return;
 
         checkDB();
-        setInterval(checkDB, 300000 );
     }, [token])
 
     // FUNC CONTROLLER PRODUCTS
