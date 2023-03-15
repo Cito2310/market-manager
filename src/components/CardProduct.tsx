@@ -1,38 +1,26 @@
-import { IProduct } from '../../Types/product';
-
-import "../styles/card-product.scss"
 import { useContext } from 'react';
 import { ContextModal } from '../providers/Modal/ProviderModal';
 
+import { IProductFormat } from '../../Types/product';
+import "../styles/card-product.scss"
+
 interface props {
-    product: IProduct
+    product: IProductFormat
 }
 
 export const CardProduct = ({ product }: props) => {
-    const { barcode, brand, category, name, price, size } = product;
+    const { barcode, brand, category, name, price, sizeUnit } = product;
 
     // ON CONTROLLER MODALS
     const { dispatchModal } = useContext(ContextModal)
-
-    const onModifyProduct = () => {
-        dispatchModal({
-            type: "Change modal-modify-product", 
-            payload: product,
-        })
-    }
-
-    const onDeleteProduct = () => {
-        dispatchModal({
-            type: "Change modal-delete-product", 
-            payload: product,
-        })
-    }
+    const onModifyProduct = () => {  dispatchModal({ type: "Change modal-modify-product", payload: product })  }
+    const onDeleteProduct = () => {  dispatchModal({ type: "Change modal-delete-product", payload: product })  }
 
 
     return (
         <div className='card-product'>
             <div className='row-sb align-center'>
-                <p className='txt-product'>{brand} {name} {size}</p>
+                <p className='txt-product'>{brand} {name} {sizeUnit[0]}{sizeUnit[1]}</p>
 
                 <div className='container-btn'>
                     <button onClick={onModifyProduct}>
