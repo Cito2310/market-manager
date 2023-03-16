@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import { ContextModal } from '../providers/Modal/ProviderModal';
-
 import { IProductFormat } from '../../Types/product';
 import "../styles/card-product.scss"
+
 
 interface props {
     product: IProductFormat
 }
+
 
 export const CardProduct = ({ product }: props) => {
     const { barcode, brand, category, name, price, sizeUnit } = product;

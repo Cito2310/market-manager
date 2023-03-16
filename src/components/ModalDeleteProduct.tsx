@@ -1,22 +1,14 @@
 import axios from 'axios';
 import { useContext } from 'react';
 
-import { useForm } from '../hooks/useForm';
 import { useResponseState } from '../hooks/useResponseState';
-
-import { transformProductToAPI } from '../helpers/transformProductToAPI';
-import { formatProduct } from '../helpers/formatProduct';
 
 import { ContextModal } from '../providers/Modal/ProviderModal';
 import { ContextDatabase } from '../providers/Database/ProviderDatabase';
 
-import { InputText } from '../input/InputText';
-import { InputSelect } from '../input/InputSelect';
-import { InputNumber } from '../input/InputNumber';
-import { ItemsResponse } from './ItemsResponse';
+import { ItemsResponse, CardProduct } from './';
 
-import "../modals/modal-simple.scss"
-import { CardProduct } from './CardProduct';
+import "../styles/modal-simple.scss"
 
 
 

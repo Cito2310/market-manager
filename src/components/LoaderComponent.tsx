@@ -1,5 +1,4 @@
-import { SvgElements } from './SvgElements';
-
+import { SvgElements } from './';
 import "../styles/loader-component.scss"
 
 export const LoaderComponent = () => 

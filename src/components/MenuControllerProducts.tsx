@@ -1,8 +1,8 @@
-import { SvgElements } from "./SvgElements"
-
-import "../styles/menu-controller-products.scss"
 import { useContext } from 'react';
+import { SvgElements } from "./"
 import { ContextModal } from '../providers/Modal/ProviderModal';
+import "../styles/menu-controller-products.scss"
+
 
 export const MenuControllerProducts = () => {
     const { dispatchModal } = useContext(ContextModal);

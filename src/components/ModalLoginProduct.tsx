@@ -1,20 +1,19 @@
 import axios from 'axios';
 
-import { InputText } from "../input/InputText"
-
-import { ItemsResponse } from '../components/ItemsResponse';
+import { InputText, ItemsResponse } from "./"
 
 import { useForm } from '../hooks/useForm';
 import { useResponseState } from '../hooks/useResponseState';
 
-import "./modal-simple.scss"
 import { checkErrorLogin } from '../helpers/checkErrorLogin';
+
+import "../styles/modal-simple.scss"
 
 interface props {
     setLoginToken: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const ModalFormLoginProduct = ({ setLoginToken }: props) => {
+export const ModalLoginProduct = ({ setLoginToken }: props) => {
     // STATE ERROR
     const { controllerRespState, respState } = useResponseState();
 

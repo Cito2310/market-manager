@@ -1,4 +1,4 @@
-import "./input-style.scss"
+import "../styles/input-style.scss"
 
 interface props {
     label: string

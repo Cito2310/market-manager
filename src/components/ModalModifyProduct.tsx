@@ -10,12 +10,9 @@ import { formatProduct } from '../helpers/formatProduct';
 import { ContextModal } from '../providers/Modal/ProviderModal';
 import { ContextDatabase } from '../providers/Database/ProviderDatabase';
 
-import { InputText } from '../input/InputText';
-import { InputSelect } from '../input/InputSelect';
-import { InputNumber } from '../input/InputNumber';
-import { ItemsResponse } from './ItemsResponse';
+import { InputNumber, InputSelect, InputText, ItemsResponse } from './';
 
-import "../modals/modal-simple.scss"
+import "../styles/modal-simple.scss"
 
 
 

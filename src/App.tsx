@@ -1,17 +1,14 @@
 import { useContext, useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { ContextModal } from './providers/Modal/ProviderModal';
+import { ContextDatabase } from './providers/Database/ProviderDatabase';
+
+import { BottomBar, LoaderComponent, ModalCreateProduct, ModalDeleteProduct, ModalLoginProduct, ModalModifyProduct } from './components';
+
+import { ScreenAllProducts } from './screen/ScreenAllProducts';
 
 import "./config.scss"
-import { ModalFormLoginProduct } from './modals/ModalFormLoginProduct';
-import { ScreenAllProducts } from './screen/ScreenAllProducts';
-import { BottomBar } from './components/BottomBar';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { LoaderComponent } from './components/LoaderComponent';
-import { ContextDatabase } from './providers/Database/ProviderDatabase';
-import { ModalCreateProduct } from './components/ModalCreateProduct';
-import { ModalModifyProduct } from './components/ModalModifyProduct';
-import { ModalDeleteProduct } from './components/ModalDeleteProduct';
 
 
 function App() {
@@ -22,7 +19,7 @@ function App() {
         <div className="App">
           {
             !token ? 
-              <ModalFormLoginProduct setLoginToken={ setToken }/>
+              <ModalLoginProduct setLoginToken={ setToken }/>
             :
               statusDB === "await" ? <LoaderComponent /> :
               
