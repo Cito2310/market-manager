@@ -1,4 +1,4 @@
-import { IProduct } from '../../../Types/product';
+import { IProductFormat } from '../../../Types/product';
 
 export interface InterfaceModalAction { type: TypeModalTypes, payload?: unknown }
 
@@ -9,6 +9,6 @@ type TypeModalTypes =   "Change modal-create-product"
 
 export interface InterfaceContextModal {
     currentModal: "none" | "delete" | "modify" | "create",
-    productSelected: IProduct,
+    productSelected: IProductFormat,
     dispatchModal: React.Dispatch<InterfaceModalAction>
 }

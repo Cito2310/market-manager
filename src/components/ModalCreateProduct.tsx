@@ -19,12 +19,12 @@ import "../modals/modal-simple.scss"
 
 
 
-export const ModalModifyProduct = () => {
+export const ModalCreateProduct = () => {
     // GET TOKEN
     const { token, controllerProducts } = useContext(ContextDatabase);
 
     // IMPORT CONTEXT MODAL
-    const { dispatchModal, productSelected } = useContext(ContextModal);
+    const { dispatchModal } = useContext(ContextModal);
 
     // CREATE FORM
     const {
@@ -39,13 +39,13 @@ export const ModalModifyProduct = () => {
         onInputChange,
         formState
     } = useForm({
-        barcode: productSelected.barcode,
-        brand: productSelected.brand.toLocaleUpperCase(),
-        category: productSelected.category.toLocaleLowerCase(),
-        name: productSelected.name,
-        price: productSelected.price,
-        size: productSelected.sizeUnit[0],
-        unitType: productSelected.sizeUnit[1].toLocaleLowerCase(),
+        barcode: "",
+        brand: "",
+        category: "superman",
+        price: 0,
+        size: 0,
+        name: "",
+        unitType: "g",
     })
 
     // FUNC EXIT MODAL
@@ -59,14 +59,14 @@ export const ModalModifyProduct = () => {
 
         // call API Login
         controllerRespState.setStatusAwait()
-        axios.put(
-            `https://market-product-rest.onrender.com/api/product/${barcode}`,
+        axios.post(
+            `https://market-product-rest.onrender.com/api/product/`,
             transformProductToAPI( formState ),
             { headers: { token } }
         )
         .then(({ data }) => { 
             controllerRespState.setStatusDone()
-            controllerProducts.modify(formatProduct(data))
+            controllerProducts.add(formatProduct(data))
             setTimeout(exitModal,300)
         })
         .catch(error => {
@@ -78,7 +78,7 @@ export const ModalModifyProduct = () => {
         <>
             <div className="modal-container">
                 <div className="modal-div-top">
-                    <h2 className="title-modal">Editar Producto</h2>
+                    <h2 className="title-modal">Crear Producto</h2>
 
                     <button className="btn-exit-modal" onClick={ exitModal }>
                         <i className="fa-solid fa-xmark" />
@@ -87,6 +87,14 @@ export const ModalModifyProduct = () => {
 
                 <form  onSubmit={onCreateProductFetch}>
                     <div className="modal-div-body">
+                        <InputText
+                            label="Codigo de Barra"
+                            placeholder="Inserte el codigo de barra"
+                            name="barcode"
+                            value={barcode}
+                            onChange={onInputChange}
+                        />
+
                         <InputSelect
                             value={category}
                             name="category"
@@ -154,7 +162,7 @@ export const ModalModifyProduct = () => {
                     </div>
 
                     <div className="modal-div-footer">
-                        <input type="submit" className="btn-modal primary" value="Editar"/>
+                        <input type="submit" className="btn-modal primary" value="Crear"/>
                         <button  disabled={false} className="btn-modal secundary" onClick={exitModal}>Rechazar</button>
                         <ItemsResponse type={respState.status} errorMsg={respState.errorMsg}/>
                     </div>

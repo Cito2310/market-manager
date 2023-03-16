@@ -3,14 +3,14 @@ import { createContext, useReducer } from "react"
 import { reducerMordal } from './reducerModal';
 
 import { InterfaceContextModal } from './typesReducerModal';
-import { IProduct } from '../../../Types/product';
+import { IProductFormat } from '../../../Types/product';
 
 
 export const ContextModal = createContext({} as InterfaceContextModal);
 
 const initialState: InterfaceContextModal = {
     currentModal: "none",
-    productSelected: {} as IProduct,
+    productSelected: {} as IProductFormat,
     dispatchModal: () => {}
 }
 
