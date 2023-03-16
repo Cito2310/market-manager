@@ -4,6 +4,7 @@ declare global {
     interface Window {
         electronAPI: {
             saveDataProduct: ( token: string ) => IProduct[],
+            getDataProductsOffline: () => IProduct[],
         }
     }
 }

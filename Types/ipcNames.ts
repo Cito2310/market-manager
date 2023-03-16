@@ -1,1 +1,1 @@
-export type ipcNames = "save-data-products" | "";
+export type ipcNames = "save-data-products" | "get-data-products-offline";

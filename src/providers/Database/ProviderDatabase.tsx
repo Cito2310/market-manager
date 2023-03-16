@@ -51,7 +51,8 @@ export const ProviderDatabase = ({ children }: props) => {
                 })
                 .catch( error => {
                     setStatusDB("offline")
-                    // TODO electronAPI.getDataProduct
+                    const data = window.electronAPI.getDataProductsOffline();
+                    setProduct( data.map( formatProduct ).sort( sortABCProducts ) );
                 })
 
         } else {
