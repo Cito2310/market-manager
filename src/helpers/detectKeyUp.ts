@@ -1,9 +1,3 @@
-/**
- * 
- * @param handler |function| - Function execute with input key up
- * @param regex |RegExp| - Input available characters
- */
-
 export const detectKeyUp = (
     handler: ( event?: KeyboardEvent ) => void,
     regex: RegExp
