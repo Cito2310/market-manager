@@ -6,6 +6,7 @@ import App from './App';
 
 import { ProviderDatabase } from './providers/Database/ProviderDatabase';
 import { ProviderModal } from './providers/Modal/ProviderModal';
+import { ProviderPrint } from './providers/Print/ProviderPrint';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -14,9 +15,13 @@ root.render(
   <HashRouter>
 
     <ProviderDatabase>
+    <ProviderPrint>
     <ProviderModal>
+      
       <App />
+
     </ProviderModal>
+    </ProviderPrint>
     </ProviderDatabase>
 
   </HashRouter>

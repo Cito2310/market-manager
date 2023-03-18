@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { ipcMain, BrowserWindow } from 'electron';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import axios from 'axios';
 
@@ -19,6 +19,17 @@ export const ipcConnections = () => {
     ipcMain.handle("get-data-products-offline" as ipcNames, async (e, args) => {
         if ( !existsSync("./database/data_products.json") ) return([]);
         return JSON.parse(readFileSync( "./database/data_products.json", "utf-8" ));
+    })
+
+    ipcMain.on("print-page" as ipcNames, async (e, args) => {
+        const win = BrowserWindow.getFocusedWindow();
+        win?.webContents.print({
+            silent: true,
+            margins: {
+                marginType: "none",
+            },
+            header: "Mercadito Ale" 
+        })
     })
 
 }

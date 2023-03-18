@@ -5,6 +5,7 @@ declare global {
         electronAPI: {
             saveDataProduct: ( token: string ) => IProduct[],
             getDataProductsOffline: () => IProduct[],
+            printPage: () => Promise<void>,
         }
     }
 }

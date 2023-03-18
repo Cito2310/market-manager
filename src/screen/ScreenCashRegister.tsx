@@ -4,16 +4,20 @@ import { priceFormat } from '../helpers/priceFormat';
 import { detectKeyUp } from "../helpers/detectKeyUp";
 
 import { ContextDatabase } from '../providers/Database/ProviderDatabase';
+import { ContextPrint } from '../providers/Print/ProviderPrint';
 
 import { ModalNotFoundProduct } from '../components/';
 
 import { IProductWithAmount, IProductFormat } from '../../Types/product';
 
 import "../styles/screen-cash-register.scss"
+import { SvgElements } from '../components/SvgElements';
 
 
 export const ScreenCashRegister = () => {
     const { product } = useContext(ContextDatabase);
+    const { setProductToPrint, setScreenPrint } = useContext( ContextPrint );
+
     const [barcode, setBarcode] = useState<string>("");
     const [shoppingCart, setShoppingCart] = useState<IProductWithAmount[]>([]);
     const [notFound, setNotFound] = useState(false);
@@ -52,6 +56,10 @@ export const ScreenCashRegister = () => {
 
     }, [barcode])
 
+    const onPrint = () => {
+        setProductToPrint(shoppingCart);
+        setScreenPrint(true);
+    }
 
     return (
         <div className='screen-cash-register'>
@@ -79,10 +87,11 @@ export const ScreenCashRegister = () => {
                 </ul>
             </section>
 
-            <section className='section-total'>
+            <section className='section-total' style={{justifyContent:"space-between"}}>
                 <p className='total-price'>
                     TOTAL : $ { priceFormat(shoppingCart.reduce((prev, curr) => prev + curr.price*curr.amount,0)) }
                 </p>
+                <button className='btn-print' onClick={onPrint}><SvgElements element='print'/></button>
             </section>
         </div>
     )
