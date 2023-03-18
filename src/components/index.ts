@@ -12,3 +12,4 @@ export * from "./ModalDeleteProduct";
 export * from "./ModalLoginProduct";
 export * from "./ModalModifyProduct";
 export * from "./ModalNotFoundProduct"
+export * from "./TicketPrint"

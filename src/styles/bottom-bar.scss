@@ -1,11 +1,13 @@
+@use "../var";
+
 .bottom-bar {
     a, p {all:unset};
 
     $padding: 12px;
     align-items: end;
-    background-color: #282828;
+    background-color: var.$black-1;
     bottom: 0;
-    color: #f9f9f9;
+    color: var.$white-0;
     display: flex;
     justify-content: space-between;
     padding: 2px $padding;
@@ -17,8 +19,8 @@
         padding: 2px 6px;
         transition: color 0.2s, background-color 0.2s;
 
-        &:hover { background-color: #363636; color: #f9f9f9 }
-        &.active { background-color: #f9f9f9; color: #282828; font-weight: 600; }
+        &:hover { background-color: var.$grey-3; color: var.$white-0 }
+        &.active { background-color: var.$white-0; color: var.$black-1; font-weight: 600; }
     }
 
     p { font-size: 0.7em; font-weight: 300 }

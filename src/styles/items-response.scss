@@ -1,3 +1,5 @@
+@use "../var";
+
 .spinner-loader {
     font-size: 1.4em;
     animation: rotation360 1s infinite linear;
@@ -5,14 +7,14 @@
 }
 
 .done-svg {
-    color: #43d336;
+    color: var.$done;
     align-self: center;
     font-size: 1.4em;
 }
 
 .container-error {
     display: flex;
-    color: #d62a2a;
+    color: var.$error;
 
     svg {font-size: 1.6em; align-self: center}
 

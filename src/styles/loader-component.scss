@@ -1,3 +1,5 @@
+@use "../var";
+
 .loader-component {
     bottom: 0;
     left: 0;
@@ -21,7 +23,7 @@
 
     .error {
         font-size: 3em;
-        color: #ff2323;
+        color: var.$error;
     }
 
     p {
@@ -29,7 +31,7 @@
         font-size: 2em;
         font-weight: 600;
 
-        &.error { color: #ff2323 }
+        &.error { color: var.$error }
     }
 }
 

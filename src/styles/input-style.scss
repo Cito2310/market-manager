@@ -1,6 +1,4 @@
-$grey-0: #dadada;
-$grey-1: #c5c5c5;
-$grey-2: #afafaf;
+@use "../var";
 
 .input-container {
     label, input, select, option  { all: unset }
@@ -13,12 +11,12 @@ $grey-2: #afafaf;
 
 
     input, select, option {
-        background-color: $grey-0;
+        background-color: var.$white-1;
         border-radius: 6px;
-        border: 1px $grey-1 solid;
+        border: 1px var.$white-2 solid;
         padding: 4px 6px;
 
-        &::placeholder { color: $grey-2; }
+        &::placeholder { color: var.$grey-1; }
     }
 
     select {

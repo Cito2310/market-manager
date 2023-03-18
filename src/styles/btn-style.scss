@@ -1,0 +1,29 @@
+@use "../var";
+
+.btn {
+    all: unset;
+
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Montserrat;
+    padding: 4px 6px;
+    transition: background-color 0.2s, color 0.2s;
+
+    &.primary { 
+        background-color: var.$black-0; color: var.$white-0;
+        &:hover { background-color: var.$grey-2; color: var.$white-0 };
+        &:active { background-color: var.$grey-1; color: var.$black-0 };
+    }
+
+    &.danger { 
+        background-color: var.$red-0; color: var.$white-0;
+        &:hover { background-color: var.$red-1; color: var.$white-0 };
+        &:active { background-color: var.$red-2; color: var.$white-0 };
+    }
+
+    &.secundary { 
+        background-color: var.$grey-0; color: var.$black-0;
+        &:hover { background-color: var.$grey-1; color: var.$black-0 };
+        &:active { background-color: var.$grey-2; color: var.$white-0 };
+    }
+}

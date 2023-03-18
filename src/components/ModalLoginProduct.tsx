@@ -81,7 +81,7 @@ export const ModalLoginProduct = ({ setLoginToken }: props) => {
                 </div>
 
                 <div className="modal-div-footer">
-                    <input type="submit" className="btn-modal primary" value="Iniciar Sesion"/>
+                    <input type="submit" className="btn primary" value="Iniciar Sesion"/>
                     
                     <ItemsResponse type={respState.status} errorMsg={respState.errorMsg} />
                 </div>

@@ -5,13 +5,13 @@ import { ContextModal } from './providers/Modal/ProviderModal';
 import { ContextDatabase } from './providers/Database/ProviderDatabase';
 import { ContextPrint } from './providers/Print/ProviderPrint';
 
-import { BottomBar, LoaderComponent, ModalCreateProduct, ModalDeleteProduct, ModalLoginProduct, ModalModifyProduct } from './components';
+import { BottomBar, LoaderComponent, ModalCreateProduct, ModalDeleteProduct, ModalLoginProduct, ModalModifyProduct, TicketPrint } from './components';
 
 import { ScreenAllProducts } from './screen/ScreenAllProducts';
 import { ScreenCashRegister } from './screen/ScreenCashRegister';
 
 import "./config.scss"
-import { TicketPrint } from './components/TicketPrint';
+import "./styles/btn-style.scss"
 
 
 function App() {

@@ -62,8 +62,8 @@ export const ModalDeleteProduct = () => {
                 </div>
 
                 <div className="modal-div-footer">
-                    <button autoFocus className="btn-modal primary" onClick={onDeleteProduct}>Eliminar</button>
-                    <button  disabled={true} className="btn-modal secundary" onClick={exitModal}>Rechazar</button>
+                    <button autoFocus className="btn primary" onClick={onDeleteProduct}>Eliminar</button>
+                    <button  disabled={true} className="btn secundary" onClick={exitModal}>Rechazar</button>
                     <ItemsResponse type={respState.status} errorMsg={respState.errorMsg}/>
                 </div>
             </div>

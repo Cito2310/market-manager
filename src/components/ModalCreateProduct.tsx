@@ -159,8 +159,8 @@ export const ModalCreateProduct = () => {
                     </div>
 
                     <div className="modal-div-footer">
-                        <input type="submit" className="btn-modal primary" value="Crear"/>
-                        <button  disabled={false} className="btn-modal secundary" onClick={exitModal}>Rechazar</button>
+                        <input type="submit" className="btn primary" value="Crear"/>
+                        <button  disabled={false} className="btn secundary" onClick={exitModal}>Rechazar</button>
                         <ItemsResponse type={respState.status} errorMsg={respState.errorMsg}/>
                     </div>
                 </form>
