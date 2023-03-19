@@ -1,59 +1,66 @@
+@use "../var";
+
 .screen-cash-register {
+    ul, p { all: unset }
+
     display: grid;
-    grid-template-rows: 1fr 4em;
-    height: calc(100vh - 25px);
+    grid-template-columns: 1fr 16em;
+    height: calc(100vh - var.$bottom-bar);
 
     .section-shopping-cart {
-        background-color: #e9e9e9;
-        height: 100%;
-    
-        ul {all:unset}
-
-        .product-item-top {
-            background-color: #282828;
-            color: #fff;
-            font-weight: 700;
-        }
+        background-color: var.$white-0;
 
         .product-item {
             border-bottom: 1px #b3b3b3 solid;
             display: grid;
-            font-size: 1.2em;
-            grid-template-columns: 2fr 1fr 7em 7em 7em;
-            height: 1em;
-            padding: 0.2em 0.8em 0.4em;
-            word-break:break-all;
+            gap: 6px;
+            grid-template-columns: 5fr 3fr 7em 7em 7em 2em;
+            padding: 0.2em 0.8em;
+            word-break: break-all;
 
-            p {all: unset}
+            &.top {
+                background-color: var.$black-2;
+                color: var.$white-0;
+                font-weight: 700;
+                padding: 0.4em 0.8em;
+            }
+
+            p { &.center { text-align: center } }
+
+            button {
+                all: unset;
+                border-radius: 6px;
+                cursor: pointer;
+                display: flex;
+                font-size: 1.3em;
+                justify-content: center;
+                transition: color 0.2s, background-color 0.2s;
+
+                background-color: var.$white-1; color: var.$grey-1;
+                &:hover { background-color: var.$white-1; color: var.$red-1 };
+                &:active { background-color: var.$white-2; color: var.$red-2 };
+            }
         }
-
-        .product-item-even { background-color: #dadada }
-        .product-item-odd { background-color: #ebebeb }
     }
 
-    .section-total {
+    .section-sidebar {
+        background-color: var.$black-0;
+        color: var.$white-1;
         display: flex;
-        flex-direction: row-reverse;
-        background-color: #c9c9c9;
-        font-weight: 800;
-        padding: 1em;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 16px 20px;
 
-        .total-price {
-            margin: auto 0;
-            font-size: 2em;
+        .div-button {
+            gap: 10px;
+
+            input { background-color: var.$white-0 }
         }
-    }
 
-    .btn-print {
-        all: unset;
+        .div-total {
+            font-size: 1.6em;
+            font-weight: 700;
+        }
 
-        align-items: center;
-        background-color: grey;
-        border-radius: 6px;
-        display: flex;
-        font-size: 1.4em;
-        height: 1.5em;
-        justify-content: center;
-        width: 1.5em;
     }
 }

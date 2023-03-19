@@ -6,3 +6,17 @@ body {
     font-family: Mulish, Montserrat, Arial, Helvetica, sans-serif;
     font-size: 17px;
 }
+
+.row { 
+    display: flex;
+    flex-direction: row;
+    
+    &.space-between { justify-content: space-between; }
+ }
+
+ .column {
+    display: flex;
+    flex-direction: column;
+
+    &.space-between { justify-content: space-between; }
+ }

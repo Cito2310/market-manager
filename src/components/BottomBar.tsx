@@ -9,7 +9,7 @@ export const BottomBar = () => {
 
     return (
         <div className="bottom-bar">
-            <div>
+            <div className='row'>
                 <NavLink to="/cash-register">Cash Register</NavLink>
                 <NavLink to="/all-products">All Products</NavLink>
             </div>

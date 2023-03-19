@@ -6,24 +6,36 @@
     border-radius: 6px;
     cursor: pointer;
     font-family: Montserrat;
-    padding: 4px 6px;
+    padding: 5px 7px;
     transition: background-color 0.2s, color 0.2s;
 
     &.primary { 
         background-color: var.$black-0; color: var.$white-0;
         &:hover { background-color: var.$grey-2; color: var.$white-0 };
         &:active { background-color: var.$grey-1; color: var.$black-0 };
+        &:disabled { background-color: var.$grey-2; color: var.$white-0; cursor: default };
     }
 
     &.danger { 
         background-color: var.$red-0; color: var.$white-0;
         &:hover { background-color: var.$red-1; color: var.$white-0 };
         &:active { background-color: var.$red-2; color: var.$white-0 };
+        &:disabled { background-color: var.$grey-2; color: var.$white-0; cursor: default };
+    }
+
+    &.white {
+        background-color: var.$white-0; color: var.$black-0;
+        &:hover { background-color: var.$white-2; color: var.$black-0 };
+        &:active { background-color: var.$grey-1; color: var.$white-0 };
+        &:disabled { background-color: var.$white-2; color: var.$grey-0; cursor: default };
     }
 
     &.secundary { 
         background-color: var.$grey-0; color: var.$black-0;
         &:hover { background-color: var.$grey-1; color: var.$black-0 };
         &:active { background-color: var.$grey-2; color: var.$white-0 };
+        &:disabled { background-color: var.$grey-2; color: var.$white-0; cursor: default };
     }
+
+    &.center { text-align: center }
 }

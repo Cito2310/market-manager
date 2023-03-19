@@ -6,12 +6,11 @@ import { detectKeyUp } from "../helpers/detectKeyUp";
 import { ContextDatabase } from '../providers/Database/ProviderDatabase';
 import { ContextPrint } from '../providers/Print/ProviderPrint';
 
-import { ModalNotFoundProduct } from '../components/';
+import { InputText, ModalNotFoundProduct, SvgElements } from '../components/';
 
 import { IProductWithAmount, IProductFormat } from '../../Types/product';
 
 import "../styles/screen-cash-register.scss"
-import { SvgElements } from '../components/SvgElements';
 
 
 export const ScreenCashRegister = () => {
@@ -61,37 +60,71 @@ export const ScreenCashRegister = () => {
         setScreenPrint(true);
     }
 
+    const onClearShoppingCart = () => {setShoppingCart([])};
+
+    const deleteProduct = ( barcode: string ) => {
+        const newShoppingCart = [...shoppingCart].filter( value => value.barcode !== barcode );
+        setShoppingCart( newShoppingCart );
+    }
+
+
     return (
         <div className='screen-cash-register'>
             { notFound ? <ModalNotFoundProduct/> : null }
 
             <section className='section-shopping-cart'>
                 <ul>
-                    <li className='product-item product-item-top'>
-                        <p className='product-item-text'>PRODUCTO</p>
-                        <p className='product-item-text'>CATEGORIA</p>
-                        <p className='product-item-text'>PRECIO X U</p>
-                        <p className='product-item-text'>CANTIDAD</p>
-                        <p className='product-item-text'>TOTAL</p>
+                    <li className='product-item top'>
+                        <p>PRODUCTO</p>
+                        <p>CATEGORIA</p>
+                        <p className='center'>PRECIO X U</p>
+                        <p className='center'>CANTIDAD</p>
+                        <p className='center'>TOTAL</p>
                     </li>
 
                     { shoppingCart.map( 
                             ({ barcode, category, brand, name, price, amount, sizeUnit }) => <li key={barcode} className='product-item'>
-                                <p className='product-item-text'>{`${brand} ${name} ${sizeUnit[0]+sizeUnit[1]}`}</p>
-                                <p className='product-item-text'>{category}</p>
-                                <p className='product-item-text'>{`$ `+priceFormat( price )}</p>
-                                <p className='product-item-text'>{amount}</p>
-                                <p className='product-item-text'>{`$ `+priceFormat( amount*price )}</p>
+                                <p>{`${brand} ${name} ${sizeUnit[0]+sizeUnit[1]}`}</p>
+                                <p>{category}</p>
+                                <p className='center'>{`$ `+priceFormat( price )}</p>
+                                <p className='center'>{amount}</p>
+                                <p className='center'>{`$ `+priceFormat( amount*price )}</p>
+                                <button onClick={()=>{ deleteProduct(barcode) }}><SvgElements element='xmark' /></button>
                             </li>
                     ) }
                 </ul>
             </section>
 
-            <section className='section-total' style={{justifyContent:"space-between"}}>
-                <p className='total-price'>
-                    TOTAL : $ { priceFormat(shoppingCart.reduce((prev, curr) => prev + curr.price*curr.amount,0)) }
-                </p>
-                <button className='btn-print' onClick={onPrint}><SvgElements element='print'/></button>
+            <section className='section-sidebar'>
+                <div className='column div-button'>
+                    <InputText 
+                        label='Codigo de barra' 
+                        name='barcode' 
+                        onChange={()=>{}} 
+                        placeholder="Ingresar codigo de barra" 
+                        value={barcode}/>
+
+                    <button 
+                        disabled={ shoppingCart.length === 0 ? true : false } 
+                        className='btn white btn-print center' 
+                        onClick={onPrint}
+                    >
+                            Imprimir Ticket
+                    </button>
+
+                    <button 
+                        disabled={ shoppingCart.length === 0 ? true : false } 
+                        className='btn white btn-print center' 
+                        onClick={onClearShoppingCart}
+                    >
+                            Borrar todo
+                    </button>
+                </div>
+
+                <div className='column div-total'>
+                    <p>TOTAL</p>
+                    <p>$ { priceFormat(shoppingCart.reduce((prev, curr) => prev + curr.price*curr.amount,0)) }</p>
+                </div>
             </section>
         </div>
     )

@@ -50,25 +50,21 @@ export const ProviderDatabase = ({ children }: props) => {
                     setProduct( data.map( formatProduct ).sort( sortABCProducts ) );
                 })
                 .catch( error => {
+                    console.log(error)
                     setStatusDB("offline")
                     const data = window.electronAPI.getDataProductsOffline();
                     setProduct( data.map( formatProduct ).sort( sortABCProducts ) );
                 })
 
         } else {
-            axios.get("https://market-product-rest.onrender.com/api/product/7623201814851", { headers: { token } })
+            axios.get("https://market-product-rest.onrender.com/api/product/7790580129705", { headers: { token } })
                 .then(()=> { setStatusDB("online") })
-                .catch(()=> { setStatusDB("offline") })
+                .catch((error)=> { console.log(error);setStatusDB("offline") })
         }
     
     }
-
     useInterval(checkDB, 300000 );
-    useEffect(() => {
-        if ( !token ) return;
-
-        checkDB();
-    }, [token])
+    useEffect(() => { if(token) checkDB() }, [token])
 
     // FUNC CONTROLLER PRODUCTS
     const controllerProducts: IControllerProducts = {
