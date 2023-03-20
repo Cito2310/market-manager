@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { ipcNames } from '../Types/ipcNames';
 import { IProduct } from '../Types/product';
+import { ITicketData } from '../Types/ticketData';
 
 
 export const ipcConnections = () => {
@@ -30,6 +31,12 @@ export const ipcConnections = () => {
             },
             header: "Mercadito Ale" 
         })
+    })
+
+    ipcMain.on("save-ticket" as ipcNames, async (e, args: ITicketData) => {
+        if (!existsSync("./tickets")) mkdirSync("./tickets");
+        writeFileSync(`./tickets/${args.date.split(' ').join('_').split(':').join('-')}-${args.idTicket}.json`, JSON.stringify(args));
+        return args;
     })
 
 }
