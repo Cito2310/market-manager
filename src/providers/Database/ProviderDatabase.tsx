@@ -35,8 +35,6 @@ export const ProviderDatabase = ({ children }: props) => {
     // FUNC CALL API PRODUCTS
     const [firstCall, setFirstCall] = useState(true);
     const checkDB = () => {
-        if ( !token ) return; // Check exist token
-
         if ( !firstCall ) setStatusDB("checking");
 
         // call api get all product
@@ -57,6 +55,7 @@ export const ProviderDatabase = ({ children }: props) => {
                 })
 
         } else {
+            if ( !token ) return; // Check exist token
             axios.get("https://market-product-rest.onrender.com/api/product/7790580129705", { headers: { token } })
                 .then(()=> { setStatusDB("online") })
                 .catch((error)=> { console.log(error);setStatusDB("offline") })
@@ -64,7 +63,7 @@ export const ProviderDatabase = ({ children }: props) => {
     
     }
     useInterval(checkDB, 300000 );
-    useEffect(() => { if(token) checkDB() }, [token])
+    useEffect(() => { checkDB() }, [token])
 
     // FUNC CONTROLLER PRODUCTS
     const controllerProducts: IControllerProducts = {

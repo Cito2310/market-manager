@@ -12,6 +12,7 @@ import { ScreenCashRegister } from './screen/ScreenCashRegister';
 
 import "./config.scss"
 import "./styles/btn-style.scss"
+import { PrivateRoute } from './routes/PrivateRoute';
 
 
 function App() {
@@ -25,14 +26,19 @@ function App() {
             screenPrint ? <TicketPrint/> : <>
             
               {
-                !token ? 
-                  <ModalLoginProduct setLoginToken={ setToken }/>
-                :
+                // !token ? 
+                //   <ModalLoginProduct setLoginToken={ setToken }/>
+                // :
                   statusDB === "await" ? <LoaderComponent /> :
                   
                   <Routes>
                     <Route path='/cash-register' element={ <ScreenCashRegister/> }/>
-                    <Route path='/all-products' element={ <ScreenAllProducts/> }/>
+
+                    <Route path='/all-products' element={ 
+                      <PrivateRoute>
+                        <ScreenAllProducts/>
+                      </PrivateRoute> 
+                    }/>
     
                     <Route path='/*' element={ <Navigate to="/cash-register"/> }/>
                   </Routes>
