@@ -13,6 +13,7 @@
     padding: 0 $padding;
     position: fixed;
     width: calc(100% - $padding*2);
+    z-index: 20;
     
     a {
         cursor: pointer;
