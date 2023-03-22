@@ -1,0 +1,32 @@
+@use "../var";
+
+.screen-categories {
+    padding: 16px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;    
+    gap: 16px;
+
+    .menu-controller {
+        position: absolute;
+        bottom: calc(var.$bottom-bar + 8px);
+        right: 0;
+        background-color: var.$white-1;
+        padding: 6px 5px 6px 6px;
+        border-radius: 6px 0 0 6px;
+
+        button {
+            all: unset;
+            background-color: var.$white-2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var.$grey-0;
+            border-radius: 6px;
+            width: 1.3em;
+            height: 1.3em;
+            font-size: 1.6em;
+        }
+    }
+}

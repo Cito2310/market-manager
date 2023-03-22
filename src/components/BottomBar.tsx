@@ -12,6 +12,7 @@ export const BottomBar = () => {
             <div className='row'>
                 <NavLink to="/cash-register">Cash Register</NavLink>
                 <NavLink to="/all-products">All Products</NavLink>
+                <NavLink to="/categories">Categories</NavLink>
             </div>
 
             <p>status server : { statusDB }</p>

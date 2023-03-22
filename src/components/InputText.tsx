@@ -1,7 +1,7 @@
 import "../styles/input-style.scss"
 
 interface props {
-    label: string
+    label?: string
     name: string
     placeholder: string
     value: string
@@ -13,7 +13,7 @@ interface props {
 export const InputText = ({ label, placeholder, name, value, onChange, autoFocus, password }: props) => {
     return (
         <div className="input-container">
-            <label>{label}</label>
+            { label ? <label>{label}</label> : null }
             <input 
                 name={name}
                 placeholder={placeholder}

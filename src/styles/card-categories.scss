@@ -1,0 +1,92 @@
+@use "../var";
+
+.card-categories {
+    h1, p, ul, input, li { all: unset }
+    
+    background-color: var.$white-1;
+    border-radius: 12px;
+    box-shadow: 10px 10px 12px -10px #00000050;
+    display: grid;
+    gap: 8px;
+    grid-template-rows: 10em auto;
+    padding: 12px 20px;
+    min-width: 300px;
+    flex: 1 1 auto;
+
+
+    .container-data-category {
+        display: grid;
+        gap: 4px;
+        grid-template-rows: auto 1fr;
+        height: 100%;
+
+        .container-top {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            
+            h1 {font-size: 1.6em}
+
+            button { 
+                font-size: 1em;
+                &.btn-icon-plus { font-size: 1.4em }
+            }
+        }
+    
+        .container-body {
+            &::-webkit-scrollbar {display: none}
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+
+            li {
+                align-items: center;
+                display: flex;
+                gap: 12px;
+                border-top: 1px #d4d4d4 solid;
+                text-transform: uppercase;
+                p {
+                    padding: 3px 6px;
+                }
+                
+                input { 
+                    padding: 3px 6px;
+                    flex-grow: 1; 
+                    background-color: #fafafa;
+                }
+            }
+        }
+    }
+
+
+
+    .container-button {
+        display: none;
+        gap: 8px;
+        justify-content: end;
+        
+        &.active { display: flex }
+    }
+
+    .btn-icon {
+        all: unset;
+        align-items: center;
+        background-color: red;
+        border-radius: 6px;
+        display: flex;
+        height: 1.6em;
+        justify-content: center;
+        width: 1.6em;
+    }
+
+    .btn-icon-plus {
+        all: unset;
+        align-items: center;
+        background-color: red;
+        border-radius: 6px;
+        display: flex;
+        height: 1.2em;
+        justify-content: center;
+        width: 1.2em;
+    }
+}

@@ -5,19 +5,20 @@ import { ContextModal } from './providers/Modal/ProviderModal';
 import { ContextDatabase } from './providers/Database/ProviderDatabase';
 import { ContextPrint } from './providers/Print/ProviderPrint';
 
-import { BottomBar, LoaderComponent, ModalCreateProduct, ModalDeleteProduct, ModalLoginProduct, ModalModifyProduct, TicketPrint } from './components';
+import { BottomBar, LoaderComponent, ModalCreateProduct, ModalDeleteProduct, ModalModifyProduct, TicketPrint } from './components';
+import { PrivateRoute } from './routes/PrivateRoute';
 
 import { ScreenAllProducts } from './screen/ScreenAllProducts';
 import { ScreenCashRegister } from './screen/ScreenCashRegister';
+import { ScreenCategories } from './screen/ScreenCategories';
 
 import "./config.scss"
 import "./styles/btn-style.scss"
-import { PrivateRoute } from './routes/PrivateRoute';
 
 
 function App() {
   const { currentModal } = useContext(ContextModal);
-  const { setToken, token, statusDB } = useContext(ContextDatabase);
+  const { statusDB } = useContext(ContextDatabase);
   const { screenPrint } = useContext(ContextPrint);
 
   return (
@@ -26,9 +27,6 @@ function App() {
             screenPrint ? <TicketPrint/> : <>
             
               {
-                // !token ? 
-                //   <ModalLoginProduct setLoginToken={ setToken }/>
-                // :
                   statusDB === "await" ? <LoaderComponent /> :
                   
                   <Routes>
@@ -37,6 +35,12 @@ function App() {
                     <Route path='/all-products' element={ 
                       <PrivateRoute>
                         <ScreenAllProducts/>
+                      </PrivateRoute> 
+                    }/>
+
+                    <Route path='/categories' element={ 
+                      <PrivateRoute>
+                        <ScreenCategories/>
                       </PrivateRoute> 
                     }/>
     
