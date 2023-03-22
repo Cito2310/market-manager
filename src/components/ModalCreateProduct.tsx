@@ -18,7 +18,7 @@ import "../styles/modal-simple.scss"
 
 export const ModalCreateProduct = () => {
     // GET TOKEN
-    const { token, controllerProducts } = useContext(ContextDatabase);
+    const { token, controllerProducts, categories } = useContext(ContextDatabase);
 
     // IMPORT CONTEXT MODAL
     const { dispatchModal } = useContext(ContextModal);
@@ -71,6 +71,8 @@ export const ModalCreateProduct = () => {
         })
     }
 
+    console.log(formState.category, formState.brand, formState.unitType)
+
     return (
         <>
             <div className="modal-container">
@@ -96,12 +98,15 @@ export const ModalCreateProduct = () => {
                             value={category}
                             name="category"
                             label="Categoria"
-                            option={[
-                                { label: "Spider Man", value: "spiderman" },
-                                { label: "Superman", value: "superman" },
-                                { label: "Iron Man", value: "ironman" },
-                                { label: "Hulk", value: "hulk" },
-                            ]}
+                            option={[{label: "", value: ""}, ...categories.map( item =>({ label: item.category, value: item.category }) )]}
+                            onChange={onInputChange}
+                        />
+
+                        <InputSelect
+                            value={brand}
+                            name="brand"
+                            label="Marca"
+                            option={[{label: "", value: ""}, ...categories.find( item => item.category === category.toUpperCase() )?.brands.map( item =>({label: item, value: item}))||[]]}
                             onChange={onInputChange}
                         />
 

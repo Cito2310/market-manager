@@ -18,7 +18,7 @@ import "../styles/modal-simple.scss"
 
 export const ModalModifyProduct = () => {
     // GET TOKEN
-    const { token, controllerProducts } = useContext(ContextDatabase);
+    const { token, controllerProducts, categories } = useContext(ContextDatabase);
 
     // IMPORT CONTEXT MODAL
     const { dispatchModal, productSelected } = useContext(ContextModal);
@@ -70,7 +70,8 @@ export const ModalModifyProduct = () => {
             controllerRespState.setStatusError("Error")
         })
     }
-
+    
+    console.log(category)
     return (
         <>
             <div className="modal-container">
@@ -85,23 +86,18 @@ export const ModalModifyProduct = () => {
                 <form  onSubmit={onCreateProductFetch}>
                     <div className="modal-div-body">
                         <InputSelect
-                            value={category}
+                            value={category.toUpperCase()}
                             name="category"
                             label="Categoria"
-                            option={[
-                                { label: "Spider Man", value: "spiderman" },
-                                { label: "Superman", value: "superman" },
-                                { label: "Iron Man", value: "ironman" },
-                                { label: "Hulk", value: "hulk" },
-                            ]}
+                            option={categories.map( item =>({ label: item.category, value: item.category }) )}
                             onChange={onInputChange}
                         />
 
-                        <InputText
-                            label="Marca"
-                            placeholder="Inserte el marca"
-                            name="brand"
+                        <InputSelect
                             value={brand}
+                            name="brand"
+                            label="Marca"
+                            option={[{label: "", value: ""}, ...categories.find( item => item.category === category.toUpperCase() )?.brands.map( item =>({label: item, value: item}))||[]]}
                             onChange={onInputChange}
                         />
 
