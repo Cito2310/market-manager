@@ -1,8 +1,10 @@
 import "./test-style.scss";
 import "./btn.scss";
+import "./modal.scss"
 import { SvgElements } from '../components/SvgElements';
 import { BtnIcon } from './BtnIcon';
 import { InputNumber, InputSelect, InputText } from "./Inputs";
+import { ModalExample } from './modalExample';
 
 export const TestStyle = () => {
     // const button = () => {console.log(event.target)} 
@@ -35,7 +37,7 @@ export const TestStyle = () => {
                 <BtnIcon element="xmark"/>
             </div> */}
 
-            <InputText name="" value="Value VALUE" onChange={()=>{}} />
+            {/* <InputText name="" value="Value VALUE" onChange={()=>{}} />
             <InputText name="" label="label LABEL Label" value="Value VALUE" onChange={()=>{}}/>
             <InputText name="" value="" placeholder="This is Placeholder PLACEHOLDER" onChange={()=>{}}/>
 
@@ -52,8 +54,9 @@ export const TestStyle = () => {
                 {label: "MARTES", value: "MARTES"},
                 {label: "HOLA", value: "HOLA"},
                 {label: "MIERCOLES", value: "MIERCOLES"},
-            ]} />
+            ]} /> */}
 
+            <ModalExample/>
         </div>
     )
 }

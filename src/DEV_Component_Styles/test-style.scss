@@ -8,10 +8,13 @@ body {
     font-family: Mulish, Montesrrat, Arial, Helvetica, sans-serif;
     font-size: 17px;
     font-weight: 500;
+    background-color: #363636;
+    color: #202020;
 
     .row {
         display: flex;
         flex-direction: row;
+        width: 100%;
 
         &.reverse { flex-direction: row-reverse }
         &.sb { justify-content: space-between }
@@ -28,6 +31,7 @@ body {
     .column {
         display: flex;
         flex-direction: column;
+        width: 100%;
 
         &.reverse { flex-direction: column-reverse }
         &.sb { justify-content: space-between }
