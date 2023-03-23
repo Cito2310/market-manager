@@ -2,6 +2,7 @@ import "./test-style.scss";
 import "./btn.scss";
 import { SvgElements } from '../components/SvgElements';
 import { BtnIcon } from './BtnIcon';
+import { InputNumber, InputSelect, InputText } from "./Inputs";
 
 export const TestStyle = () => {
     // const button = () => {console.log(event.target)} 
@@ -33,6 +34,25 @@ export const TestStyle = () => {
                 <BtnIcon element="trash" color="red"/>
                 <BtnIcon element="xmark"/>
             </div> */}
+
+            <InputText name="" value="Value VALUE" onChange={()=>{}} />
+            <InputText name="" label="label LABEL Label" value="Value VALUE" onChange={()=>{}}/>
+            <InputText name="" value="" placeholder="This is Placeholder PLACEHOLDER" onChange={()=>{}}/>
+
+            <hr/>
+
+            <InputNumber name="" value={1} onChange={()=>{}}/>
+            <InputNumber name="" label="label LABEL Label" value={0} onChange={()=>{}}/>
+            <InputNumber name="" value={4125} placeholder="This is Placeholder PLACEHOLDER" onChange={()=>{}} />
+
+            <hr/>
+
+            <InputSelect name="" value="HOLA" onChange={()=>{}} option={[
+                {label: "LUNES", value: "LUNES"},
+                {label: "MARTES", value: "MARTES"},
+                {label: "HOLA", value: "HOLA"},
+                {label: "MIERCOLES", value: "MIERCOLES"},
+            ]} />
 
         </div>
     )
