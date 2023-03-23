@@ -7,7 +7,7 @@ import App from './App';
 import { ProviderDatabase } from './providers/Database/ProviderDatabase';
 import { ProviderModal } from './providers/Modal/ProviderModal';
 import { ProviderPrint } from './providers/Print/ProviderPrint';
-import { TestStyle } from './TestStyle';
+import { TestStyle } from './DEV_Component_Styles/TestStyle';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -19,8 +19,8 @@ root.render(
     <ProviderPrint>
     <ProviderModal>
       
-      <App />
-      {/* <TestStyle/> */}
+      {/* <App /> */}
+      <TestStyle/>
 
     </ProviderModal>
     </ProviderPrint>
