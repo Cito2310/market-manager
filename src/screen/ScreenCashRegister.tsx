@@ -29,7 +29,7 @@ export const ScreenCashRegister = () => {
     
     const onToggleNotFoundModal = () => {
         setCurrentModal('not-found');
-        setTimeout(()=>{setNotFound(false)}, 800);
+        setTimeout(()=>{setCurrentModal("not-found")}, 800);
         setBarcode("");
     }
     
