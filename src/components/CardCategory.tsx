@@ -43,6 +43,15 @@ export const CardCategory = ({ category }:props) => {
 
         onDecline () { setEdit(false); setBrands( initBrand ) },
 
+        // DELETE CATEGORY
+        async onDeleteCategory () {
+            axios.delete(`https://market-product-rest.onrender.com/api/category/${category._id}`, {headers: {token}})
+                .then(() => {
+                    controllerCategories.delete(category);
+                })
+                .catch(error => console.log(error));
+        },
+
         // CONTROLLER EDIT BRANDS
         onEditFormFields () {
             if (!brands.length) setBrands([{value: ""}]);
@@ -58,7 +67,6 @@ export const CardCategory = ({ category }:props) => {
         },
     }
 
-
     // R E T U R N
     return (
         <div className="card-category">
@@ -67,26 +75,32 @@ export const CardCategory = ({ category }:props) => {
                 <div className="row sb">
                     <h2>{category.category}</h2>
 
-                    {
-                        !edit ? 
-                        <BtnIcon element='pencil' onClickFunc={controllerForm.onEditFormFields}/> :
-                        <BtnIcon element='plus' onClickFunc={controllerForm.onAddFormFields}/>
-                    }
+                    <div className='row gap-8'>
+                        {
+                            !edit ? <>
+                            <BtnIcon element='pencil' onClickFunc={controllerForm.onEditFormFields}/> 
+                            <BtnIcon element='trash' color='red' onClickFunc={controllerForm.onDeleteCategory}/>
+                            </> :
+                            <BtnIcon element='plus' onClickFunc={controllerForm.onAddFormFields}/>
+                        }
+                    </div>
                 </div>
 
                 <ul className="container-body">
-                    {brands.map(({value}, index) => <>
-                        {
-                            edit ?
-
-                            <li className='row sb input' key={index}>
-                                <input type="text" value={value} name="value" onChange={event => controllerForm.onChange(index, event)} />
-                                <BtnIcon element='trash' color='red' onClickFunc={()=>controllerForm.onRemoveFormFields(index)}></BtnIcon>
-                            </li> :
-
-                            <li className='row sb text'><p>{value}</p></li>
-                        }
-                    </> )}
+                    {brands.map(({value}, index) => 
+                            <li 
+                                className={`row sb ${edit ? "input" : "text"}`}
+                                key={index}
+                            >
+                                {
+                                    edit ? <>
+                                        <input type="text" value={value} name="value" onChange={event => controllerForm.onChange(index, event)} />
+                                        <BtnIcon element='trash' color='red' onClickFunc={()=>controllerForm.onRemoveFormFields(index)}></BtnIcon>
+                                    </> 
+                                    : <p>{value}</p>
+                                }
+                            </li>
+                    )}
                 </ul>
 
             </div>

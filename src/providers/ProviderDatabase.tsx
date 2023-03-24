@@ -56,7 +56,7 @@ export const ProviderDatabase = ({ children }: props) => {
                 console.log(error)
                 setStatusDB("offline")
                 const data = window.electronAPI.getDataProductsOffline();
-                setProduct( data.map( formatProduct ).sort( sortProducts ) );
+                setProduct( data.map( formatProduct ).sort( sortProducts ) || [] );
             })
     }
 

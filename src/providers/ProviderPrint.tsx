@@ -6,7 +6,8 @@ interface IContextPrint {
     setProductToPrint: React.Dispatch<React.SetStateAction<IProductWithAmount[]>>,
 
     screenPrint: boolean,
-    toggleScreenPrint: () => void,
+    offScreenPrint: () => void,
+    onScreenPrint: () => void,
 }
 
 export const ContextPrint = createContext({} as IContextPrint)
@@ -16,12 +17,13 @@ export const ProviderPrint = ({ children }: props) => {
     const [screenPrint, setScreenPrint] = useState(false);
     const [productToPrint, setProductToPrint] = useState<IProductWithAmount[]>([]);
 
-    const toggleScreenPrint = () => {setScreenPrint(!screenPrint)};
+    const offScreenPrint = () => { setScreenPrint(false) };
+    const onScreenPrint = () => { setScreenPrint(true) };
 
     // R E T U R N
     return (
         <ContextPrint.Provider  value={{
-            screenPrint, toggleScreenPrint,
+            screenPrint, offScreenPrint, onScreenPrint,
             productToPrint, setProductToPrint,
         }}>
             { children }

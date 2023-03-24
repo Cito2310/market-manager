@@ -15,21 +15,19 @@ import "../styles/screen-cash-register.scss"
 export const ScreenCashRegister = () => {
     const { setCurrentModal } = useContext(ContextModal);
     const { product } = useContext(ContextDatabase);
-    const { setProductToPrint, toggleScreenPrint } = useContext( ContextPrint );
+    const { setProductToPrint, onScreenPrint } = useContext( ContextPrint );
 
     const [barcode, setBarcode] = useState<string>("");
     const [shoppingCart, setShoppingCart] = useState<IProductWithAmount[]>([]);
-    const [notFound, setNotFound] = useState(false);
-
     
     const onPrint = () => {
         setProductToPrint(shoppingCart);
-        toggleScreenPrint();
+        onScreenPrint();
     }
     
     const onToggleNotFoundModal = () => {
         setCurrentModal('not-found');
-        setTimeout(()=>{setCurrentModal("not-found")}, 800);
+        setTimeout(()=>{setCurrentModal("none")}, 800);
         setBarcode("");
     }
     

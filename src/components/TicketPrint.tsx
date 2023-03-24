@@ -5,7 +5,7 @@ import "../styles/ticket-print.scss"
 import { ITicketData } from '../../Types/ticketData';
 
 export const TicketPrint = () => {
-    const { productToPrint, toggleScreenPrint } = useContext(ContextPrint);
+    const { productToPrint, offScreenPrint } = useContext(ContextPrint);
 
     const getTime = () => {
         const date = new Date();
@@ -28,7 +28,7 @@ export const TicketPrint = () => {
         const printFuncPage = async() => {
             await window.electronAPI.printPage();
             await window.electronAPI.saveTicket( ticket );
-            setTimeout( ()=>{toggleScreenPrint}, 1000 )
+            setTimeout( offScreenPrint, 1000 )
         }
         printFuncPage()
     }, [])
