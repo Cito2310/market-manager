@@ -1,4 +1,4 @@
-import "./btn-icon.scss"
+import "../styles/btn-icon.scss"
 
 interface props {
     element: TElement

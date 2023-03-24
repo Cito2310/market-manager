@@ -1,15 +1,13 @@
 import { useContext } from 'react';
 import { SvgElements } from "./"
-import { ContextModal } from '../providers/Modal/ProviderModal';
+import { ContextModal } from '../providers';
 import "../styles/menu-controller-products.scss"
 
 
 export const MenuControllerProducts = () => {
-    const { dispatchModal } = useContext(ContextModal);
+    const { setCurrentModal } = useContext(ContextModal);
 
-    const onModalCreate = () => {
-        dispatchModal({type: "Change modal-create-product"})
-    }
+    const onModalCreate = () => { setCurrentModal("create-product") }
 
     // TODO : Crear funcion para desplegar el modal para buscar un producto y asignarlo al boton lens
 

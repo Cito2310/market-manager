@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { ContextDatabase } from '../providers/Database/ProviderDatabase';
-import { ModalLoginProduct } from '../components';
+import { ContextDatabase } from '../providers/ProviderDatabase';
+import { ModalLoginProduct } from '../components/modals';
 
 interface props {
     children: JSX.Element | JSX.Element[]

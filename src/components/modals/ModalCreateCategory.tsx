@@ -1,40 +1,29 @@
 import axios from 'axios';
 import { useContext } from 'react';
 
-import { useForm } from '../hooks/useForm';
-import { useResponseState } from '../hooks/useResponseState';
+import { useForm } from '../../hooks/useForm';
+import { useResponseState } from '../../hooks/useResponseState';
 
-import { transformProductToAPI } from '../helpers/transformProductToAPI';
-import { formatProduct } from '../helpers/formatProduct';
+import { ContextModal, ContextDatabase } from '../../providers';
 
-import { ContextModal } from '../providers/Modal/ProviderModal';
-import { ContextDatabase } from '../providers/Database/ProviderDatabase';
+import { ItemsResponse } from '../';
+import { InputText } from '../Inputs';
 
-import { InputText, InputSelect, InputNumber, ItemsResponse } from '.';
+import { SvgElements } from '../SvgElements';
 
-import "../styles/modal-simple.scss"
-
-interface props {
-    setCreating: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-
-export const ModalCreateCategory = ({setCreating}: props) => {
+export const ModalCreateCategory = () => {
     // GET TOKEN
     const { token, controllerCategories } = useContext(ContextDatabase);
+
+    const { exitModal } = useContext(ContextModal);
 
     // CREATE FORM
     const {
         categoryName,
-
         onInputChange,
-        formState
     } = useForm({
         categoryName: "",
     })
-
-    // FUNC EXIT MODAL
-    const exitModal = () => { setCreating(false) };
 
     // FUNC CALL API MODIFY PRODUCT
     const { controllerRespState, respState } = useResponseState();
@@ -51,7 +40,7 @@ export const ModalCreateCategory = ({setCreating}: props) => {
         )
             .then(({ data }) => { 
                 controllerRespState.setStatusDone();
-                controllerCategories.addNewCategory(data);
+                controllerCategories.add(data);
                 setTimeout(exitModal,300);
             })
             .catch(error => {
@@ -62,16 +51,14 @@ export const ModalCreateCategory = ({setCreating}: props) => {
     return (
         <>
             <div className="modal-container">
-                <div className="modal-div-top">
-                    <h2 className="title-modal">Inserte la nueva categoria</h2>
+                <div className="row sb">
+                    <h2>Inserte la nueva categoria</h2>
 
-                    <button className="btn-exit-modal" onClick={ exitModal }>
-                        <i className="fa-solid fa-xmark" />
-                    </button>
+                    <button className="btn-exit" onClick={exitModal}><SvgElements element="xmark"/></button>
                 </div>
 
                 <form  onSubmit={onCreateCategoryFetch}>
-                    <div className="modal-div-body">
+                    <div className="body-container">
                         <InputText
                             placeholder="Inserte la nueva categoria"
                             name="categoryName"
@@ -80,9 +67,9 @@ export const ModalCreateCategory = ({setCreating}: props) => {
                         />
                     </div>
 
-                    <div className="modal-div-footer">
+                    <div className="row gap-12 reverse">
                         <input type="submit" className="btn primary" value="Crear"/>
-                        <button  disabled={false} className="btn secundary" onClick={exitModal}>Rechazar</button>
+                        <button disabled={respState.status === "await" ? false : true} className="btn secundary" onClick={exitModal}>Rechazar</button>
                         <ItemsResponse type={respState.status} errorMsg={respState.errorMsg}/>
                     </div>
                 </form>

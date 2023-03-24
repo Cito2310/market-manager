@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import { NavLink } from "react-router-dom"
-import { ContextDatabase } from '../providers/Database/ProviderDatabase';
+import { ContextDatabase } from '../providers';
 import "../styles/bottom-bar.scss"
-
 
 export const BottomBar = () => {
     const { statusDB } = useContext(ContextDatabase);

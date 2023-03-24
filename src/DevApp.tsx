@@ -1,19 +1,25 @@
-import "./test-style.scss";
-import "./btn.scss";
-import "./modal.scss"
-import { SvgElements } from '../components/SvgElements';
-import { BtnIcon } from './BtnIcon';
-import { InputNumber, InputSelect, InputText } from "./Inputs";
-import { ModalExample } from './modalExample';
-import { CardProduct } from "./CardProduct";
-import { CardCategory } from "./CardCategory";
+import "./config.scss";
+import "./styles/btn.scss";
+import "./styles/modal.scss";
 
-export const TestStyle = () => {
+import { SvgElements } from './components/SvgElements';
+import { ModalLoginProduct } from "./components/modals/ModalLoginProduct";
+import { ModalDeleteProduct } from "./components/modals/ModalDeleteProduct";
+// // import { BtnIcon } from './BtnIcon';
+// // import { InputNumber, InputSelect, InputText } from "../components/Inputs";
+// // import { ModalExample } from '../components/modals/ModalExample';
+// // import { CardProduct } from "./CardProduct";
+// // import { CardCategory } from "./CardCategory";
+
+export const DevApp = () => {
     // const button = () => {console.log(event.target)} 
 
     return (
         <div className="screen-test column">
-            <h1>TEST STYLE</h1>
+            {/* <ModalLoginProduct setLoginToken={()=>{console.log()}}/> */}
+
+            {/* <ModalDeleteProduct/> */}
+
 
             {/* <div className="row gap-16">
                 <button className="btn primary">PRIMARY</button>
@@ -71,7 +77,7 @@ export const TestStyle = () => {
                     sizeUnit: [24, "g"],
                 }}
             /> */}
-            <CardCategory categoryBase={{
+            {/* <CardCategory categoryBase={{
                 category: "JUGO EN SOBRE",
                 brands: [
                     "ARCOR",
@@ -81,7 +87,7 @@ export const TestStyle = () => {
                     "MANAO",
                     "LEPEX",
                 ]
-            }}/>
+            }}/>*/}
         </div>
     )
 }

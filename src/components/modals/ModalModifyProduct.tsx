@@ -1,18 +1,15 @@
 import axios from 'axios';
 import { useContext } from 'react';
 
-import { useForm } from '../hooks/useForm';
-import { useResponseState } from '../hooks/useResponseState';
+import { useForm } from '../../hooks/useForm';
+import { useResponseState } from '../../hooks/useResponseState';
 
-import { transformProductToAPI } from '../helpers/transformProductToAPI';
-import { formatProduct } from '../helpers/formatProduct';
+import { transformProductToAPI } from '../../helpers/transformProductToAPI';
+import { formatProduct } from '../../helpers/formatProduct';
 
-import { ContextModal } from '../providers/Modal/ProviderModal';
-import { ContextDatabase } from '../providers/Database/ProviderDatabase';
+import { ContextModal, ContextDatabase } from '../../providers';
 
-import { InputNumber, InputSelect, InputText, ItemsResponse } from './';
-
-import "../styles/modal-simple.scss"
+import { InputNumber, InputSelect, InputText, ItemsResponse } from '../';
 
 
 
@@ -21,7 +18,7 @@ export const ModalModifyProduct = () => {
     const { token, controllerProducts, categories } = useContext(ContextDatabase);
 
     // IMPORT CONTEXT MODAL
-    const { dispatchModal, productSelected } = useContext(ContextModal);
+    const { exitModal, productSelected } = useContext(ContextModal);
 
     // CREATE FORM
     const {
@@ -36,17 +33,14 @@ export const ModalModifyProduct = () => {
         onInputChange,
         formState
     } = useForm({
-        barcode: productSelected.barcode,
-        brand: productSelected.brand.toLocaleUpperCase(),
-        category: productSelected.category.toLocaleLowerCase(),
-        name: productSelected.name,
-        price: productSelected.price,
-        size: productSelected.sizeUnit[0],
-        unitType: productSelected.sizeUnit[1].toLocaleLowerCase(),
+        barcode: productSelected!.barcode,
+        brand: productSelected!.brand.toLocaleUpperCase(),
+        category: productSelected!.category.toLocaleLowerCase(),
+        name: productSelected!.name,
+        price: productSelected!.price,
+        size: productSelected!.sizeUnit[0],
+        unitType: productSelected!.sizeUnit[1].toLocaleLowerCase(),
     })
-
-    // FUNC EXIT MODAL
-    const exitModal = () => { dispatchModal({type: "Change modal-none"}) };
 
     // FUNC CALL API MODIFY PRODUCT
     const { controllerRespState, respState } = useResponseState();
@@ -147,8 +141,8 @@ export const ModalModifyProduct = () => {
                     </div>
 
                     <div className="modal-div-footer">
-                        <input type="submit" className="btn primary" value="Editar"/>
-                        <button  disabled={false} className="btn secundary" onClick={exitModal}>Rechazar</button>
+                        <input disabled={respState.status === "await" ? true : false} type="submit" className="btn primary" value="Editar"/>
+                        <button disabled={respState.status === "await" ? true : false} className="btn secundary" onClick={exitModal}>Rechazar</button>
                         <ItemsResponse type={respState.status} errorMsg={respState.errorMsg}/>
                     </div>
                 </form>

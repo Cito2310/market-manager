@@ -1,4 +1,4 @@
-import "./inputs.scss"
+import "../styles/inputs.scss"
 
 
 // I N P U T   T E X T

@@ -1,11 +1,12 @@
 import { createContext, useState } from 'react';
-import { IProductWithAmount } from '../../../Types/product';
+import { IProductWithAmount } from '../../Types/product';
 
 interface IContextPrint {
     productToPrint: IProductWithAmount[],
-    screenPrint: boolean,
     setProductToPrint: React.Dispatch<React.SetStateAction<IProductWithAmount[]>>,
-    setScreenPrint: React.Dispatch<React.SetStateAction<boolean>>
+
+    screenPrint: boolean,
+    toggleScreenPrint: () => void,
 }
 
 export const ContextPrint = createContext({} as IContextPrint)
@@ -15,10 +16,12 @@ export const ProviderPrint = ({ children }: props) => {
     const [screenPrint, setScreenPrint] = useState(false);
     const [productToPrint, setProductToPrint] = useState<IProductWithAmount[]>([]);
 
+    const toggleScreenPrint = () => {setScreenPrint(!screenPrint)};
+
     // R E T U R N
     return (
         <ContextPrint.Provider  value={{
-            screenPrint, setScreenPrint,
+            screenPrint, toggleScreenPrint,
             productToPrint, setProductToPrint,
         }}>
             { children }

@@ -1,23 +1,22 @@
 import axios from 'axios';
 import { useState, useContext, useEffect } from 'react';
-import { SvgElements } from "./";
-import { ContextDatabase, IControllerCategories } from '../providers/Database/ProviderDatabase';
+import { SvgElements } from ".";
+import { ContextDatabase } from '../providers';
 import { IRespCategories } from '../../Types/categories';
-import "../styles/card-categories.scss"
+import "../styles/card-category.scss"
+import { BtnIcon } from './BtnIcon';
 
 interface props { category: IRespCategories }
 
 interface IBrandObject { value: string }
 
-export const CardCategories = ({ category }:props) => {
+export const CardCategory = ({ category }:props) => {
     const { token, controllerCategories } = useContext(ContextDatabase);
     const [edit, setEdit] = useState(false);
-
 
     // B R A N D
     const initBrand = category.brands.map( brand => ({value: brand}));
     const [brands, setBrands] = useState<IBrandObject[]>(initBrand);
-   
 
     // C O N T R O L L E R   F O R M S
     const controllerForm = {
@@ -28,7 +27,6 @@ export const CardCategories = ({ category }:props) => {
             // @ts-ignore
             copyBrands[index][name] = value;
             setBrands(copyBrands)
-            console.log(value, name)
         },
 
         async onSubmitEditBrands () {
@@ -40,7 +38,7 @@ export const CardCategories = ({ category }:props) => {
             )
             setEdit(false);
             setBrands(brands.filter( brand => brand.value ).sort());
-            controllerCategories.modifyCategory( data );
+            controllerCategories.modify( data );
         },
 
         onDecline () { setEdit(false); setBrands( initBrand ) },
@@ -63,39 +61,44 @@ export const CardCategories = ({ category }:props) => {
 
     // R E T U R N
     return (
-        <div className="card-categories">
-            <div className="container-data-category">
-                <div className="container-top">
-                    <h1>{category.category}</h1>
-                    <div>
-                        {
-                            !edit ? 
-                            <button className='btn-icon' onClick={controllerForm.onEditFormFields}><SvgElements element="pencil"/></button> : 
-                            <button className='btn-icon-plus' onClick={controllerForm.onAddFormFields}><SvgElements element="plus"/></button>
-                        }
-                    </div>
+        <div className="card-category">
+            <div className="column 100w">
+
+                <div className="row sb">
+                    <h2>{category.category}</h2>
+
+                    {
+                        !edit ? 
+                        <BtnIcon element='pencil' onClickFunc={controllerForm.onEditFormFields}/> :
+                        <BtnIcon element='plus' onClickFunc={controllerForm.onAddFormFields}/>
+                    }
                 </div>
 
                 <ul className="container-body">
-                    {brands.map(({value}, index) => <li key={index}>
+                    {brands.map(({value}, index) => <>
                         {
                             edit ?
-                            <>
+
+                            <li className='row sb input' key={index}>
                                 <input type="text" value={value} name="value" onChange={event => controllerForm.onChange(index, event)} />
-                                <button className='btn-icon' onClick={()=>controllerForm.onRemoveFormFields(index)}><SvgElements element="trash"/></button>
-                            </>
-                            : <p>{value}</p>
+                                <BtnIcon element='trash' color='red' onClickFunc={()=>controllerForm.onRemoveFormFields(index)}></BtnIcon>
+                            </li> :
+
+                            <li className='row sb text'><p>{value}</p></li>
                         }
-                    </li>)}
+                    </> )}
                 </ul>
+
             </div>
             
-            <div 
-                className={edit ? "container-button active" : "container-button"}
-            >
-                <button className="btn secundary" onClick={controllerForm.onDecline}>Rechazar</button>
-                <button onClick={controllerForm.onSubmitEditBrands} className="btn primary">Editar</button>
-            </div>
+            {
+                edit ?
+                <div className="row reverse gap-8">
+                    <button onClick={controllerForm.onSubmitEditBrands} className="btn primary">Editar</button>
+                    <button className="btn secondary" onClick={controllerForm.onDecline}>Rechazar</button>
+                </div>
+                : null
+            }
         </div>
     )
 }

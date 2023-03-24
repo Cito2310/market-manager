@@ -1,9 +1,7 @@
-import { SvgElements } from '../components/SvgElements';
+import { SvgElements } from '..';
 
-export const ModalExample = () => {
-
-    // RETURN
-    return (
+export const ModalExample = () => (
+    <>
         <div className="modal-container">
             <div className="row sb">
                 <h2>Modal Base</h2>
@@ -20,5 +18,7 @@ export const ModalExample = () => {
                 <button className="btn secondary">Rechazar</button>
             </div>
         </div>
-    )
-}
+
+        <div className="black-screen" />
+    </>
+)

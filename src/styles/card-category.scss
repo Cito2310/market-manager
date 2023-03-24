@@ -1,0 +1,40 @@
+.card-category {
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    display: grid;
+    flex: 1 1 0;
+    gap: 8px;
+    grid-template-rows: 10em auto;
+    min-width: 300px;
+    padding: 12px 20px;
+
+    h2 { font-size: 1.58em; }
+
+    li {
+        gap: 12px;
+
+        &.input {
+            margin-top: 6px;
+
+            input {
+                background-color: #e7e7e7;
+                border-radius: 6px;
+                padding: 2px 8px;
+                width: 100%;
+            }
+        }
+
+        &.text {
+            border-top: 1px #dbdbdb solid;
+            padding: 3px 6px;
+        }
+    }
+
+    .container-body {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+    }
+
+    ::-webkit-scrollbar {display: none}
+}

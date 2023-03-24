@@ -1,6 +1,7 @@
 import { IProductFormat, IProduct } from '../../Types/product';
 
 export const formatProduct = ( product: IProduct ): IProductFormat => {
+    const { _id, barcode, brand, category, name, price, size } = product;
 
     const capitalizeText = (string: string): string => {
         const copyString = string.slice().toLocaleLowerCase();
@@ -15,14 +16,14 @@ export const formatProduct = ( product: IProduct ): IProductFormat => {
     }
 
     const newProduct: IProductFormat = {
-        _id: product._id,
-        barcode: product.barcode,
-        brand: product.brand,
-        category: capitalizeText( product.category ),
-        name: product.name,
-        price: product.price,
-        size: product.size,
-        sizeUnit: getUnitAndSize(product.size),
+        _id,
+        barcode,
+        brand,
+        category: capitalizeText( category ),
+        name: name,
+        price: price,
+        size: size,
+        sizeUnit: getUnitAndSize(size),
     }
 
     return newProduct;

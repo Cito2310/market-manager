@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { CardProduct } from "../components/CardProduct";
 import { MenuControllerProducts } from "../components/MenuControllerProducts";
 
-import { ContextDatabase } from '../providers/Database/ProviderDatabase';
+import { ContextDatabase } from '../providers';
 
 import "../styles/screen-all-products.scss"
 

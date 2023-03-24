@@ -1,27 +1,22 @@
 import axios from 'axios';
 import { useContext } from 'react';
 
-import { useForm } from '../hooks/useForm';
-import { useResponseState } from '../hooks/useResponseState';
+import { useForm } from '../../hooks/useForm';
+import { useResponseState } from '../../hooks/useResponseState';
 
-import { transformProductToAPI } from '../helpers/transformProductToAPI';
-import { formatProduct } from '../helpers/formatProduct';
+import { transformProductToAPI } from '../../helpers/transformProductToAPI';
+import { formatProduct } from '../../helpers/formatProduct';
 
-import { ContextModal } from '../providers/Modal/ProviderModal';
-import { ContextDatabase } from '../providers/Database/ProviderDatabase';
+import { ContextModal, ContextDatabase } from '../../providers';
 
-import { InputText, InputSelect, InputNumber, ItemsResponse } from './';
-
-import "../styles/modal-simple.scss"
+import { InputText, InputSelect, InputNumber, ItemsResponse, SvgElements } from '../';
 
 
 
 export const ModalCreateProduct = () => {
     // GET TOKEN
     const { token, controllerProducts, categories } = useContext(ContextDatabase);
-
-    // IMPORT CONTEXT MODAL
-    const { dispatchModal } = useContext(ContextModal);
+    const { exitModal } = useContext(ContextModal);
 
     // CREATE FORM
     const {
@@ -38,15 +33,12 @@ export const ModalCreateProduct = () => {
     } = useForm({
         barcode: "",
         brand: "",
-        category: "superman",
+        category: "",
         price: 0,
         size: 0,
         name: "",
         unitType: "g",
     })
-
-    // FUNC EXIT MODAL
-    const exitModal = () => { dispatchModal({type: "Change modal-none"}) };
 
     // FUNC CALL API MODIFY PRODUCT
     const { controllerRespState, respState } = useResponseState();
@@ -62,12 +54,12 @@ export const ModalCreateProduct = () => {
             { headers: { token } }
         )
         .then(({ data }) => { 
-            controllerRespState.setStatusDone()
-            controllerProducts.add(formatProduct(data))
-            setTimeout(exitModal,300)
+            controllerRespState.setStatusDone();
+            controllerProducts.add(formatProduct(data));
+            setTimeout(exitModal,300);
         })
         .catch(error => {
-            controllerRespState.setStatusError("Error")
+            controllerRespState.setStatusError("Error");
         })
     }
 
@@ -76,16 +68,16 @@ export const ModalCreateProduct = () => {
     return (
         <>
             <div className="modal-container">
-                <div className="modal-div-top">
+                <div className="row sb">
                     <h2 className="title-modal">Crear Producto</h2>
 
-                    <button className="btn-exit-modal" onClick={ exitModal }>
-                        <i className="fa-solid fa-xmark" />
+                    <button className="btn-exit" onClick={ exitModal }>
+                        <SvgElements element='xmark'/>
                     </button>
                 </div>
 
-                <form  onSubmit={onCreateProductFetch}>
-                    <div className="modal-div-body">
+                <form onSubmit={onCreateProductFetch}>
+                    <div className="body-container">
                         <InputText
                             label="Codigo de Barra"
                             placeholder="Inserte el codigo de barra"
@@ -107,14 +99,6 @@ export const ModalCreateProduct = () => {
                             name="brand"
                             label="Marca"
                             option={[{label: "", value: ""}, ...categories.find( item => item.category === category.toUpperCase() )?.brands.map( item =>({label: item, value: item}))||[]]}
-                            onChange={onInputChange}
-                        />
-
-                        <InputText
-                            label="Marca"
-                            placeholder="Inserte el marca"
-                            name="brand"
-                            value={brand}
                             onChange={onInputChange}
                         />
 
@@ -163,9 +147,9 @@ export const ModalCreateProduct = () => {
 
                     </div>
 
-                    <div className="modal-div-footer">
-                        <input type="submit" className="btn primary" value="Crear"/>
-                        <button  disabled={false} className="btn secundary" onClick={exitModal}>Rechazar</button>
+                    <div className="row gap-12 reverse">
+                        <input disabled={respState.status === "await" ? true : false} type="submit" className="btn primary" value="Crear"/>
+                        <button disabled={respState.status === "await" ? true : false} className="btn secondary" onClick={exitModal}>Rechazar</button>
                         <ItemsResponse type={respState.status} errorMsg={respState.errorMsg}/>
                     </div>
                 </form>

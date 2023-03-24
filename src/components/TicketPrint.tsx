@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { priceFormat } from '../helpers/priceFormat';
-import { ContextPrint } from '../providers/Print/ProviderPrint';
+import { ContextPrint } from '../providers/ProviderPrint';
 import "../styles/ticket-print.scss"
 import { ITicketData } from '../../Types/ticketData';
 
 export const TicketPrint = () => {
-    const { productToPrint, setScreenPrint } = useContext(ContextPrint);
+    const { productToPrint, toggleScreenPrint } = useContext(ContextPrint);
 
     const getTime = () => {
         const date = new Date();
@@ -28,7 +28,7 @@ export const TicketPrint = () => {
         const printFuncPage = async() => {
             await window.electronAPI.printPage();
             await window.electronAPI.saveTicket( ticket );
-            setTimeout( ()=>{setScreenPrint(false)}, 1000 )
+            setTimeout( ()=>{toggleScreenPrint}, 1000 )
         }
         printFuncPage()
     }, [])

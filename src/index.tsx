@@ -4,10 +4,8 @@ import { HashRouter } from 'react-router-dom';
 
 import App from './App';
 
-import { ProviderDatabase } from './providers/Database/ProviderDatabase';
-import { ProviderModal } from './providers/Modal/ProviderModal';
-import { ProviderPrint } from './providers/Print/ProviderPrint';
-import { TestStyle } from './DEV_Component_Styles/TestStyle';
+import { ProviderDatabase, ProviderPrint, ProviderModal } from './providers/';
+import { DevApp } from './DevApp';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -19,8 +17,8 @@ root.render(
     <ProviderPrint>
     <ProviderModal>
       
-      {/* <App /> */}
-      <TestStyle/>
+      <App />
+      {/* <DevApp/> */}
 
     </ProviderModal>
     </ProviderPrint>

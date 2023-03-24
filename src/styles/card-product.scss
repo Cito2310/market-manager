@@ -1,48 +1,14 @@
-@use "../var";
-
 .card-product {
-    p, button {all:unset}
-
-    background-color: var.$white-0;
+    background-color: #f0f0f0;
     border-radius: 12px;
-    border: 1px var.$white-2 solid;
-    box-shadow: 3px 3px 6px #00000036;
-    color: var.$black-1;
-    display: flex;
+    box-shadow: 4px 4px 6px -2px #0000002f;
     flex-basis: 0;
-    flex-direction: column;
     flex-grow: 1;
-    min-width: 16em;
-    padding: 12px;
+    min-width: 250px;
+    padding: 12px 20px 16px;
 
-    .container-btn {
-        display: flex;
-        gap: 6px;
-
-        button {
-            align-items: center;
-            background-color: var.$white-1;
-            border-radius: 6px;
-            color: var.$white-3;
-            cursor: pointer;
-            display: flex;
-            height: 1.7em;
-            justify-content: center;
-            transition: color 0.2s, background-color 0.2s;
-            width: 1.7em;
-
-            &:hover { color: var.$grey-0; background-color: var.$white-3 }
-            &:active { color: var.$grey-2; background-color: var.$grey-0 }
-        }
-    }
-
-    .txt-barcode { color: var.$grey-0; font-size: 0.7em }
-    .txt-category { font-size: 0.9em }
-    .txt-price { color: var.$black-0; font-size: 1.2em; font-weight: 600 }
-    .txt-product { font-weight: 500 }
-
-    .align-center { align-items: center }
-    .align-end { align-items: end }
-    .column { display: flex; flex-direction: column }
-    .row-sb { display: flex; flex-direction: row; justify-content: space-between }
+    .txt-product { align-self: flex-end }
+    .txt-category { font-size: 0.9em; font-weight: 300; }
+    .txt-price { align-self: flex-end; font-size: 1.2em; font-weight: 600; }
+    .txt-barcode { font-size: 0.7em; color: #9c9c9c; font-weight: 400; }
 }

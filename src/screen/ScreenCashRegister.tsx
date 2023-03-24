@@ -3,10 +3,9 @@ import { useContext, useState, useEffect } from 'react';
 import { priceFormat } from '../helpers/priceFormat';
 import { detectKeyUp } from "../helpers/detectKeyUp";
 
-import { ContextDatabase } from '../providers/Database/ProviderDatabase';
-import { ContextPrint } from '../providers/Print/ProviderPrint';
+import { ContextDatabase, ContextPrint, ContextModal } from '../providers';
 
-import { InputText, ModalNotFoundProduct, SvgElements } from '../components/';
+import { InputText, SvgElements } from '../components/';
 
 import { IProductWithAmount, IProductFormat } from '../../Types/product';
 
@@ -14,13 +13,33 @@ import "../styles/screen-cash-register.scss"
 
 
 export const ScreenCashRegister = () => {
+    const { setCurrentModal } = useContext(ContextModal);
     const { product } = useContext(ContextDatabase);
-    const { setProductToPrint, setScreenPrint } = useContext( ContextPrint );
+    const { setProductToPrint, toggleScreenPrint } = useContext( ContextPrint );
 
     const [barcode, setBarcode] = useState<string>("");
     const [shoppingCart, setShoppingCart] = useState<IProductWithAmount[]>([]);
     const [notFound, setNotFound] = useState(false);
 
+    
+    const onPrint = () => {
+        setProductToPrint(shoppingCart);
+        toggleScreenPrint();
+    }
+    
+    const onToggleNotFoundModal = () => {
+        setCurrentModal('not-found');
+        setTimeout(()=>{setNotFound(false)}, 800);
+        setBarcode("");
+    }
+    
+    const onClearShoppingCart = () => {setShoppingCart([])};
+    
+    const deleteProduct = ( barcode: string ) => {
+        const newShoppingCart = [...shoppingCart].filter( value => value.barcode !== barcode );
+        setShoppingCart( newShoppingCart );
+    }
+    
     useEffect(() => {
         detectKeyUp(
             (event)=>{setBarcode(barcode + event!.key)},
@@ -40,9 +59,7 @@ export const ScreenCashRegister = () => {
                 const productSelect = product.find( value => value.barcode === barcode );
 
                 if (!productSelect) { 
-                    setNotFound(true);
-                    setTimeout(()=>{setNotFound(false)}, 800);
-                    setBarcode("");
+                    onToggleNotFoundModal();
                     return;
                 }
 
@@ -55,23 +72,8 @@ export const ScreenCashRegister = () => {
 
     }, [barcode])
 
-    const onPrint = () => {
-        setProductToPrint(shoppingCart);
-        setScreenPrint(true);
-    }
-
-    const onClearShoppingCart = () => {setShoppingCart([])};
-
-    const deleteProduct = ( barcode: string ) => {
-        const newShoppingCart = [...shoppingCart].filter( value => value.barcode !== barcode );
-        setShoppingCart( newShoppingCart );
-    }
-
-
     return (
         <div className='screen-cash-register'>
-            { notFound ? <ModalNotFoundProduct/> : null }
-
             <section className='section-shopping-cart'>
                 <ul>
                     <li className='product-item top'>

@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { ContextModal } from './providers/Modal/ProviderModal';
-import { ContextDatabase } from './providers/Database/ProviderDatabase';
-import { ContextPrint } from './providers/Print/ProviderPrint';
+import { ContextModal, ContextDatabase, ContextPrint } from './providers';
 
-import { BottomBar, LoaderComponent, ModalCreateProduct, ModalDeleteProduct, ModalModifyProduct, TicketPrint } from './components';
+import { BottomBar, LoaderComponent, TicketPrint } from './components';
+import { ModalCreateCategory, ModalCreateProduct, ModalDeleteProduct, ModalModifyProduct, ModalNotFoundProduct } from "./components/modals";
 import { PrivateRoute } from './routes/PrivateRoute';
 
 import { ScreenAllProducts } from './screen/ScreenAllProducts';
@@ -13,7 +12,8 @@ import { ScreenCashRegister } from './screen/ScreenCashRegister';
 import { ScreenCategories } from './screen/ScreenCategories';
 
 import "./config.scss"
-import "./styles/btn-style.scss"
+import "./styles/btn.scss"
+import "./styles/modal.scss"
 
 
 function App() {
@@ -49,9 +49,11 @@ function App() {
               }
             
               {
-                currentModal === "create" ? <ModalCreateProduct/>
-                : currentModal === "modify" ? <ModalModifyProduct/>
-                : currentModal === "delete" ? <ModalDeleteProduct/>
+                currentModal === "create-product" ? <ModalCreateProduct/>
+                : currentModal === "modify-product" ? <ModalModifyProduct/>
+                : currentModal === "delete-product" ? <ModalDeleteProduct/>
+                : currentModal === "create-category" ? <ModalCreateCategory/>
+                : currentModal === "not-found" ? <ModalNotFoundProduct/>
                 : null
               }
     
