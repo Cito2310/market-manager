@@ -1,0 +1,10 @@
+.card-product {
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    padding: 12px 20px 16px;
+
+    .txt-product { align-self: flex-end }
+    .txt-category { font-size: 0.9em; font-weight: 300; }
+    .txt-price { align-self: flex-end; font-size: 1.2em; font-weight: 600; }
+    .txt-barcode { font-size: 0.7em; color: #9c9c9c; font-weight: 400; }
+}

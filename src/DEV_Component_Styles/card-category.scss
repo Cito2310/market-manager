@@ -1,0 +1,25 @@
+.card-category {
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    padding: 12px 20px 16px;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+
+    h2 { font-size: 1.58em; }
+
+    li {
+        gap: 12px;
+
+        &.input {
+            margin-top: 6px;
+
+            input {
+                padding: 2px 4px;
+                background-color: #e7e7e7;
+                border-radius: 6px;
+                width: 100%;
+            }
+        }
+    }
+}

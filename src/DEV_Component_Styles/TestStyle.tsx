@@ -5,6 +5,8 @@ import { SvgElements } from '../components/SvgElements';
 import { BtnIcon } from './BtnIcon';
 import { InputNumber, InputSelect, InputText } from "./Inputs";
 import { ModalExample } from './modalExample';
+import { CardProduct } from "./CardProduct";
+import { CardCategory } from "./CardCategory";
 
 export const TestStyle = () => {
     // const button = () => {console.log(event.target)} 
@@ -56,7 +58,30 @@ export const TestStyle = () => {
                 {label: "MIERCOLES", value: "MIERCOLES"},
             ]} /> */}
 
-            <ModalExample/>
+            {/* <ModalExample/> */}
+            {/* <CardProduct
+                product={{
+                    _id: "dada",
+                    barcode: "41251516",
+                    brand: "ARCOR",
+                    category: "JUGO EN SOBRE",
+                    name: "NARANJA",
+                    price: 24,
+                    size: 24,
+                    sizeUnit: [24, "g"],
+                }}
+            /> */}
+            <CardCategory categoryBase={{
+                category: "JUGO EN SOBRE",
+                brands: [
+                    "ARCOR",
+                    "TANG",
+                    "LIGHT",
+                    "LIFE",
+                    "MANAO",
+                    "LEPEX",
+                ]
+            }}/>
         </div>
     )
 }

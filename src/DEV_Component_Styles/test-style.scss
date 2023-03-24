@@ -14,11 +14,13 @@ body {
     .row {
         display: flex;
         flex-direction: row;
-        width: 100%;
+
+        &.w100 { width: 100% }
 
         &.reverse { flex-direction: row-reverse }
         &.sb { justify-content: space-between }
         &.center { align-items: center; justify-content: center }
+        &.align-end { align-items: center }
         
         &.gap-2 { gap: 2px }
         &.gap-4 { gap: 4px }
@@ -31,11 +33,14 @@ body {
     .column {
         display: flex;
         flex-direction: column;
-        width: 100%;
+
+        &.w100 { width: 100% }
+
 
         &.reverse { flex-direction: column-reverse }
         &.sb { justify-content: space-between }
         &.center { align-items: center; justify-content: center }
+        &.align-end { align-items: center }
 
         &.gap-2 { gap: 2px }
         &.gap-4 { gap: 4px }
