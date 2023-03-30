@@ -15,7 +15,7 @@ export const ScreenAllProducts = () => {
 
     detectKeyUp(()=>setCurrentModal("create-product"), /\+/g);
 
-    const [search, setSearch] = useState("NESQUIK");
+    const [search, setSearch] = useState("");
     const filterSearchProducts = () => product.filter(({barcode, brand, category, name, size})=> {
         const allData = `${barcode} ${brand} ${category} ${name} ${size}`.toUpperCase();
         const regex = new RegExp(search.toUpperCase());
