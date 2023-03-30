@@ -1,5 +1,5 @@
 export const detectKeyUp = (
-    handler: ( event?: KeyboardEvent ) => void,
+    handler: ( event: KeyboardEvent ) => void,
     regex: RegExp
 ): void => {
     const handlerWithReset = (event: KeyboardEvent) => {

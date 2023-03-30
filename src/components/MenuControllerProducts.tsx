@@ -14,7 +14,7 @@ export const MenuControllerProducts = ({setSearch, search}: props) => {
 
     const onModalCreate = () => { setCurrentModal("create-product") }
 
-    const [searchState, setSearchState] = useState(true);
+    const [searchState, setSearchState] = useState(false);
     const onToggleSearchState = () => {setSearchState(!searchState); setSearch("")};
 
     const onInputChangeSearch = ({target}: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

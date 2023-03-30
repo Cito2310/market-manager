@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useCallback, KeyboardEvent } from 'react';
 
 import { priceFormat } from '../helpers/priceFormat';
 import { detectKeyUp } from "../helpers/detectKeyUp";
@@ -28,7 +28,6 @@ export const ScreenCashRegister = () => {
     const onToggleNotFoundModal = () => {
         setCurrentModal('not-found');
         setTimeout(()=>{setCurrentModal("none")}, 800);
-        setBarcode("");
     }
     
     const onClearShoppingCart = () => {setShoppingCart([])};
@@ -38,42 +37,59 @@ export const ScreenCashRegister = () => {
         setShoppingCart( newShoppingCart );
     }
     
+    
+    // DETECT KEY PRESS
+    const [currentKeyPress, setCurrentKeyPress] = useState([""]);
     useEffect(() => {
-        detectKeyUp(
-            ()=>{ setBarcode("") },
-            /Backspace/g
-        )
+        const handleKeyDown = (event:any) => {
+            if (/^[0-9]+$|Backspace/.test(event.key)) setCurrentKeyPress([event.key])
+        }
+        document.addEventListener("keyup", handleKeyDown);
+        return () => document.removeEventListener("keyup", handleKeyDown);
+      }, []);
 
-        detectKeyUp(
-            (event)=>{setBarcode(barcode + event!.key)},
-            /^[0-9]+$/g
-        )
-        
-        if (barcode.length === 13) {
+    //   ACTION WHEN PRESS KEY
+    useEffect(() => {
+        if ( /^[0-9]+$/g.test(currentKeyPress[0]) ) setBarcode(barcode + currentKeyPress);
+        if ( /Backspace/g.test(currentKeyPress[0]) ) setBarcode("");
+    }, [currentKeyPress])
+
+
+    //   DETECT PRODUCT BARCODE
+    useEffect(() => {
+        console.log(barcode)
+        if ( barcode.length === 13 || barcode.length === 8 ) {
+
+            // check exist product in shopping cart
             const existShoppinCartIndex = shoppingCart.findIndex( value => value.barcode === barcode );
             
+            // when exist product in shopping cart - add amount to product
             if (existShoppinCartIndex !== -1) {
                 let newShoppingCart = [...shoppingCart];
                 newShoppingCart[existShoppinCartIndex].amount++;
                 setShoppingCart(newShoppingCart);
-                
+                setBarcode("");
 
             } else {
-                const productSelect = product.find( value => value.barcode === barcode );
-
-                if (!productSelect) { 
+                // when not exist product in shopping cart - add new product to shopping cart
+                const existProduct = product.find( value => value.barcode === barcode );
+                
+                // when not exist product in database
+                if ( !existProduct && barcode.length === 13 ) {
                     onToggleNotFoundModal();
-                    return;
+                    setBarcode("");
+                } 
+
+                // add product to shopping cart
+                if (existProduct) {
+                    const productSelectWithAmount: IProductWithAmount = {...existProduct as IProductFormat, amount: 1};
+                    setShoppingCart([...shoppingCart, productSelectWithAmount]);
+                    setBarcode("");
                 }
-
-                const productSelectWithAmount: IProductWithAmount = {...productSelect as IProductFormat, amount: 1};
-                setShoppingCart([...shoppingCart, {...productSelectWithAmount}]);
             }
-
-            setBarcode("");
-        }
-
+        }        
     }, [barcode])
+      
 
     return (
         <div className='screen-cash-register'>
@@ -103,7 +119,6 @@ export const ScreenCashRegister = () => {
             <section className='section-sidebar'>
                 <div className='column div-button'>
                     <InputText 
-                        label='Codigo de barra' 
                         name='barcode' 
                         onChange={()=>{}} 
                         placeholder="Ingresar codigo de barra" 

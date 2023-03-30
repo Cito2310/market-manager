@@ -7,8 +7,11 @@ import { sortCategories, sortProducts } from '../helpers/sortFunc';
 import { IProductFormat } from '../../Types/product';
 import { IRespCategories } from '../../Types/categories';
 
-interface IContextDatabase {
 
+
+
+// TYPESCRIPT
+interface IContextDatabase {
     categories: IRespCategories[],
     controllerCategories: IControllerCategories,
 
@@ -34,9 +37,17 @@ export interface IControllerCategories {
     modify: (category: IRespCategories) => void
 }
 
-
 export const ContextDatabase = createContext({} as IContextDatabase)
 
+
+
+
+
+
+
+
+
+// PROVIDER COMPONENT
 interface props {  children: JSX.Element | JSX.Element[]  }
 export const ProviderDatabase = ({ children }: props) => {
     const [statusDB, setStatusDB] = useState<TStatusDB>("await");
