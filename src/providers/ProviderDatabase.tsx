@@ -65,7 +65,7 @@ export const ProviderDatabase = ({ children }: props) => {
         if (!token) return;
 
         axios.get("https://market-product-rest.onrender.com/api/category/",{ headers: {token} })
-            .then(({ data }) => { setCategories(data.sort(sortCategories)) })
+            .then(({ data }:{data: IRespCategories[]}) => { setCategories(data.sort(sortCategories).map(category => ({...category, brands: category.brands.sort()})) ) })
             .catch( err => console.log(err) )
     }
 
@@ -93,7 +93,7 @@ export const ProviderDatabase = ({ children }: props) => {
     // FUNC CONTROLLER CATEGORIES
     const controllerCategories: IControllerCategories = {
         add: ( categoryData ) => {
-            const newCategories = [...categories, categoryData].sort(sortCategories);
+            const newCategories = [...categories, categoryData].sort(sortCategories).map(category => ({...category, brands: category.brands.sort()}));
             setCategories(newCategories);
         },
 
@@ -103,7 +103,7 @@ export const ProviderDatabase = ({ children }: props) => {
 
         modify: ( categoryData ) => {
             const copyCategories = categories.filter( i => i.category !== categoryData.category )
-            setCategories([...copyCategories, categoryData].sort(sortCategories));
+            setCategories([...copyCategories, categoryData].sort(sortCategories).map(category => ({...category, brands: category.brands.sort()})));
         },
     }
 

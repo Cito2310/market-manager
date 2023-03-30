@@ -1,25 +1,38 @@
-import { useContext } from 'react';
-import { SvgElements } from "./"
+import { useContext, useState } from 'react';
+import { BtnIcon, InputText, SvgElements } from "./"
 import { ContextModal } from '../providers';
 import "../styles/menu-controller-products.scss"
 
 
-export const MenuControllerProducts = () => {
+interface props {
+    setSearch: React.Dispatch<React.SetStateAction<string>>
+    search: string
+}
+
+export const MenuControllerProducts = ({setSearch, search}: props) => {
     const { setCurrentModal } = useContext(ContextModal);
 
     const onModalCreate = () => { setCurrentModal("create-product") }
 
-    // TODO : Crear funcion para desplegar el modal para buscar un producto y asignarlo al boton lens
+    const [searchState, setSearchState] = useState(true);
+    const onToggleSearchState = () => {setSearchState(!searchState); setSearch("")};
+
+    const onInputChangeSearch = ({target}: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        setSearch(target.value)
+    }
 
     return (
         <div className="menu-controller-products">
-            <button>
-                <SvgElements element="lens"/>
-            </button>
+            {
+                searchState ?
+                <>
+                    <InputText name='search' onChange={onInputChangeSearch} value={search} autoFocus placeholder='Buscar'/>
+                    <BtnIcon onClickFunc={onToggleSearchState} element="xmark"/>
+                </>
+                : <BtnIcon onClickFunc={onToggleSearchState} element='lens'/>
+            }
 
-            <button onClick={onModalCreate}>
-                <SvgElements element="plus"/>
-            </button>
+            <BtnIcon onClickFunc={onModalCreate} element="plus"/>
         </div>
     )
 }

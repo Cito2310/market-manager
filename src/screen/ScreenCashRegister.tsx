@@ -40,6 +40,11 @@ export const ScreenCashRegister = () => {
     
     useEffect(() => {
         detectKeyUp(
+            ()=>{ setBarcode("") },
+            /Backspace/g
+        )
+
+        detectKeyUp(
             (event)=>{setBarcode(barcode + event!.key)},
             /^[0-9]+$/g
         )

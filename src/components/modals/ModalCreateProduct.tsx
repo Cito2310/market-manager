@@ -63,8 +63,7 @@ export const ModalCreateProduct = () => {
         })
     }
 
-    console.log(formState.category, formState.brand, formState.unitType)
-
+    
     return (
         <>
             <div className="modal-container">
@@ -79,6 +78,7 @@ export const ModalCreateProduct = () => {
                 <form onSubmit={onCreateProductFetch}>
                     <div className="body-container">
                         <InputText
+                            autoFocus
                             label="Codigo de Barra"
                             placeholder="Inserte el codigo de barra"
                             name="barcode"

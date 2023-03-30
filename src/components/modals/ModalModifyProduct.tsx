@@ -10,6 +10,7 @@ import { formatProduct } from '../../helpers/formatProduct';
 import { ContextModal, ContextDatabase } from '../../providers';
 
 import { InputNumber, InputSelect, InputText, ItemsResponse } from '../';
+import { SvgElements } from '../SvgElements';
 
 
 
@@ -69,16 +70,14 @@ export const ModalModifyProduct = () => {
     return (
         <>
             <div className="modal-container">
-                <div className="modal-div-top">
-                    <h2 className="title-modal">Editar Producto</h2>
+                <div className="row sb">
+                    <h2>Editar Producto</h2>
 
-                    <button className="btn-exit-modal" onClick={ exitModal }>
-                        <i className="fa-solid fa-xmark" />
-                    </button>
+                    <button onClick={ exitModal } className="btn-exit"><SvgElements element="xmark"/></button>
                 </div>
 
                 <form  onSubmit={onCreateProductFetch}>
-                    <div className="modal-div-body">
+                    <div className="body-container">
                         <InputSelect
                             value={category.toUpperCase()}
                             name="category"
@@ -140,9 +139,9 @@ export const ModalModifyProduct = () => {
 
                     </div>
 
-                    <div className="modal-div-footer">
-                        <input disabled={respState.status === "await" ? true : false} type="submit" className="btn primary" value="Editar"/>
-                        <button disabled={respState.status === "await" ? true : false} className="btn secundary" onClick={exitModal}>Rechazar</button>
+                    <div className="row gap-12 reverse">
+                        <button disabled={respState.status === "await" ? true : false} type="submit" className="btn primary" value="Editar">Editar</button>
+                        <button disabled={respState.status === "await" ? true : false} className="btn secondary" onClick={exitModal}>Rechazar</button>
                         <ItemsResponse type={respState.status} errorMsg={respState.errorMsg}/>
                     </div>
                 </form>
