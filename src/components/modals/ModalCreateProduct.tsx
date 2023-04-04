@@ -118,6 +118,7 @@ export const ModalCreateProduct = () => {
                                 value={size}
                                 onChange={onInputChange}
                                 length={{ min: 0 }}
+                                decimal
                             />
 
                             <InputSelect

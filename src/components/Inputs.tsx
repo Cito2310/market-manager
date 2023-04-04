@@ -37,9 +37,10 @@ interface propsNumber {
     onChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void
     placeholder?: string
     value: number
+    decimal?: boolean
 }
 
-export const InputNumber = ({ label, placeholder, length, value, name, onChange, autoFocus }: propsNumber) => {
+export const InputNumber = ({ label, placeholder, length, value, name, onChange, autoFocus, decimal }: propsNumber) => {
     return (
         <div className="input-container number">
             { label ? <label>{label}</label> : null }
@@ -53,6 +54,7 @@ export const InputNumber = ({ label, placeholder, length, value, name, onChange,
                 placeholder={placeholder}
                 type="number"
                 value={value}
+                step={decimal ? "any" : "1"}
             />
         </div>
     )
