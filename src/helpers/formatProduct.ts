@@ -8,10 +8,12 @@ export const formatProduct = ( product: IProduct ): IProductFormat => {
         return copyString[0].toLocaleUpperCase() + copyString.slice(1)
     }
 
-    const getUnitAndSize = ( string: any ): [number, string] => {
-        const unit= String(string.match(/[a-zA-Z]+/g)).toLocaleLowerCase();
-        const size = Number(string.match(/[0-9]+/g));
-
+    const getUnitAndSize = ( string: unknown ): [number, string] => {
+        // @ts-ignore
+        let size = Number(string.match(/[0-9]+/)[0]);
+        // @ts-ignore
+        let unit = string.match(/[a-zA-Z]+[0-9]+|[a-zA-Z]+/)[0];
+        
         return [size, unit]
     }
 

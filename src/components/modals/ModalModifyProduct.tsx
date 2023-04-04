@@ -66,7 +66,6 @@ export const ModalModifyProduct = () => {
         })
     }
     
-    console.log(category)
     return (
         <>
             <div className="modal-container">
@@ -123,6 +122,8 @@ export const ModalModifyProduct = () => {
                                     { label: "l", value: "l" },
                                     { label: "oz", value: "oz" },
                                     { label: "cm3", value: "cm3" },
+                                    { label: "cc", value: "cc" },
+                                    { label: "u", value: "u" },
                                 ]}
                                 onChange={onInputChange}
                             />
