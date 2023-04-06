@@ -51,8 +51,8 @@ export const TicketPrint = () => {
                 </li>
 
                 {
-                    productToPrint.map(({ brand, name, sizeUnit, price, amount }, index) => <li key={index+"product"} className='product-item'>
-                        <p>{`${brand} ${name} ${sizeUnit[0]+sizeUnit[1]}`}</p>
+                    productToPrint.map(({ category, brand, name, sizeUnit, price, amount }, index) => <li key={index+"product"} className='product-item'>
+                        <p>{`${category.toLocaleUpperCase()} ${brand} ${name} ${sizeUnit[0]+sizeUnit[1]}`}</p>
                         <p className='center'>{amount}</p>
                         <p className='center'>$ {priceFormat( price*amount )}</p>
                     </li>)
