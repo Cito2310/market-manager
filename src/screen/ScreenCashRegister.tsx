@@ -5,11 +5,14 @@ import { detectKeyUp } from "../helpers/detectKeyUp";
 
 import { ContextDatabase, ContextPrint, ContextModal } from '../providers';
 
-import { InputText, SvgElements } from '../components/';
+import { InputNumber, InputText, SvgElements } from '../components/';
 
 import { IProductWithAmount, IProductFormat } from '../../Types/product';
 
 import "../styles/screen-cash-register.scss"
+import { useKeyPress } from '../hooks/useKeyPress';
+import { useForm } from '../hooks/useForm';
+import { ModalChangeAmount } from '../components/modals/ModalChangeAmount';
 
 
 export const ScreenCashRegister = () => {
@@ -27,7 +30,7 @@ export const ScreenCashRegister = () => {
     
     const onToggleNotFoundModal = () => {
         setCurrentModal('not-found');
-        setTimeout(()=>{setCurrentModal("none")}, 800);
+        setTimeout(()=>{setCurrentModal("none")}, 500);
     }
     
     const onClearShoppingCart = () => {setShoppingCart([])};
@@ -36,29 +39,32 @@ export const ScreenCashRegister = () => {
         const newShoppingCart = [...shoppingCart].filter( value => value.barcode !== barcode );
         setShoppingCart( newShoppingCart );
     }
-    
-    
-    // DETECT KEY PRESS
-    const [currentKeyPress, setCurrentKeyPress] = useState([""]);
-    useEffect(() => {
-        const handleKeyDown = (event:any) => {
-            if (/^[0-9]+$|Backspace/.test(event.key)) setCurrentKeyPress([event.key])
-        }
-        document.addEventListener("keyup", handleKeyDown);
-        return () => document.removeEventListener("keyup", handleKeyDown);
-      }, []);
 
-    //   ACTION WHEN PRESS KEY
-    useEffect(() => {
-        if ( /^[0-9]+$/g.test(currentKeyPress[0]) ) setBarcode(barcode + currentKeyPress);
-        if ( /Backspace/g.test(currentKeyPress[0]) ) setBarcode("");
-    }, [currentKeyPress])
+    // MODAL
+    const [modal, setModal] = useState<undefined | "change-amount">();
+    const onExitModal = () => setModal(undefined);
+    const [productShoppingCart, setProductShoppingCart] = useState<undefined | IProductWithAmount>()
+    const onModalChangeProduct = (product: IProductWithAmount) => { setModal("change-amount"); setProductShoppingCart(product) }
+    const onChangeAmountProduct = (product: IProductWithAmount, newAmount: number) => {
+        const existShoppinCartIndex = shoppingCart.findIndex( value => value.barcode === product.barcode );
+        let newShoppingCart = [...shoppingCart];
+        newShoppingCart[existShoppinCartIndex].amount = newAmount;
+        setShoppingCart(newShoppingCart);
+        onExitModal()
+    }
+
+
+    // DETECT KEY PRESS
+    useKeyPress(
+        [/[0-9]/, ( key )=>{ if (modal !== "change-amount") setBarcode(barcode+key) }], // modify barcode
+        [/Backspace/, ()=>{ if (modal !== "change-amount") setBarcode("") }] // clean barcode
+    )
 
 
     //   DETECT PRODUCT BARCODE
     useEffect(() => {
-        console.log(barcode)
-        if ( barcode.length === 13 || barcode.length === 8 ) {
+        const lengthBarcode = [13, 8];
+        if ( lengthBarcode.includes(barcode.length) ) {
 
             // check exist product in shopping cart
             const existShoppinCartIndex = shoppingCart.findIndex( value => value.barcode === barcode );
@@ -104,12 +110,12 @@ export const ScreenCashRegister = () => {
                     </li>
 
                     { shoppingCart.map( 
-                            ({ barcode, category, brand, name, price, amount, sizeUnit }) => <li key={barcode} className='product-item'>
-                                <p>{`${brand} ${name} ${sizeUnit[0]+sizeUnit[1]}`}</p>
-                                <p>{category}</p>
-                                <p className='center'>{`$ `+priceFormat( price )}</p>
-                                <p className='center'>{amount}</p>
-                                <p className='center'>{`$ `+priceFormat( amount*price )}</p>
+                            (product) => <li key={product.barcode} className='product-item'>
+                                <p>{`${product.brand} ${product.name} ${product.sizeUnit[0]+product.sizeUnit[1]}`}</p>
+                                <p>{product.category}</p>
+                                <p className='center'>{`$ `+priceFormat( product.price )}</p>
+                                <p style={{cursor: "pointer "}} onClick={()=>onModalChangeProduct(product)} className='center'>{product.amount}</p>
+                                <p className='center'>{`$ `+priceFormat( product.amount*product.price )}</p>
                                 <button onClick={()=>{ deleteProduct(barcode) }}><SvgElements element='xmark' /></button>
                             </li>
                     ) }
@@ -146,6 +152,8 @@ export const ScreenCashRegister = () => {
                     <p>$ { priceFormat(shoppingCart.reduce((prev, curr) => prev + curr.price*curr.amount,0)) }</p>
                 </div>
             </section>
+
+            {modal === "change-amount" ? <ModalChangeAmount onChangeAmountProduct={onChangeAmountProduct} onExit={onExitModal} product={productShoppingCart}/> : null}
         </div>
     )
 }

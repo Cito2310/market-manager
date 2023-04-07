@@ -57,16 +57,15 @@ export const ProviderDatabase = ({ children }: props) => {
     
     // FUNC CALL API PRODUCTS
     const getProducts = () => {
-        axios.get( "https://market-product-rest.onrender.com/api/product/" )
+        axios.get( "https://market-product-rest.onrender.com/api/product/", {timeout: 120000} )
             .then(({ data }) => {
                 window.electronAPI.saveDataProduct( token );
                 setStatusDB("online");
                 setProduct( data.map( formatProduct ).sort( sortProducts ) );
             })
-            .catch( error => {
-                console.log(error)
+            .catch( async error => {
                 setStatusDB("offline")
-                const data = window.electronAPI.getDataProductsOffline();
+                const data = await window.electronAPI.getDataProductsOffline()
                 setProduct( data.map( formatProduct ).sort( sortProducts ) || [] );
             })
     }

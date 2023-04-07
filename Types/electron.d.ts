@@ -4,8 +4,8 @@ import { ITicketData } from './ticketData';
 declare global {
     interface Window {
         electronAPI: {
-            saveDataProduct: ( token: string ) => IProduct[],
-            getDataProductsOffline: () => IProduct[],
+            saveDataProduct: ( token: string ) => Promise<IProduct[]>,
+            getDataProductsOffline: () => Promise<IProduct[]>,
             printPage: () => Promise<void>,
             saveTicket: ( ticketData: ITicketData ) => Promise<void>
         }
