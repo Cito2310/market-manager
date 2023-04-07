@@ -10,7 +10,6 @@ interface props {
 
 export const ModalChangeAmount = ({onExit, product, onChangeAmountProduct}: props) => {
     const {amount, onInputChange} = useForm({amount: product?.amount || 0})
-    console.log(product)
 
     return (
         <>

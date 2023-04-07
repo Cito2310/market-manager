@@ -116,7 +116,7 @@ export const ScreenCashRegister = () => {
                                 <p className='center'>{`$ `+priceFormat( product.price )}</p>
                                 <p style={{cursor: "pointer "}} onClick={()=>onModalChangeProduct(product)} className='center'>{product.amount}</p>
                                 <p className='center'>{`$ `+priceFormat( product.amount*product.price )}</p>
-                                <button onClick={()=>{ deleteProduct(barcode) }}><SvgElements element='xmark' /></button>
+                                <button onClick={()=>{ deleteProduct(product.barcode) }}><SvgElements element='xmark' /></button>
                             </li>
                     ) }
                 </ul>
