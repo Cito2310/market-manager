@@ -1,30 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
+import { Provider } from "react-redux";
 
-import App from './App';
-
-import { ProviderDatabase, ProviderPrint, ProviderModal } from './providers/';
-import { DevApp } from './DevApp';
+import { AppMarketManager } from './AppMarketManager';
+import { store } from './store/store';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
-  // <React.StrictMode>
-  <HashRouter>
-
-    <ProviderDatabase>
-    <ProviderPrint>
-    <ProviderModal>
-      
-      <App />
-      {/* <DevApp/> */}
-
-    </ProviderModal>
-    </ProviderPrint>
-    </ProviderDatabase>
-
-  </HashRouter>
-
-  // {/* </React.StrictMode> */}
+    <React.StrictMode>
+        <HashRouter>
+            <Provider store={ store }>
+                <AppMarketManager />
+            </Provider>
+        </HashRouter>
+    </React.StrictMode>
 );
