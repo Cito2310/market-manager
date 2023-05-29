@@ -10,6 +10,7 @@ import { InputText } from "./components/inputs/InputText";
 import { useForm } from "react-hook-form";
 import { Test } from './test';
 import { ModalCreateCategory } from "./components/ModalCreateCategory";
+import { fetchApi } from "./helpers/fetchApi";
 
 
 export const AppMarketManager = () => {
@@ -24,12 +25,24 @@ export const AppMarketManager = () => {
         firstCall()
     }, [])
 
+    useEffect(() => {
+        const callApi = () => {
+            fetchApi({ method: "get", path: "api/product" }).then( data => console.log("Se llamo") )
+        }
+
+        const timer = setInterval( callApi, 120000 )
+    
+        return () => { clearInterval( timer ) }
+
+    }, [])
+    
+
     return (
         <div className="bg-gray-400">
             {/* <Test/> */}
-            <ModalCreateCategory/>
+            {/* <ModalCreateCategory/> */}
 
-            {/* <CategoryPage categories={data} /> */}
+            <CategoryPage categories={data} />
         </div>
     )
 }

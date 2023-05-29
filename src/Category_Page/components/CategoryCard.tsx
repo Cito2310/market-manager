@@ -1,65 +1,69 @@
-import { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form"
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { Category } from "../../../Types/category";
-import { CategoryCardForm } from "./CategoryCardForm";
-import { CategoryCardText } from "./CategoryCardText";
-import { useAppDispatch } from "../../store/store";
-import { startDeleteCategoryById, startUpdateCategoryById } from "../../store/category/thunks";
+import { categoryToFormCategory } from "../../helpers/formCategoryParse";
+import { FormCategory } from "../../../Types/formData";
+import { CardSubcategories } from "./CardSubcategories";
+import { Button } from "../../components/Button";
+import { TopCategory } from "./TopCategory";
+import { useState } from 'react';
 
-export interface FormCategory {
-    category: string,
-    brands: { brand: string }[]
-}
 
 interface props {
     category: Category;
 }
 
 export const CategoryCard = ({ category }: props) => {
-    const dispatch = useAppDispatch();
+    const methods = useForm<FormCategory>({ defaultValues: categoryToFormCategory( category ) });
+    const { control, handleSubmit, reset } = methods;
+    const { append, fields, remove } = useFieldArray({ control, name: "subcategories" });
 
-    const initialFormValue: FormCategory = {
-        category: category.category,
-        brands: category.brands.map( brand => ({ brand }) )
-    }
-
-    const { control, register, handleSubmit, reset } = useForm<FormCategory>({defaultValues: initialFormValue});
-    const { append, fields, remove } = useFieldArray({ control, name: "brands" } );
-    const [isBeingEdited, setIsBeingEdited] = useState(false);
-
-    const onAppendBrand = () => append({ brand: "" });
-    const toggleEdited = () => {  setIsBeingEdited( !isBeingEdited ); reset(initialFormValue)  };
-    
-    const onUpdateCategory = async( data: FormCategory ) => {
-        await dispatch(startUpdateCategoryById( category._id, data ));
-        toggleEdited();
+    const [isEditing, setIsEditing] = useState(true);
+    const toggleEditing = () => {
+        setIsEditing(!isEditing); 
+        reset(categoryToFormCategory( category ));
     };
 
-    const onRemoveCategory = async() => {
-        await dispatch( startDeleteCategoryById( category._id ) );
-    }
+    const onSubmit = ( data: FormCategory ) => console.log(data);
+    const onRemoveCategory = () => { throw new Error("NOT IMPLEMENTED: onRemoveCategory") };
+    const onAppendSubcategory = () => append({ brands: [], name: "" }); 
 
 
     return (
-        <div className="bg-card_bg rounded-md p-3 shadow-md min-w-[300px] flex flex-col flex-1">
-            {
-                isBeingEdited 
-
-                ? <CategoryCardForm
-                    onSubmit={ handleSubmit(onUpdateCategory) }
-                    fields={ fields }
-                    register={ register }
-                    remove={ remove }
-                    onAppend={ onAppendBrand }
-                    toggleEdited={ toggleEdited }
-                />
-
-                : <CategoryCardText 
-                    onRemove={ onRemoveCategory } 
+        <FormProvider {...methods}>
+            <form 
+                className="bg-card_bg rounded-md p-3 shadow-md min-w-[300px] flex flex-col flex-1 gap-3" 
+                onSubmit={handleSubmit( onSubmit )} 
+            >
+                <TopCategory 
                     category={ category } 
-                    toggleEdited={ toggleEdited }
+                    isEditing={ isEditing } 
+                    toggleEditing={ toggleEditing }
+                    onRemoveCategory={ onRemoveCategory }
+                    onAppendSubcategory={ onAppendSubcategory }
                 />
-            }
-        </div>
+
+                <div className="flex flex-wrap gap-3 -mt-2">
+                    { fields.map(( field, index ) => 
+                        <CardSubcategories 
+                            key={ field.id } 
+                            methods={ methods } 
+                            index={ index }
+                            removeSubcategory={ remove }
+                            category={ category }
+                            isEditing={ isEditing }
+                        /> 
+                    )}
+                </div>
+
+                {
+                    isEditing &&
+
+                    <div className="flex flex-row-reverse gap-3">
+                        <Button label="Editar" color="primary" type="submit"/>
+                        <Button label="Rechazar" color="secondary" func={ toggleEditing }/>
+                    </div>
+                }
+            </form>
+        </FormProvider>
     )
 }

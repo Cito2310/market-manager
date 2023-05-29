@@ -21,7 +21,7 @@ export const ModalLayout = ({
     return (
         <>
             <div className="
-                bg-card_bg fixed top-12 z-20 p-4 rounded-md left-[50%] translate-x-[-50%]
+                bg-card_bg fixed top-12 z-20 p-3 rounded-md left-[50%] translate-x-[-50%]
                 w-[32em] flex flex-col
             ">
                 <div className="flex items-center justify-between">

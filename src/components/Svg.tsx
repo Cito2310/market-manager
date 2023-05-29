@@ -1,5 +1,7 @@
+export type SVGElements = "pen" | "plus" | "search" | "minus" | "trash" | "xmark";
+
 interface props {
-    element: "pen" | "plus" | "search" | "minus" | "trash" | "xmark",
+    element: SVGElements
     classname?: string
 }
 

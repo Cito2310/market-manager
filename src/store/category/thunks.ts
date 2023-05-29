@@ -1,5 +1,6 @@
-import { FormCategory } from '../../Category_Page/components/CategoryCard';
+import { FormCategory } from "../../../Types/formData";
 import { fetchApi } from "../../helpers/fetchApi";
+import { formCategoryToCategory } from "../../helpers/formCategoryParse";
 import { AppDispatch, RootState } from "../store";
 import { deleteCategoryById, initLoading, setCategories, stopLoading, updateCategory } from "./categorySlice";
 
@@ -25,11 +26,7 @@ export const startUpdateCategoryById = ( id: string, dataForm: FormCategory ) =>
         dispatch( initLoading() );
 
         const { token } = getState().auth;
-
-        const parseData = {
-            category: dataForm.category,
-            brands: dataForm.brands.map(({ brand }) => brand )
-        }
+        const parseData = formCategoryToCategory( dataForm );
 
         const data = await fetchApi({
             method: "put",

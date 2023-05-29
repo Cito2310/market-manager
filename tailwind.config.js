@@ -22,7 +22,7 @@ export default {
         },
         fontFamily: {
             // sans: ["Mulish", "Montserrat", "Arial", "Helvetica", "sans-serif"],
-            // Montserrat: ["Montserrat"]
+            Montserrat: ["Montserrat", "Mulish", "Montserrat", "Arial", "Helvetica", "sans-serif"]
         }
       },
     },
