@@ -10,7 +10,7 @@ interface props {
     onAppendSubcategory: () => void;
 }
 
-export const TopCategory = ({ category, isEditing, toggleEditing, onRemoveCategory, onAppendSubcategory }: props) => {
+export const CardCategoryTop = ({ category, isEditing, toggleEditing, onRemoveCategory, onAppendSubcategory }: props) => {
     const { register } = useFormContext()
 
 

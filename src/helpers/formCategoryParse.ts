@@ -20,6 +20,6 @@ export const formCategoryToCategory = ( formCategory: FormCategory ): Category =
             name: subcategory.name,
             brands: subcategory.brands.map( brand => brand.name )
         })),
-        _id: "NO_VALID_ID"
+        _id: ""
     }
 } 

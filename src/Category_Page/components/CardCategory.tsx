@@ -4,26 +4,34 @@ import { categoryToFormCategory } from "../../helpers/formCategoryParse";
 import { FormCategory } from "../../../Types/formData";
 import { CardSubcategories } from "./CardSubcategories";
 import { Button } from "../../components/Button";
-import { TopCategory } from "./TopCategory";
+import { CardCategoryTop } from "./CardCategoryTop";
 import { useState } from 'react';
+import { useAppDispatch } from "../../store/store";
+import { startUpdateCategoryById } from "../../store/category/thunks";
 
 
 interface props {
     category: Category;
 }
 
-export const CategoryCard = ({ category }: props) => {
+export const CardCategory = ({ category }: props) => {
+    const dispatch = useAppDispatch()
+
     const methods = useForm<FormCategory>({ defaultValues: categoryToFormCategory( category ) });
     const { control, handleSubmit, reset } = methods;
     const { append, fields, remove } = useFieldArray({ control, name: "subcategories" });
 
-    const [isEditing, setIsEditing] = useState(true);
+    const [isEditing, setIsEditing] = useState(false);
     const toggleEditing = () => {
         setIsEditing(!isEditing); 
         reset(categoryToFormCategory( category ));
     };
 
-    const onSubmit = ( data: FormCategory ) => console.log(data);
+    const onSubmit = async( data: FormCategory ) => { 
+        await dispatch( startUpdateCategoryById( category._id, data ) );
+        setIsEditing( false ); 
+    };
+
     const onRemoveCategory = () => { throw new Error("NOT IMPLEMENTED: onRemoveCategory") };
     const onAppendSubcategory = () => append({ brands: [], name: "" }); 
 
@@ -34,7 +42,7 @@ export const CategoryCard = ({ category }: props) => {
                 className="bg-card_bg rounded-md p-3 shadow-md min-w-[300px] flex flex-col flex-1 gap-3" 
                 onSubmit={handleSubmit( onSubmit )} 
             >
-                <TopCategory 
+                <CardCategoryTop 
                     category={ category } 
                     isEditing={ isEditing } 
                     toggleEditing={ toggleEditing }
