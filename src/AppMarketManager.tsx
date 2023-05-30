@@ -8,19 +8,22 @@ import { startGetCategories } from "./store/category/thunks";
 import { ModalLayout } from "./layout/ModalLayout";
 import { InputText } from "./components/inputs/InputText";
 import { useForm } from "react-hook-form";
-import { Test } from './test';
 import { ModalCreateCategory } from "./components/ModalCreateCategory";
 import { fetchApi } from "./helpers/fetchApi";
+import { ProductPage } from "./Product_Page/page/ProductPage";
+import { startGetProducts } from "./store/product/thunks";
 
 
 export const AppMarketManager = () => {
     const dispatch = useAppDispatch();
     const { data } = useAppSelector( state => state.category );
+    const { products } = useAppSelector( state => state.product );
 
     useEffect(() => {
         const firstCall = async() => {
             await dispatch( startLogin("adminUser", "admin231023") );
             await dispatch( startGetCategories() );
+            await dispatch( startGetProducts() )
         }
         firstCall()
     }, [])
@@ -41,8 +44,9 @@ export const AppMarketManager = () => {
         <div className="bg-gray-400">
             {/* <Test/> */}
             {/* <ModalCreateCategory/> */}
+            <ProductPage />
 
-            <CategoryPage categories={data} />
+            {/* <CategoryPage categories={data} /> */}
         </div>
     )
 }
