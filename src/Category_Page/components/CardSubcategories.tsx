@@ -1,7 +1,7 @@
 import { UseFieldArrayRemove, UseFormReturn, useFieldArray } from "react-hook-form"
+import { ButtonSvg } from "../../components/ButtonSvg";
 import { FormCategory } from "../../../Types/formData"
 import { Category } from "../../../Types/category";
-import { ButtonSvg } from "../../components/ButtonSvg";
 
 interface props {
     methods: UseFormReturn<FormCategory, any>;
@@ -24,6 +24,7 @@ export const CardSubcategories = ({ methods, index: indexMain, removeSubcategory
 
                 <div className="flex justify-between items-center gap-3 mb-1">
                     <input {...register(`subcategories.${indexMain}.name`)}
+                        placeholder="Subcategoria"
                         className="capitalize text-xl font-medium font-Montserrat w-full focus:outline-none border-b"
                     />
 
@@ -47,6 +48,7 @@ export const CardSubcategories = ({ methods, index: indexMain, removeSubcategory
                     <div className="gap-3 flex" key={field.id}>
                         <input {...register(`subcategories.${indexMain}.brands.${index}.name`)} 
                             className="capitalize focus:outline-none border-b w-full"
+                            placeholder="Marca"
                         />
                         <ButtonSvg
                             className="text-card_btnText hover:text-red-500"

@@ -1,18 +1,28 @@
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { Category } from "../../../Types/category";
-import { categoryToFormCategory } from "../../helpers/formCategoryParse";
-import { FormCategory } from "../../../Types/formData";
-import { CardSubcategories } from "./CardSubcategories";
-import { Button } from "../../components/Button";
-import { CardCategoryTop } from "./CardCategoryTop";
 import { useState } from 'react';
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+
 import { useAppDispatch } from "../../store/store";
-import { startUpdateCategoryById } from "../../store/category/thunks";
+import { startDeleteCategoryById, startUpdateCategoryById } from "../../store/category/thunks";
+
+import { categoryToFormCategory } from "../../helpers/formCategoryParse";
+
+import { Button } from "../../components/Button";
+import { CardSubcategories } from "./CardSubcategories";
+import { CardCategoryTop } from "./CardCategoryTop";
+
+import { Category } from "../../../Types/category";
+import { FormCategory } from "../../../Types/formData";
+
+
+
 
 
 interface props {
     category: Category;
 }
+
+
+
 
 export const CardCategory = ({ category }: props) => {
     const dispatch = useAppDispatch()
@@ -32,14 +42,14 @@ export const CardCategory = ({ category }: props) => {
         setIsEditing( false ); 
     };
 
-    const onRemoveCategory = () => { throw new Error("NOT IMPLEMENTED: onRemoveCategory") };
+    const onRemoveCategory = async() => { await dispatch( startDeleteCategoryById( category._id ) )}
     const onAppendSubcategory = () => append({ brands: [], name: "" }); 
 
 
     return (
         <FormProvider {...methods}>
             <form 
-                className="bg-card_bg rounded-md p-3 shadow-md min-w-[300px] flex flex-col flex-1 gap-3" 
+                className="bg-card_bg rounded-md p-3 shadow-md min-w-[300px] min-h-[206px] flex flex-col flex-1 gap-3" 
                 onSubmit={handleSubmit( onSubmit )} 
             >
                 <CardCategoryTop 
@@ -49,6 +59,7 @@ export const CardCategory = ({ category }: props) => {
                     onRemoveCategory={ onRemoveCategory }
                     onAppendSubcategory={ onAppendSubcategory }
                 />
+
 
                 <div className="flex flex-wrap gap-3 -mt-2">
                     { fields.map(( field, index ) => 
@@ -62,6 +73,7 @@ export const CardCategory = ({ category }: props) => {
                         /> 
                     )}
                 </div>
+
 
                 {
                     isEditing &&

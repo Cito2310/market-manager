@@ -15,33 +15,25 @@ export const CardCategoryTop = ({ category, isEditing, toggleEditing, onRemoveCa
 
 
     if ( isEditing ) return (
-        <div className="flex items-center justify-between gap-3 text-black">
+        <div className="flex items-center justify-between text-black">
             <input {...register(`name`)}
+                placeholder="Categoria"
                 className="uppercase text-2xl font-semibold font-Montserrat ml-1 w-full focus:outline-none"
             /> 
 
             <div className="flex gap-2">
-                <ButtonSvg element="trash" onClick={ onRemoveCategory }
-                    className="w-8 text-lg bg-card_bg text-card_btnText"
-                />
-
-                <ButtonSvg element="plus" onClick={ onAppendSubcategory }
-                    className="w-8 text-lg bg-card_bg text-card_btnText"
-                />
+                <ButtonSvg element="trash" onClick={ onRemoveCategory } className="w-8 text-lg bg-card_bg text-card_btnText" />
+                <ButtonSvg element="plus" onClick={ onAppendSubcategory } className="w-8 text-lg bg-card_bg text-card_btnText" />
             </div>
         </div>
     )
 
 
     return (
-        <div className="flex items-center justify-between gap-3 text-black">
-            <h2 className="uppercase text-2xl font-semibold font-Montserrat ml-1">{ category.name }</h2>
+        <div className="flex items-center justify-between text-black">
+            <h1 className="uppercase text-2xl font-semibold font-Montserrat ml-1">{ category.name }</h1>
 
-            <div>
-                <ButtonSvg element="pen" onClick={ toggleEditing }
-                    className="w-8 text-lg bg-card_bg text-card_btnText"
-                />
-            </div>
+            <ButtonSvg element="pen" onClick={ toggleEditing } className="w-8 text-lg bg-card_bg text-card_btnText" />
         </div>
     )
 }
