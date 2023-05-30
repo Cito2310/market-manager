@@ -49,7 +49,7 @@ export const CardCategory = ({ category }: props) => {
     return (
         <FormProvider {...methods}>
             <form 
-                className="bg-card_bg rounded-md p-3 shadow-md min-w-[300px] min-h-[206px] flex flex-col flex-1 gap-3" 
+                className="bg-card_bg rounded-md p-3 shadow-md min-w-[300px] min-h-[206px] flex flex-col flex-1 gap-3 justify-between" 
                 onSubmit={handleSubmit( onSubmit )} 
             >
                 <CardCategoryTop 

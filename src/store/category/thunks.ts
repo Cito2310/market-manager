@@ -2,6 +2,7 @@ import { FormCategory } from "../../../Types/formData";
 import { fetchApi } from "../../helpers/fetchApi";
 import { formCategoryToCategory } from "../../helpers/formCategoryParse";
 import { AppDispatch, RootState } from "../store";
+import { createCategory } from "./categorySlice";
 import { deleteCategoryById, initLoading, setCategories, stopLoading, updateCategory } from "./categorySlice";
 
 export const startGetCategories = () => {
@@ -55,6 +56,25 @@ export const startDeleteCategoryById = ( id:string ) => {
 
         dispatch( stopLoading() );
         dispatch( deleteCategoryById( id ) );
+
+    };
+};
+
+export const startCreateCategory = (dataForm: { name: string }) => {
+    return async( dispatch: AppDispatch, getState: () => RootState ) => {
+        
+        dispatch( initLoading() );
+        const { token } = getState().auth;
+
+        const data = await fetchApi({
+            method: "post",
+            path: `api/category`,
+            token: token!,
+            body: dataForm
+        })
+
+        dispatch( createCategory( data ) );
+        dispatch( stopLoading() );
 
     };
 };
