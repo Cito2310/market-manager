@@ -1,12 +1,14 @@
-import { CardCategory } from "../components/CardCategory"
-import { Category } from "../../../Types/category"
-import { TopButtons } from "../../components/TopButtons"
-import { ModalCreateCategory } from "../components/ModalCreateCategory"
-import { useAppDispatch, useAppSelector } from "../../store/store"
-import { setModal } from "../../store/modal/modalSlice"
+import { setModal } from "../../store/modal/modalSlice";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+
+import { CardCategory } from "../components/CardCategory";
+import { TopButtons } from "../../components/TopButtons";
+import { ModalCreateCategory } from "../components/ModalCreateCategory";
+
+import { Category } from "../../../Types/category";
 
 interface props {
-    categories: Category[]
+    categories: Category[];
 }
 
 export const CategoryPage = ({ categories }: props) => {
@@ -14,16 +16,13 @@ export const CategoryPage = ({ categories }: props) => {
     const dispatch = useAppDispatch()
 
     const onSetModalCreateCategory = () => dispatch( setModal( "createCategory" ) )
-    const onSetModalSearchCategory = () => dispatch( setModal( "searchCategory" ) )
-    
     
     return (
-        <div className="flex flex-wrap gap-5 p-5">
+        <div className="flex flex-col flex-wrap gap-5 p-5">
             { current === "createCategory" && <ModalCreateCategory /> }
 
             <TopButtons
                 buttons={[
-                    {element: "search", onClick: onSetModalSearchCategory},
                     {element: "plus", onClick: onSetModalCreateCategory},
                 ]}
             />

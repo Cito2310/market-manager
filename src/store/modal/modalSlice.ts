@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export type Modals = "createCategory" | "searchCategory";
+export type Modals = "createCategory";
 
 interface modalState {
     current: null | Modals;
 }
 
 const initialState: modalState = {
-    current: "searchCategory",
+    current: null,
 }
 
 
