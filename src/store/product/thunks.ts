@@ -1,11 +1,23 @@
 import { fetchApi } from "../../helpers/fetchApi";
-import { AppDispatch, RootState } from "../store";
-import { stopLoading, initLoading, setProducts } from "./productSlice";
+import { AppDispatch, RootState, useAppSelector } from "../store";
+import { stopLoading, initLoading, setProducts, createProducts } from "./productSlice";
+import { FormCreateProduct } from '../../../Types/formData';
 
-export const startCreateProduct = () => {
+export const startCreateProduct = ( formData: FormCreateProduct ) => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
         
         dispatch( initLoading() );
+
+        const { token } = getState().auth;
+
+        const data = await fetchApi({ 
+            method: "post",
+            path: "api/product",
+            body: formData,
+            token: token!,
+        })
+
+        dispatch( createProducts(data) );
         dispatch( stopLoading() );
 
     };
