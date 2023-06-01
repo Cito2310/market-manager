@@ -1,7 +1,7 @@
 import { fetchApi } from "../../helpers/fetchApi";
 import { AppDispatch, RootState, useAppSelector } from "../store";
 import { stopLoading, initLoading, setProducts, createProducts, deleteProductsByBarcode } from "./productSlice";
-import { FormCreateProduct } from '../../../Types/formData';
+import { FormCreateProduct, FormUpdateProduct } from '../../../Types/formData';
 
 export const startCreateProduct = ( formData: FormCreateProduct ) => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
@@ -23,10 +23,20 @@ export const startCreateProduct = ( formData: FormCreateProduct ) => {
     };
 };
 
-export const startUpdateProductByBarcode = () => {
+export const startUpdateProductByBarcode = ( barcode: string, dataForm: FormUpdateProduct ) => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
         
         dispatch( initLoading() );
+
+        const { token } = getState().auth;
+
+        await fetchApi({
+            method: "put",
+            path: `api/product/${barcode}`,
+            body: dataForm,
+            token: token!
+        })
+
         dispatch( stopLoading() );
 
     };

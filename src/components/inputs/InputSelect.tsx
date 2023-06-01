@@ -5,7 +5,7 @@ interface props {
     label?: string;
     className?: string;
     options: string[];
-    emptyField?: boolean
+    emptyField?: boolean;
 }
 
 export const InputSelect = ({ register, label, className, options, emptyField }: props) => {
