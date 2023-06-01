@@ -1,6 +1,6 @@
 import { fetchApi } from "../../helpers/fetchApi";
 import { AppDispatch, RootState, useAppSelector } from "../store";
-import { stopLoading, initLoading, setProducts, createProducts } from "./productSlice";
+import { stopLoading, initLoading, setProducts, createProducts, deleteProductsByBarcode } from "./productSlice";
 import { FormCreateProduct } from '../../../Types/formData';
 
 export const startCreateProduct = ( formData: FormCreateProduct ) => {
@@ -32,10 +32,20 @@ export const startUpdateProductByBarcode = () => {
     };
 };
 
-export const startDeleteProductByBarcode = () => {
+export const startDeleteProductByBarcode = ( barcode: string ) => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
         
         dispatch( initLoading() );
+
+        const { token } = getState().auth;
+
+        await fetchApi({
+            method: "delete",
+            path: `api/product/${barcode}`,
+            token: token!
+        })
+
+        dispatch( deleteProductsByBarcode( barcode ) );
         dispatch( stopLoading() );
 
     };

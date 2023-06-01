@@ -34,13 +34,13 @@ export const productSlice = createSlice({
         },
 
         updateProductsByBarcode: ( state, action: { payload: { barcode: string, productUpdate: Product } } ) => {
-            state.products.map( product => 
+            state.products = state.products.map( product => 
                 ( product.barcode === action.payload.barcode ) ? action.payload.productUpdate : product
             )
         },
 
-        deleteProductsByBarcode: ( state, action: { payload: { barcode: string } } ) => {
-            state.products.filter( product => product.barcode !== action.payload.barcode )
+        deleteProductsByBarcode: ( state, action: { payload: string } ) => {
+            state.products = state.products.filter( product => product.barcode !== action.payload )
         },
 
         initLoading: ( state ) => { state.status.isLoading = true },

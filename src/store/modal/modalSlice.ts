@@ -5,12 +5,12 @@ export type Modals = "createCategory" | "createProduct" | "updateProduct" | "del
 
 interface modalState {
     current: null | Modals;
-    productSelected: Product | null;
+    selectedProduct: Product | null;
 }
 
 const initialState: modalState = {
     current: null,
-    productSelected: null,
+    selectedProduct: null,
 }
 
 
@@ -20,16 +20,16 @@ export const modalSlice = createSlice({
     reducers: {
 
         selectProduct: ( state, action: { payload: Product } ) => {
-            state.productSelected = action.payload;
+            state.selectedProduct = action.payload;
         },
 
         exitModal: ( state ) => {
             state.current = null;
+            state.selectedProduct = null;
         },
 
         setModal: ( state, action: { payload: Modals } ) => {
             state.current = action.payload;
-            state.productSelected = null;
         }
 
     }

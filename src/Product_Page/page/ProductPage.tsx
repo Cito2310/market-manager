@@ -3,6 +3,8 @@ import { setModal } from "../../store/modal/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { CardProduct } from "../components/CardProduct";
 import { ModalCreateProduct } from "../components/ModalCreateProduct";
+import { ModalDeleteProduct } from "../components/ModalDeleteProduct";
+import { ModalUpdateProduct } from "../components/ModalUpdateProduct";
 
 export const ProductPage = () => {
     const { products } = useAppSelector( state => state.product );
@@ -12,7 +14,7 @@ export const ProductPage = () => {
     const onSetModalCreateProduct = () =>  dispatch( setModal( "createProduct" ) );
 
     return (
-        <div className="flex flex-col flex-wrap gap-5 p-5">
+        <div className="flex flex-wrap gap-5 p-5">
 
             <TopButtons
                 buttons={[
@@ -24,6 +26,8 @@ export const ProductPage = () => {
             )}
 
             { current === "createProduct" && <ModalCreateProduct/> }
+            { current === "updateProduct" && <ModalUpdateProduct/> }
+            { current === "deleteProduct" && <ModalDeleteProduct/> }
         </div>
     )
 }
