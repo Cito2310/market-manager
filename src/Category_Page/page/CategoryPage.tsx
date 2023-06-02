@@ -5,13 +5,9 @@ import { CardCategory } from "../components/CardCategory";
 import { TopButtons } from "../../components/TopButtons";
 import { ModalCreateCategory } from "../components/ModalCreateCategory";
 
-import { Category } from "../../../Types/category";
 
-interface props {
-    categories: Category[];
-}
-
-export const CategoryPage = ({ categories }: props) => {
+export const CategoryPage = () => {
+    const { data } = useAppSelector( state => state.category );
     const { current } = useAppSelector( state => state.modal );
     const dispatch = useAppDispatch()
 
@@ -26,7 +22,7 @@ export const CategoryPage = ({ categories }: props) => {
                     {element: "plus", onClick: onSetModalCreateCategory},
                 ]}
             />
-            { categories.map( category => 
+            { data.map( category => 
                 <CardCategory key={ category._id }  category={category}/>
             )}
         </div>

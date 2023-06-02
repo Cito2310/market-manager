@@ -12,6 +12,7 @@ import { ModalCreateCategory } from "./components/ModalCreateCategory";
 import { fetchApi } from "./helpers/fetchApi";
 import { ProductPage } from "./Product_Page/page/ProductPage";
 import { startGetProducts } from "./store/product/thunks";
+import { CashRegisterPage } from "./CashRegister_Page/page/CashRegisterPage";
 
 
 export const AppMarketManager = () => {
@@ -44,9 +45,10 @@ export const AppMarketManager = () => {
         <div className="bg-gray-400">
             {/* <Test/> */}
             {/* <ModalCreateCategory/> */}
-            <ProductPage />
+            {/* <ProductPage /> */}
+            <CashRegisterPage />
 
-            {/* <CategoryPage categories={data} /> */}
+            {/* <CategoryPage /> */}
         </div>
     )
 }
