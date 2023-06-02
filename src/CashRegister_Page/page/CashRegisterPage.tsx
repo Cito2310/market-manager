@@ -1,6 +1,10 @@
 import { useDetectBarcode } from "../hooks/useDetectBarcode";
 import { useKeyUp } from "../hooks/useKeyUp"
 import { useAppSelector } from "../../store/store";
+import { Sidebar } from "../components/Sidebar";
+import { TopItem } from "../components/TopItem";
+import { ItemProductCart } from "../components/ItemProductCart";
+import { useMemo } from "react";
 
 export const CashRegisterPage = () => {
     const currentKeypress = useKeyUp();
@@ -9,15 +13,28 @@ export const CashRegisterPage = () => {
     const { productsCart } = useAppSelector( state => state.cashRegister );
     const { barcode } = useDetectBarcode( currentKeypress, products );
 
-    return (
-        <section>
-            <p>{ products[0] ? "ready" : "loading" } { barcode }</p>
+    const totalSum = useMemo( () => productsCart.reduce((prev, curr) => prev + curr.price * curr.amount, 0), [ productsCart ] )
 
-            <ul>
-                { productsCart.map( productCart => 
-                    <li key={productCart.barcode}>{JSON.stringify( productCart )}</li>
-                )}
-            </ul>
+    return (
+        <section className="grid grid-cols-[1fr_300px] w-screen h-screen bg-white">
+            <div className="flex flex-col justify-between">
+                <div>
+                    <TopItem />
+
+                    <ul>
+                        { productsCart.map(( productCart, index ) => 
+                            <ItemProductCart key={ productCart.barcode } productCart={ productCart } index={ index }/>
+                        )}
+                    </ul>
+                </div>
+
+
+                <div className="bg-white justify-end flex border-t border-gray-500 p-1 px-2">
+                    <p className="text-4xl font-semibold">$ { totalSum }</p>
+                </div>
+            </div>
+
+            <Sidebar />
         </section>
     )
 }
