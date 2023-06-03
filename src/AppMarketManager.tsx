@@ -13,6 +13,8 @@ import { fetchApi } from "./helpers/fetchApi";
 import { ProductPage } from "./Product_Page/page/ProductPage";
 import { startGetProducts } from "./store/product/thunks";
 import { CashRegisterPage } from "./CashRegister_Page/page/CashRegisterPage";
+import { BottomBar } from "./components/BottomBar";
+import { AppRoute } from "./routes/AppRoute";
 
 
 export const AppMarketManager = () => {
@@ -42,13 +44,10 @@ export const AppMarketManager = () => {
     
 
     return (
-        <div className="bg-gray-400">
-            {/* <Test/> */}
-            {/* <ModalCreateCategory/> */}
-            {/* <ProductPage /> */}
-            <CashRegisterPage />
+        <div className="bg-gray-300 h-screen grid grid-rows-[auto_1.7em]">
+            <AppRoute />
 
-            {/* <CategoryPage /> */}
+            <BottomBar />
         </div>
     )
 }

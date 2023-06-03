@@ -17,7 +17,7 @@ export const CashRegisterPage = () => {
     const totalSum = useMemo( () => productsCart.reduce((prev, curr) => prev + curr.price * curr.amount, 0), [ productsCart ] )
 
     return (
-        <section className="grid grid-cols-[1fr_300px] w-screen h-screen bg-white">
+        <section className="grid grid-cols-[1fr_300px] w-screen h-full bg-white">
             <div className="flex flex-col justify-between">
                 <div>
                     <TopItem />
@@ -30,7 +30,7 @@ export const CashRegisterPage = () => {
                 </div>
 
 
-                <div className="bg-white justify-end flex border-t border-gray-500 p-1 px-2">
+                <div className="bg-white justify-end flex border-t border-gray-500 p-1 px-3">
                     <p className="text-4xl font-semibold">$ { parseNumber( totalSum ) }</p>
                 </div>
             </div>

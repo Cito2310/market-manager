@@ -23,7 +23,7 @@ export const CardProduct = ({ product }: props) => {
     }
 
     return (
-        <div className="bg-card_bg p-3 rounded-md text-txt-black min-w-[400px] flex-1">
+        <div className="bg-card_bg p-3 shadow-md rounded-md text-txt-black min-w-[400px] flex-1">
             <div className="flex justify-between gap-3">
                 <h2 className="uppercase text-lg font-Montserrat font-medium text-black">{`${brand} ${subcategory} ${name} ${size}${sizeUnit}`}</h2>
 

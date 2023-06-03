@@ -19,7 +19,7 @@ export const CardSubcategories = ({ methods, index: indexMain, removeSubcategory
 
 
     if ( isEditing ) return (
-        <section className="p-2 flex-1 border rounded min-w-[200px] text-txt-black">
+        <section className="p-2 flex-1 border rounded min-w-[300px] text-txt-black">
             <div className="flex flex-col h-32 overflow-auto scrollbar-hide">
 
                 <div className="flex justify-between items-center gap-3 mb-1">
@@ -65,7 +65,7 @@ export const CardSubcategories = ({ methods, index: indexMain, removeSubcategory
 
     
     return (
-        <section className="p-2 flex-1 border rounded min-w-[200px] text-txt-black">
+        <section className="p-2 flex-1 border rounded min-w-[300px] text-txt-black">
             <div className="flex flex-col h-32 overflow-auto scrollbar-hide">
 
                 <div className="flex justify-between items-center gap-3 mb-1">

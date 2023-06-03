@@ -6,7 +6,7 @@ interface props {
 
 export const Sidebar = ({ barcode }: props) => {
     return (
-        <aside className="h-screen w-full bg-gray-800 p-3 flex flex-col justify-between">
+        <aside className="h-full w-full bg-gray-800 p-3 flex flex-col justify-between">
             <div className="flex flex-col gap-3">
                 <input className="rounded bg-white px-3 py-1 w-full focus:outline-none" onChange={()=>{}} value={barcode} placeholder="Codigo de Barra"/>
 
