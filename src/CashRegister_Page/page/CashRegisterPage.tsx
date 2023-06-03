@@ -5,6 +5,7 @@ import { Sidebar } from "../components/Sidebar";
 import { TopItem } from "../components/TopItem";
 import { ItemProductCart } from "../components/ItemProductCart";
 import { useMemo } from "react";
+import { parseNumber } from "../../helpers/parseNumber";
 
 export const CashRegisterPage = () => {
     const currentKeypress = useKeyUp();
@@ -30,11 +31,14 @@ export const CashRegisterPage = () => {
 
 
                 <div className="bg-white justify-end flex border-t border-gray-500 p-1 px-2">
-                    <p className="text-4xl font-semibold">$ { totalSum }</p>
+                    <p className="text-4xl font-semibold">$ { parseNumber( totalSum ) }</p>
                 </div>
             </div>
 
-            <Sidebar />
+            <Sidebar 
+                barcode={ barcode }
+            
+            />
         </section>
     )
 }

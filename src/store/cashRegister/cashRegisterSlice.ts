@@ -22,11 +22,11 @@ export const cashRegisterSlice = createSlice({
     initialState,
     reducers: {
 
-        deleteProductInCart: ( state, action: { payload: Product } ) => {
-            state.productsCart.filter( product => product.barcode !== action.payload.barcode );
+        deleteProductInCartByBarcode: ( state, action: { payload: string } ) => {
+            state.productsCart = state.productsCart.filter( product => product.barcode !== action.payload );
         },
 
-        addProductToCart: ( state, action: { payload: Product } ) => {
+        addProductUnitToCart: ( state, action: { payload: Product } ) => {
             const existProductInCart = state.productsCart.find( productInCart => productInCart.barcode === action.payload.barcode );
 
             if ( existProductInCart === undefined ) {
@@ -42,6 +42,24 @@ export const cashRegisterSlice = createSlice({
 
         },
 
+        addProductWeightToCart: ( state, action: { payload: { product: Product, weight: number } } ) => {
+            const { product, weight } = action.payload;
+
+            const existProductInCart = state.productsCart.find( productInCart => productInCart.barcode === product.barcode );
+
+            if ( existProductInCart === undefined ) {
+                const newProduct: ProductInCart = { ...product, amount: weight };
+                state.productsCart.push( newProduct );
+                return;
+            }
+
+            state.productsCart = state.productsCart.map( productInCart => {
+                if ( productInCart.barcode !== existProductInCart?.barcode ) return productInCart;
+
+                return {...productInCart, amount: productInCart.amount + action.payload.weight };
+            })
+        },
+
         setNotFoundProduct: ( state ) => {
             state.status.notFoundProduct = true;
         },
@@ -53,9 +71,10 @@ export const cashRegisterSlice = createSlice({
 });
 
 export const { 
-    addProductToCart, 
-    deleteProductInCart, 
+    addProductUnitToCart, 
+    deleteProductInCartByBarcode, 
     removeError, 
     setNotFoundProduct,
+    addProductWeightToCart,
 
 } = cashRegisterSlice.actions;

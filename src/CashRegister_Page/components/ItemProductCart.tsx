@@ -1,4 +1,8 @@
 import { ProductInCart } from "../../../Types/ProductInCart"
+import { Svg } from "../../components/Svg";
+import { parseNumber } from "../../helpers/parseNumber";
+import { deleteProductInCartByBarcode } from "../../store/cashRegister/cashRegisterSlice";
+import { useAppDispatch } from "../../store/store";
 
 interface props {
     productCart: ProductInCart;
@@ -9,16 +13,29 @@ export const ItemProductCart = ({ productCart, index }: props) => {
     const { amount, barcode, brand, category, name, price, size, sizeUnit, subcategory, type } = productCart;
     const isPair = index % 2 === 0;
 
+    const dispatch = useAppDispatch();
+
+    const deleteProduct = () => dispatch( deleteProductInCartByBarcode( barcode ) )
+
     return (
         <li 
             className={`
-                grid grid-cols-[1fr_7em_7em_7em] py-1 items-center 
+                grid grid-cols-[1fr_7em_7em_7em_1.6em] px-3 py-1 items-center 
                 ${ isPair && "bg-[#f0f0f0]" }`
                 }>
-            <p className="ml-3 capitalize">{`${brand} ${subcategory} ${name} ${size+sizeUnit}`}</p>
-            <p className="mx-auto">{ amount }</p>
-            <p className="mx-auto">$ { price }</p>
-            <p className="mx-auto">$ { amount * price }</p>
+            <p className="capitalize">{`${brand} ${subcategory} ${name} ${size+sizeUnit}`}</p>
+            {
+                type === "weight" 
+                ? <p className="mx-auto">{ parseNumber( amount ) }Kg</p>
+                : <p className="mx-auto">{ amount }</p>
+            }
+
+            <p className="mx-auto">$ { parseNumber( price ) }</p>
+            <p className="mx-auto">$ { parseNumber( amount * price ) }</p>
+
+            <button onClick={ deleteProduct } className="transition-base text-card_btnText hover:text-black active:text-btn_danger cursor-pointer">
+                <Svg classname="text-xl m-auto" element="xmark"/>
+            </button>
         </li>
     )
 }

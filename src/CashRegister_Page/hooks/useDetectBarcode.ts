@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Product } from "../../../Types/product";
 import { useAppDispatch } from "../../store/store";
-import { addProductToCart } from "../../store/cashRegister/cashRegisterSlice";
+import { startAddProductToCart } from "../../store/cashRegister/thunks";
 
 export const useDetectBarcode = ( currentKeypress: [string], products: Product[] ) => {
     const dispatch = useAppDispatch();
@@ -19,12 +19,13 @@ export const useDetectBarcode = ( currentKeypress: [string], products: Product[]
         if ( ![13, 8].includes( newStateBarcode.length ) ) return;
 
         if ( newStateBarcode.length === 13 ) resetBarcode();
+        const foundProduct = dispatch( startAddProductToCart( newStateBarcode ) );
 
-        const findProduct = products.find( product => product.barcode === newStateBarcode );
-        if (!findProduct && newStateBarcode.length === 8 ) return;
+        if ( foundProduct ) resetBarcode();
+        // const findProduct = products.find( product => product.barcode === newStateBarcode );
+        // if (!findProduct && newStateBarcode.length === 8 ) return;
          
         // if ( !findProduct ) throw new Error("NOT IMPLEMENTED: Not Exist Product");
-        dispatch( addProductToCart( findProduct! ) );
     }
 
     useEffect(() => {
