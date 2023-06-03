@@ -11,25 +11,22 @@ export const useDetectBarcode = ( currentKeypress: [string], products: Product[]
     const resetBarcode = () => setBarcode("");
 
     const changeBarcode = () => {
-        if ( !/[0-9]/gi.test( key ) ) return;
+        const newBarcode = barcode + key;
+        setBarcode( newBarcode );
 
-        const newStateBarcode = barcode + key;
-        setBarcode( newStateBarcode );
+        if ( ![13, 8].includes( newBarcode.length ) ) return;
 
-        if ( ![13, 8].includes( newStateBarcode.length ) ) return;
-
-        if ( newStateBarcode.length === 13 ) resetBarcode();
-        const foundProduct = dispatch( startAddProductToCart( newStateBarcode ) );
+        if ( newBarcode.length === 13 ) resetBarcode();
+        const foundProduct = dispatch( startAddProductToCart( newBarcode ) );
 
         if ( foundProduct ) resetBarcode();
-        // const findProduct = products.find( product => product.barcode === newStateBarcode );
-        // if (!findProduct && newStateBarcode.length === 8 ) return;
-         
-        // if ( !findProduct ) throw new Error("NOT IMPLEMENTED: Not Exist Product");
     }
 
     useEffect(() => {
-        changeBarcode()
+        if ( /[0-9]/.test( key ) ) changeBarcode();
+        if (key === "Backspace") resetBarcode();
+
+
     }, [currentKeypress])
 
     return {

@@ -1,5 +1,5 @@
 import { useDetectBarcode } from "../hooks/useDetectBarcode";
-import { useKeyUp } from "../hooks/useKeyUp"
+import { useKeyUp } from "../../hooks/useKeyUp"
 import { useAppSelector } from "../../store/store";
 import { Sidebar } from "../components/Sidebar";
 import { TopItem } from "../components/TopItem";
