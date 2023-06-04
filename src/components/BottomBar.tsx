@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom"
 
 export const BottomBar = () => {
     return (
-        <div className="bg-zinc-900 text-white flex justify-between px-3">
+        <div className="bg-zinc-900 text-white flex justify-between px-3 z-50">
             <div className="bg-inherit flex">
 
                 <NavLink 

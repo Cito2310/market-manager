@@ -4,6 +4,7 @@ import { Product } from '../../../Types/product';
 interface productState {
     products: Product[];
     messageError: null | string;
+    isCalled: boolean;
     status: {
         isLoading: boolean;
         hasError: boolean;
@@ -13,6 +14,7 @@ interface productState {
 const initialState: productState = {
     products: [],
     messageError: null,
+    isCalled: false,
     status: {
         isLoading: false,
         hasError: false
@@ -27,6 +29,7 @@ export const productSlice = createSlice({
 
         setProducts: ( state, action: { payload: Product[] } ) => {
             state.products = action.payload;
+            state.isCalled = true;
         },
 
         createProducts: ( state, action: { payload: Product } ) => {
