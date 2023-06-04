@@ -1,13 +1,16 @@
 import { useDetectBarcode } from "../hooks/useDetectBarcode";
 import { useKeyUp } from "../../hooks/useKeyUp"
-import { useAppSelector } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { Sidebar } from "../components/Sidebar";
 import { TopItem } from "../components/TopItem";
 import { ItemProductCart } from "../components/ItemProductCart";
 import { useMemo } from "react";
 import { parseNumber } from "../../helpers/parseNumber";
+import { setPrint } from "../../store/print/printSlice";
 
 export const CashRegisterPage = () => {
+    const dispatch = useAppDispatch();
+
     const currentKeypress = useKeyUp();
 
     const { products } = useAppSelector( state => state.product );
@@ -15,6 +18,9 @@ export const CashRegisterPage = () => {
     const { barcode } = useDetectBarcode( currentKeypress, products );
 
     const totalSum = useMemo( () => productsCart.reduce((prev, curr) => prev + curr.price * curr.amount, 0), [ productsCart ] )
+
+    const onReset = () => {} // TODO
+    const onPrint = () => { dispatch( setPrint( productsCart ) ) }
 
     return (
         <section className="grid grid-cols-[1fr_300px] w-screen h-full bg-white">
@@ -36,8 +42,9 @@ export const CashRegisterPage = () => {
             </div>
 
             <Sidebar 
+                onPrint={ onPrint }
+                onReset={ onReset }
                 barcode={ barcode }
-            
             />
         </section>
     )

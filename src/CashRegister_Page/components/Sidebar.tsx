@@ -2,9 +2,11 @@ import { Svg } from "../../components/Svg"
 
 interface props {
     barcode: string;
+    onPrint: () => void;
+    onReset: () => void;
 }
 
-export const Sidebar = ({ barcode }: props) => {
+export const Sidebar = ({ barcode, onPrint, onReset }: props) => {
     return (
         <aside className="h-full w-full bg-gray-800 p-3 flex flex-col justify-between">
             <div className="flex flex-col gap-3">
@@ -39,6 +41,7 @@ export const Sidebar = ({ barcode }: props) => {
                         transition-base hover:brightness-[.90] active:brightness-[.80] 
                         bg-btn_primary text-white flex
                     "
+                    onClick={ onPrint }
                 >
                     <Svg element="print" classname="text-xl"/>
                     &nbsp;Imprimir Ticket

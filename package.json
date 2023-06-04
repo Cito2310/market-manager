@@ -1,7 +1,7 @@
 {
   "homepage": "./",
   "name": "market-manager",
-  "version": "3.11.0",
+  "version": "3.12.0",
   "author": "",
   "description": "",
   "keywords": [
@@ -22,7 +22,8 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "^5.0.1",
-    "sass": "^1.58.1"
+    "sass": "^1.58.1",
+    "uuid": "^9.0.0"
   },
   "scripts": {
     "dev": "concurrently \"cross-env BROWSER=none react-scripts start\" \"wait-on http://127.0.0.1:3000 && tsc -p electron -w\" \"wait-on http://127.0.0.1:3000 && tsc -p electron && electron .\"",
@@ -44,6 +45,7 @@
     "@types/node": "^18.13.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@types/uuid": "^9.0.1",
     "autoprefixer": "^10.4.14",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",

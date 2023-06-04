@@ -5,6 +5,7 @@ import { authSlice } from './auth/authSlice';
 import { modalSlice } from './modal/modalSlice';
 import { productSlice } from './product/productSlice';
 import { cashRegisterSlice } from './cashRegister/cashRegisterSlice';
+import { printSlice } from './print/printSlice';
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         modal: modalSlice.reducer,
         product: productSlice.reducer,
         cashRegister: cashRegisterSlice.reducer,
+        print: printSlice.reducer,
     }
 })
 

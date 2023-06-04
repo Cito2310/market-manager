@@ -10,9 +10,11 @@ import { fetchApi } from "./helpers/fetchApi";
 import { BottomBar } from "./components/BottomBar";
 import { AppRoute } from "./routes/AppRoute";
 import { useGetDatabase } from "./hooks/useGetDatabase";
+import { PrintTicket } from "./components/PrintTicket";
 
 
 export const AppMarketManager = () => {
+    const { isActive } = useAppSelector( state => state.print );
     useGetDatabase();
 
     useEffect(() => {
@@ -26,6 +28,7 @@ export const AppMarketManager = () => {
 
     }, [])
     
+    if ( isActive ) return <PrintTicket />;
 
     return (
         <div className="bg-gray-300 h-screen grid grid-rows-[auto_1.7em]">
