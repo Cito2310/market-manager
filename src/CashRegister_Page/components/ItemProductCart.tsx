@@ -3,6 +3,7 @@ import { Svg } from "../../components/Svg";
 import { parseNumber } from "../../helpers/parseNumber";
 import { deleteProductInCartByBarcode } from "../../store/cashRegister/cashRegisterSlice";
 import { useAppDispatch } from "../../store/store";
+import { parseNameProduct } from '../../helpers/parseNameProduct';
 
 interface props {
     productCart: ProductInCart;
@@ -23,7 +24,7 @@ export const ItemProductCart = ({ productCart, index }: props) => {
                 grid grid-cols-[1fr_7em_7em_7em_1.6em] px-3 py-1 items-center 
                 ${ isPair && "bg-[#f0f0f0]" }`
                 }>
-            <p className="capitalize">{`${brand} ${subcategory} ${name} ${size+sizeUnit}`}</p>
+            <p className="capitalize">{ parseNameProduct( productCart ) }</p>
             {
                 type === "weight" 
                 ? <p className="mx-auto">{ parseNumber( amount ) }Kg</p>

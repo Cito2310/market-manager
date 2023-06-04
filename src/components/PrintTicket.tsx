@@ -7,6 +7,7 @@ import { Ticket } from "../../Types/ticket";
 import { getTime } from "../helpers/getTime";
 
 import "../styles/TicketPrint.scss"
+import { parseNameProduct } from "../helpers/parseNameProduct";
 
 export const PrintTicket = () => {
     const dispatch = useAppDispatch()
@@ -47,11 +48,11 @@ export const PrintTicket = () => {
                 </li>
 
                 {
-                    productsToPrint.map(({ subcategory, brand, name, sizeUnit, price, amount, size, type }, index) => 
+                    productsToPrint.map((product , index) => 
                         <li key={index} className='product-item'>
-                            <p className="capitalize">{`${subcategory} ${brand} ${name} ${size}${sizeUnit}`}</p>
-                            <p className='text-center'>{ type === "weight" ? amount+"Kg" : amount}</p>
-                            <p className='text-center'>$ { parseNumber( price * amount ) }</p>
+                            <p className="capitalize">{ parseNameProduct( product ) }</p>
+                            <p className='text-center'>{ product.type === "weight" ? product.amount+"Kg" : product.amount}</p>
+                            <p className='text-center'>$ { parseNumber( product.price * product.amount ) }</p>
                         </li>)
                 }
             </ul>
