@@ -3,18 +3,16 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import axios from 'axios';
 
 import { ipcNames } from '../Types/ipcNames';
-import { IProduct } from '../Types/product';
+import { IProduct, Product } from '../Types/product';
 import { ITicketData } from '../Types/ticketData';
 
 
 export const ipcConnections = () => {
 
-    ipcMain.handle("save-data-products" as ipcNames, async (e, args) => {
+    ipcMain.on("save-data-products" as ipcNames, async (e, args: Product[]) => {
         if (!existsSync("./database")) mkdirSync("./database");
-        const { data } = await axios.get<IProduct[]>("https://market-product-rest.onrender.com/api/product/", {headers: {token: args}});
         
-        writeFileSync("./database/data_products.json", JSON.stringify(data));
-        return data;
+        writeFileSync("./database/data_products.json", JSON.stringify(args));
     })
 
     ipcMain.handle("get-data-products-offline" as ipcNames, async (e, args) => {

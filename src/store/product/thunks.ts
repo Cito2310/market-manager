@@ -1,6 +1,6 @@
 import { fetchApi } from "../../helpers/fetchApi";
 import { AppDispatch, RootState, useAppSelector } from "../store";
-import { stopLoading, initLoading, setProducts, createProducts, deleteProductsByBarcode } from "./productSlice";
+import { stopLoading, initLoading, setProducts, createProducts, deleteProductsByBarcode, setOnline } from "./productSlice";
 import { FormCreateProduct, FormUpdateProduct } from '../../../Types/formData';
 
 export const startCreateProduct = ( formData: FormCreateProduct ) => {
@@ -63,16 +63,23 @@ export const startDeleteProductByBarcode = ( barcode: string ) => {
 
 export const startGetProducts = () => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
-        
         dispatch( initLoading() );
 
-        const products = await fetchApi({
-            method: "get",
-            path: "api/product",
-        })
+        try {
+            const products = await fetchApi({
+                method: "get",
+                path: "api/product",
+            })
+            await window.electronAPI.saveDataProduct( products )
+    
+            dispatch( setProducts( products ) );
+            dispatch( setOnline() );
+            
+        } catch (error) {
+            const offlineProducts = await window.electronAPI.getDataProductsOffline();
+            dispatch( setProducts( offlineProducts ) );
+        }
 
-        dispatch( setProducts( products ) )
         dispatch( stopLoading() );
-
     };
 };

@@ -10,7 +10,9 @@ export const useGetDatabase = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if ( !product.isCalled ) { dispatch( startGetProducts() ) };
+        if ( !product.status.isCalled ) { 
+            dispatch( startGetProducts() );
+        };
 
         if ( token !== null ) { dispatch( startGetCategories() ) };
         

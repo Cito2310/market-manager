@@ -15,26 +15,19 @@ import { PrintTicket } from "./components/PrintTicket";
 
 export const AppMarketManager = () => {
     const { isActive } = useAppSelector( state => state.print );
+    const { isLoading, isOnline } = useAppSelector( state => state.product.status );
     useGetDatabase();
 
-    useEffect(() => {
-        const callApi = () => {
-            fetchApi({ method: "get", path: "api/product" }).then( data => console.log("Se llamo") )
-        }
-
-        const timer = setInterval( callApi, 120000 )
-    
-        return () => { clearInterval( timer ) }
-
-    }, [])
-    
     if ( isActive ) return <PrintTicket />;
 
     return (
         <div className="bg-gray-300 h-screen grid grid-rows-[auto_1.7em]">
             <AppRoute />
 
-            <BottomBar />
+            <BottomBar 
+                isLoading={ isLoading } 
+                isOnline={ isOnline }
+            />
         </div>
     )
 }

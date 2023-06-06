@@ -1,7 +1,12 @@
 import { NavLink } from "react-router-dom"
 import "../styles/ActiveBottomBar.scss"
 
-export const BottomBar = () => {
+interface props {
+    isOnline: boolean;
+    isLoading: boolean;
+}
+
+export const BottomBar = ({ isLoading, isOnline }: props) => {
     return (
         <div className="bg-zinc-900 text-white flex justify-between px-3 z-40">
             <div className="bg-inherit flex">
@@ -27,7 +32,13 @@ export const BottomBar = () => {
             </div>
 
             <div className="flex items-end">
-                <p className="text-xs pb-1">Cargando...</p>
+                <p className="text-xs pb-1">
+                    {
+                        isLoading ? "Cargando..."
+                        : isOnline ? "Online"
+                        : "Offline"
+                    }
+                </p>
             </div>
         </div>
     )

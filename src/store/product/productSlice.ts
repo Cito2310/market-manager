@@ -4,18 +4,20 @@ import { Product } from '../../../Types/product';
 interface productState {
     products: Product[];
     messageError: null | string;
-    isCalled: boolean;
     status: {
-        isLoading: boolean;
         hasError: boolean;
+        isCalled: boolean;
+        isLoading: boolean;
+        isOnline: boolean;
     }
 }
 
 const initialState: productState = {
     products: [],
     messageError: null,
-    isCalled: false,
     status: {
+        isCalled: false,
+        isOnline: false,
         isLoading: false,
         hasError: false
     }
@@ -29,7 +31,7 @@ export const productSlice = createSlice({
 
         setProducts: ( state, action: { payload: Product[] } ) => {
             state.products = action.payload;
-            state.isCalled = true;
+            state.status.isCalled = true;
         },
 
         createProducts: ( state, action: { payload: Product } ) => {
@@ -48,6 +50,7 @@ export const productSlice = createSlice({
 
         initLoading: ( state ) => { state.status.isLoading = true },
         stopLoading: ( state ) => { state.status.isLoading = false },
+        setOnline: ( state ) => { state.status.isOnline = true },
 
     }
 });
@@ -59,5 +62,6 @@ export const {
     updateProductsByBarcode,
     initLoading,
     stopLoading,
+    setOnline,
 
 } = productSlice.actions;
