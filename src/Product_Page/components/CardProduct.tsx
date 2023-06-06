@@ -1,6 +1,6 @@
 import { Product } from "../../../Types/product"
 import { ButtonSvg } from "../../components/ButtonSvg";
-import { selectProduct, setModal } from "../../store/modal/modalSlice";
+import { selectProduct, setModalProduct } from "../../store/modal/modalSlice";
 import { useAppDispatch } from "../../store/store";
 
 interface props {
@@ -14,12 +14,12 @@ export const CardProduct = ({ product }: props) => {
 
     const onDelete = () => {
         dispatch( selectProduct( product ) );
-        dispatch( setModal("deleteProduct") );
+        dispatch( setModalProduct("deleteProduct") );
     }
 
     const onUpdate = () => {
         dispatch( selectProduct( product ) );
-        dispatch( setModal("updateProduct") );
+        dispatch( setModalProduct("updateProduct") );
     }
 
     return (

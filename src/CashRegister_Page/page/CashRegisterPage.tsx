@@ -7,9 +7,16 @@ import { ItemProductCart } from "../components/ItemProductCart";
 import { useMemo } from "react";
 import { parseNumber } from "../../helpers/parseNumber";
 import { setPrint } from "../../store/print/printSlice";
+import { resetCart } from "../../store/cashRegister/cashRegisterSlice";
+import { ModalNotFoundProduct } from "../components/ModalNotFoundProduct";
+import { ModalResetCart } from "../components/ModalResetCart";
+import { exitModal, setModalCashRegister } from "../../store/modal/modalSlice";
+
 
 export const CashRegisterPage = () => {
     const dispatch = useAppDispatch();
+    const currentModal = useAppSelector( state => state.modal.current )
+    const onExitModal = () => { dispatch( exitModal() ) };
 
     const currentKeypress = useKeyUp();
 
@@ -19,33 +26,42 @@ export const CashRegisterPage = () => {
 
     const totalSum = useMemo( () => productsCart.reduce((prev, curr) => prev + curr.price * curr.amount, 0), [ productsCart ] )
 
-    const onReset = () => {} // TODO
-    const onPrint = () => { dispatch( setPrint( productsCart ) ) }
+    const onResetCart = () => { dispatch( resetCart() ); onExitModal() };
+    const onModalReset = () => { dispatch( setModalCashRegister("resetCart") ) };
+    const onPrint = () => { 
+        dispatch( setPrint( productsCart )); 
+        dispatch( resetCart() );
+    };
 
     return (
-        <section className="grid grid-cols-[1fr_300px] w-screen h-full bg-white">
-            <div className="flex flex-col justify-between">
-                <div>
-                    <TopItem />
+        <>
+            <section className="grid grid-cols-[1fr_300px] w-screen h-full bg-white">
+                <div className="flex flex-col justify-between">
+                    <div>
+                        <TopItem />
 
-                    <ul>
-                        { productsCart.map(( productCart, index ) => 
-                            <ItemProductCart key={ productCart.barcode } productCart={ productCart } index={ index }/>
-                        )}
-                    </ul>
+                        <ul>
+                            { productsCart.map(( productCart, index ) => 
+                                <ItemProductCart key={ productCart.barcode } productCart={ productCart } index={ index }/>
+                            )}
+                        </ul>
+                    </div>
+
+
+                    <div className="bg-white justify-end flex border-t border-gray-500 p-1 px-3">
+                        <p className="text-4xl font-semibold">$ { parseNumber( totalSum ) }</p>
+                    </div>
                 </div>
 
+                <Sidebar 
+                    onPrint={ onPrint }
+                    onReset={ onModalReset }
+                    barcode={ barcode }
+                />
+            </section>
 
-                <div className="bg-white justify-end flex border-t border-gray-500 p-1 px-3">
-                    <p className="text-4xl font-semibold">$ { parseNumber( totalSum ) }</p>
-                </div>
-            </div>
-
-            <Sidebar 
-                onPrint={ onPrint }
-                onReset={ onReset }
-                barcode={ barcode }
-            />
-        </section>
+            { currentModal === "resetCart" && <ModalResetCart onExit={ onExitModal } onResetCart={ onResetCart } /> }
+            { currentModal === "notFoundProduct" && <ModalNotFoundProduct /> }
+        </>
     )
 }

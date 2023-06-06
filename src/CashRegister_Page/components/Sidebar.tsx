@@ -11,20 +11,11 @@ export const Sidebar = ({ barcode, onPrint, onReset }: props) => {
         <aside className="h-full w-full bg-gray-800 p-3 flex flex-col justify-between">
             <div className="flex flex-col gap-3">
                 <input className="rounded bg-white px-3 py-1 w-full focus:outline-none" onChange={()=>{}} value={barcode} placeholder="Codigo de Barra"/>
-
-                <button 
-                    className="
-                        rounded p-1 items-center justify-center w-full
-                        transition-base hover:brightness-[.90] active:brightness-[.80] 
-                        bg-btn_secondary text-black flex
-                    "
-                >
-                    <Svg element="search" classname="text"/>&nbsp;Buscar
-                </button>
             </div>
 
             <div className="flex flex-col gap-3 mb-4">
                 <button 
+                    onClick={ onReset }
                     className="
                         rounded p-3 items-center justify-center
                         transition-base hover:brightness-[.90] active:brightness-[.80] 

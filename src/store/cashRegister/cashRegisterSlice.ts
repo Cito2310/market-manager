@@ -22,59 +22,54 @@ export const cashRegisterSlice = createSlice({
     initialState,
     reducers: {
 
+
         deleteProductInCartByBarcode: ( state, action: { payload: string } ) => {
             state.productsCart = state.productsCart.filter( product => product.barcode !== action.payload );
         },
 
-        addProductUnitToCart: ( state, action: { payload: Product } ) => {
-            const existProductInCart = state.productsCart.find( productInCart => productInCart.barcode === action.payload.barcode );
 
-            if ( existProductInCart === undefined ) {
-                const newProduct: ProductInCart = { ...action.payload, amount: 1 };
-                state.productsCart.push( newProduct );
-                return;
-            }
-
-            state.productsCart = state.productsCart.map( productInCart => {
-                if ( productInCart.barcode !== existProductInCart?.barcode ) return productInCart;
-                return {...productInCart, amount: productInCart.amount + 1 };
-            })
-
-        },
-
-        addProductWeightToCart: ( state, action: { payload: { product: Product, weight: number } } ) => {
+        addProductToCart: ( state, action: { payload: { product: Product, weight?: number } } ) => {
             const { product, weight } = action.payload;
 
             const existProductInCart = state.productsCart.find( productInCart => productInCart.barcode === product.barcode );
 
             if ( existProductInCart === undefined ) {
-                const newProduct: ProductInCart = { ...product, amount: weight };
+                const newProduct: ProductInCart = { ...product, amount: 1 };
                 state.productsCart.push( newProduct );
                 return;
             }
 
             state.productsCart = state.productsCart.map( productInCart => {
                 if ( productInCart.barcode !== existProductInCart?.barcode ) return productInCart;
-
-                return {...productInCart, amount: productInCart.amount + action.payload.weight };
+                return {...productInCart, amount: productInCart.type === "unit" ? productInCart.amount + 1 : productInCart.amount + weight! };
             })
+
         },
+
+
+        resetCart: ( state ) => {
+            state.productsCart = [];
+        },
+
 
         setNotFoundProduct: ( state ) => {
             state.status.notFoundProduct = true;
         },
 
+
         removeError: ( state ) => {
             state.status.notFoundProduct = false;
         }
+
+
     }
 });
 
 export const { 
-    addProductUnitToCart, 
+    addProductToCart, 
     deleteProductInCartByBarcode, 
     removeError, 
+    resetCart,
     setNotFoundProduct,
-    addProductWeightToCart,
 
 } = cashRegisterSlice.actions;

@@ -1,5 +1,5 @@
 import { TopButtons } from "../../components/TopButtons";
-import { setModal } from "../../store/modal/modalSlice";
+import { setModalProduct } from "../../store/modal/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { CardProduct } from "../components/CardProduct";
 import { ModalCreateProduct } from "../components/ModalCreateProduct";
@@ -11,7 +11,7 @@ export const ProductPage = () => {
     const { current } = useAppSelector( state => state.modal );
     const dispatch = useAppDispatch();
 
-    const onSetModalCreateProduct = () =>  dispatch( setModal( "createProduct" ) );
+    const onSetModalCreateProduct = () =>  dispatch( setModalProduct( "createProduct" ) );
 
     return (
         <div className="flex flex-wrap gap-5 p-5">

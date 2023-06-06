@@ -1,6 +1,6 @@
-import { Product } from "../../../Types/product";
+import { setModalCashRegister } from "../modal/modalSlice";
 import { AppDispatch, RootState } from "../store";
-import { addProductUnitToCart, addProductWeightToCart } from "./cashRegisterSlice";
+import { addProductToCart } from "./cashRegisterSlice";
 
 export const startAddProductToCart = (barcode: string) => {
     return ( dispatch: AppDispatch, getState: () => RootState ) => {
@@ -16,9 +16,11 @@ export const startAddProductToCart = (barcode: string) => {
     
             const findProduct = products.find( product => product.barcode === idProduct );
 
-            if (!findProduct) return false; //TODO: Not Found Product
-
-            dispatch( addProductWeightToCart({ 
+            if (!findProduct) {
+                dispatch( setModalCashRegister("notFoundProduct") );
+                return false;
+            }
+            dispatch( addProductToCart({ 
                 product: findProduct, 
                 weight: weightToKg,
             }) )
@@ -32,10 +34,13 @@ export const startAddProductToCart = (barcode: string) => {
         if (!findProduct && barcode.length === 8 ) return false;
 
         // NOT FOUND PRODUCT
-        if ( !findProduct ) return false; //TODO: Not Found Product
+        if ( !findProduct ) {
+            dispatch( setModalCashRegister("notFoundProduct") );
+            return false;
+        }
 
         // ADD PRODUCT INIT
-        dispatch( addProductUnitToCart( findProduct ) );
+        dispatch( addProductToCart({ product: findProduct }) );
         return true;
 
     };
