@@ -1,10 +1,7 @@
 import { ipcMain, BrowserWindow } from 'electron';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
-import axios from 'axios';
 
-import { ipcNames } from '../Types/ipcNames';
-import { IProduct, Product } from '../Types/product';
-import { ITicketData } from '../Types/ticketData';
+import { ipcNames, Product, Ticket } from '../Types';
 
 
 export const ipcConnections = () => {
@@ -31,7 +28,7 @@ export const ipcConnections = () => {
         })
     })
 
-    ipcMain.on("save-ticket" as ipcNames, async (e, args: ITicketData) => {
+    ipcMain.on("save-ticket" as ipcNames, async (e, args: Ticket) => {
         if (!existsSync("./tickets")) mkdirSync("./tickets");
         writeFileSync(`./tickets/${args.date.split(' ').join('_').split(':').join('-')}-${args.idTicket}.json`, JSON.stringify(args));
         return args;
