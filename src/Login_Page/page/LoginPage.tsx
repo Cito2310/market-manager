@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
-import { InputText } from "../../components/inputs/InputText";
+import { useAppDispatch } from "../../store";
+import { startLogin } from "../../store/auth";
 import { ModalLayout } from "../../layout/ModalLayout";
-import { useAppDispatch } from "../../store/store";
-import { startLogin } from "../../store/auth/thunks";
+import { InputText } from "../../components";
 
 export const LoginPage = () => {
     const { register, getValues, handleSubmit } = useForm();

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
-import { Product } from "../../../Types/product";
-import { useAppDispatch } from "../../store/store";
-import { startAddProductToCart } from "../../store/cashRegister/thunks";
+import { useAppDispatch } from "../store";
+import { startAddProductToCart } from "../store/cashRegister";
 
-export const useDetectBarcode = ( currentKeypress: [string], products: Product[] ) => {
+export const useDetectBarcode = ( currentKeypress: [string] ) => {
     const dispatch = useAppDispatch();
     const [barcode, setBarcode] = useState("");
     const [ key ] = currentKeypress;

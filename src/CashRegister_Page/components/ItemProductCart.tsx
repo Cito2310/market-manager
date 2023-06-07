@@ -1,14 +1,15 @@
-import { ProductInCart } from "../../../Types/ProductInCart"
-import { Svg } from "../../components/Svg";
-import { parseNumber } from "../../helpers/parseNumber";
-import { deleteProductInCartByBarcode } from "../../store/cashRegister/cashRegisterSlice";
-import { useAppDispatch } from "../../store/store";
-import { parseNameProduct } from '../../helpers/parseNameProduct';
+import { useAppDispatch } from "../../store";
+import { deleteProductInCartByBarcode } from "../../store/cashRegister";
+import { Svg } from "../../components";
+import { parseNameProduct, parseNumber } from '../../helpers';
+import { ProductInCart } from "../../../Types"
+
 
 interface props {
     productCart: ProductInCart;
     index: number;
 }
+
 
 export const ItemProductCart = ({ productCart, index }: props) => {
     const { amount, barcode, brand, category, name, price, size, sizeUnit, subcategory, type } = productCart;

@@ -1,9 +1,7 @@
-import { FormCategory } from "../../../Types/formData";
-import { fetchApi } from "../../helpers/fetchApi";
-import { formCategoryToCategory } from "../../helpers/formCategoryParse";
+import { FormCategory } from "../../../Types";
+import { deleteCategoryById, initLoading, setCategories, stopLoading, updateCategory, createCategory } from "./categorySlice";
+import { fetchApi, formCategoryToCategory } from "../../helpers";
 import { AppDispatch, RootState } from "../store";
-import { createCategory } from "./categorySlice";
-import { deleteCategoryById, initLoading, setCategories, stopLoading, updateCategory } from "./categorySlice";
 
 export const startGetCategories = () => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {

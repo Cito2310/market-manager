@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form"
 import { ModalLayout } from "../../layout/ModalLayout"
-import { useAppDispatch } from "../../store/store";
-import { exitModal } from "../../store/modal/modalSlice";
-import { startCreateCategory } from "../../store/category/thunks";
+import { useAppDispatch } from "../../store";
+import { exitModal } from "../../store/modal";
+import { startCreateCategory } from "../../store/category";
 
 
 export const ModalCreateCategory = () => {

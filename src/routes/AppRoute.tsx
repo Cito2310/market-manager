@@ -1,9 +1,11 @@
 import { Route, Routes } from "react-router-dom"
-import { CashRegisterPage } from "../CashRegister_Page/page/CashRegisterPage"
-import { CategoryPage } from "../Category_Page/page/CategoryPage"
-import { ProductPage } from "../Product_Page/page/ProductPage"
-import { PrivateRoute } from "./PrivateRoute"
-import { LoginPage } from "../Login_Page/page/LoginPage"
+
+import { CashRegisterPage } from "../CashRegister_Page"
+import { CategoryPage } from "../Category_Page"
+import { ProductPage } from "../Product_Page"
+import { LoginPage } from "../Login_Page"
+
+import { PrivateRoute } from "./"
 
 export const AppRoute = () => {
     return (

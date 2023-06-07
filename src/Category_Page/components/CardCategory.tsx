@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 
-import { useAppDispatch } from "../../store/store";
-import { startDeleteCategoryById, startUpdateCategoryById } from "../../store/category/thunks";
+import { useAppDispatch } from "../../store";
+import { startDeleteCategoryById, startUpdateCategoryById } from "../../store/category";
 
-import { categoryToFormCategory } from "../../helpers/formCategoryParse";
+import { Button } from "../../components";
+import { CardSubcategories, CardCategoryTop } from "./";
 
-import { Button } from "../../components/Button";
-import { CardSubcategories } from "./CardSubcategories";
-import { CardCategoryTop } from "./CardCategoryTop";
+import { categoryToFormCategory } from "../../helpers";
 
-import { Category } from "../../../Types/category";
-import { FormCategory } from "../../../Types/formData";
+import { Category, FormCategory } from "../../../Types";
 
 
 

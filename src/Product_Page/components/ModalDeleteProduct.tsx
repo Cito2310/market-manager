@@ -1,7 +1,7 @@
 import { ModalLayout } from "../../layout/ModalLayout";
-import { exitModal } from "../../store/modal/modalSlice";
-import { startDeleteProductByBarcode } from "../../store/product/thunks";
-import { useAppDispatch, useAppSelector } from "../../store/store"
+import { useAppDispatch, useAppSelector } from "../../store"
+import { exitModal } from "../../store/modal";
+import { startDeleteProductByBarcode } from "../../store/product";
 
 export const ModalDeleteProduct = () => {
     const dispatch = useAppDispatch();

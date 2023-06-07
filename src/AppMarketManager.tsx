@@ -1,17 +1,8 @@
-import { useEffect } from "react"
+import { useAppSelector } from "./store"
+import { BottomBar, PrintTicket } from "./components";
+import { AppRoute } from "./routes";
+import { useGetDatabase } from "./hooks";
 import "./index.css"
-
-import { useAppDispatch, useAppSelector } from "./store/store"
-import { startLogin } from "./store/auth/thunks";
-import { CategoryPage } from "./Category_Page/page/CategoryPage";
-import { startGetCategories } from "./store/category/thunks";
-import { ModalLayout } from "./layout/ModalLayout";
-import { fetchApi } from "./helpers/fetchApi";
-import { BottomBar } from "./components/BottomBar";
-import { AppRoute } from "./routes/AppRoute";
-import { useGetDatabase } from "./hooks/useGetDatabase";
-import { PrintTicket } from "./components/PrintTicket";
-
 
 export const AppMarketManager = () => {
     const { isActive } = useAppSelector( state => state.print );

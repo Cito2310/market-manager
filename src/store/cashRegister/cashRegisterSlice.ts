@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Product } from '../../../Types/product';
-import { ProductInCart } from '../../../Types/ProductInCart';
+import { Product, ProductInCart } from '../../../Types';
 
 interface cashRegisterState {
     productsCart: ProductInCart[];

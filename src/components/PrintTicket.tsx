@@ -1,13 +1,14 @@
 import { useEffect, useMemo } from "react";
-import { useAppDispatch, useAppSelector } from "../store/store";
 import { v4 as uuidv4 } from 'uuid';
-import { startPrintTicket } from "../store/print/thunks";
-import { parseNumber } from "../helpers/parseNumber";
-import { Ticket } from "../../Types/ticket";
-import { getTime } from "../helpers/getTime";
+
+import { useAppDispatch, useAppSelector } from "../store";
+import { startPrintTicket } from "../store/print";
+
+import { parseNumber, getTime, parseNameProduct } from "../helpers";
+
+import { Ticket } from "../../Types";
 
 import "../styles/TicketPrint.scss"
-import { parseNameProduct } from "../helpers/parseNameProduct";
 
 export const PrintTicket = () => {
     const dispatch = useAppDispatch()

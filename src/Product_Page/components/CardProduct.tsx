@@ -1,7 +1,7 @@
-import { Product } from "../../../Types/product"
-import { ButtonSvg } from "../../components/ButtonSvg";
-import { selectProduct, setModalProduct } from "../../store/modal/modalSlice";
-import { useAppDispatch } from "../../store/store";
+import { selectProduct, setModalProduct } from "../../store/modal";
+import { useAppDispatch } from "../../store";
+import { ButtonSvg } from "../../components";
+import { Product } from "../../../Types"
 
 interface props {
     product: Product

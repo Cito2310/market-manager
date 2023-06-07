@@ -1,6 +1,5 @@
-import { Navigate } from "react-router-dom"
-import { useAppSelector } from "../store/store"
-import { LoginPage } from "../Login_Page/page/LoginPage";
+import { useAppSelector } from "../store"
+import { LoginPage } from "../Login_Page";
 
 interface props {
     children: JSX.Element

@@ -1,16 +1,13 @@
-import { useDetectBarcode } from "../hooks/useDetectBarcode";
-import { useKeyUp } from "../../hooks/useKeyUp"
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import { Sidebar } from "../components/Sidebar";
-import { TopItem } from "../components/TopItem";
-import { ItemProductCart } from "../components/ItemProductCart";
 import { useMemo } from "react";
-import { parseNumber } from "../../helpers/parseNumber";
-import { setPrint } from "../../store/print/printSlice";
-import { resetCart } from "../../store/cashRegister/cashRegisterSlice";
-import { ModalNotFoundProduct } from "../components/ModalNotFoundProduct";
-import { ModalResetCart } from "../components/ModalResetCart";
-import { exitModal, setModalCashRegister } from "../../store/modal/modalSlice";
+
+import { useAppDispatch, useAppSelector } from "../../store/";
+import { setPrint } from "../../store/print";
+import { resetCart } from "../../store/cashRegister";
+import { exitModal, setModalCashRegister } from "../../store/modal";
+
+import { Sidebar, TopItem, ItemProductCart, ModalNotFoundProduct, ModalResetCart } from "../components";
+import { useDetectBarcode, useKeyUp } from "../../hooks";
+import { parseNumber } from "../../helpers";
 
 
 export const CashRegisterPage = () => {
@@ -20,9 +17,8 @@ export const CashRegisterPage = () => {
 
     const currentKeypress = useKeyUp();
 
-    const { products } = useAppSelector( state => state.product );
     const { productsCart } = useAppSelector( state => state.cashRegister );
-    const { barcode } = useDetectBarcode( currentKeypress, products );
+    const { barcode } = useDetectBarcode( currentKeypress );
 
     const totalSum = useMemo( () => productsCart.reduce((prev, curr) => prev + curr.price * curr.amount, 0), [ productsCart ] )
 

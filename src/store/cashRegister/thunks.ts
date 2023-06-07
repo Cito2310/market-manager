@@ -1,4 +1,4 @@
-import { setModalCashRegister } from "../modal/modalSlice";
+import { setModalCashRegister } from "../modal";
 import { AppDispatch, RootState } from "../store";
 import { addProductToCart } from "./cashRegisterSlice";
 

@@ -1,11 +1,12 @@
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import { configureStore } from "@reduxjs/toolkit";
-import { categorySlice } from './category/categorySlice';
-import { authSlice } from './auth/authSlice';
-import { modalSlice } from './modal/modalSlice';
-import { productSlice } from './product/productSlice';
-import { cashRegisterSlice } from './cashRegister/cashRegisterSlice';
-import { printSlice } from './print/printSlice';
+
+import { categorySlice } from './category';
+import { authSlice } from './auth';
+import { modalSlice } from './modal';
+import { productSlice } from './product';
+import { cashRegisterSlice } from './cashRegister';
+import { printSlice } from './print';
 
 export const store = configureStore({
     reducer: {

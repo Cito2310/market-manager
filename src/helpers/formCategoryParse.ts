@@ -1,6 +1,4 @@
-import { FormCategory } from '../../Types/formData';
-import { Category } from '../../Types/category';
-
+import { FormCategory, Category } from '../../Types';
 
 export const categoryToFormCategory = ( category: Category ): FormCategory => {
     return {

@@ -1,4 +1,4 @@
-import { Ticket } from "../../../Types/ticket";
+import { Ticket } from "../../../Types";
 import { AppDispatch, RootState } from "../store";
 import { exitToPrint } from "./printSlice";
 

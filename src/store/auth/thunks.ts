@@ -1,4 +1,4 @@
-import { fetchApi } from "../../helpers/fetchApi";
+import { fetchApi } from "../../helpers";
 import { AppDispatch, RootState } from "../store";
 import { initLoading, setToken, stopLoading } from "./authSlice";
 

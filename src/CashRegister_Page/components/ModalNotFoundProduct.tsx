@@ -1,7 +1,7 @@
 import { useEffect } from "react"
+import { useAppDispatch } from "../../store"
+import { exitModal } from "../../store/modal"
 import { ModalLayout } from "../../layout/ModalLayout"
-import { useAppDispatch } from "../../store/store"
-import { exitModal } from "../../store/modal/modalSlice"
 
 export const ModalNotFoundProduct = () => {
     const dispatch = useAppDispatch()

@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form"
-import { ButtonSvg } from "../../components/ButtonSvg"
-import { Category } from "../../../Types/category"
+import { ButtonSvg } from "../../components"
+import { Category } from "../../../Types"
 
 interface props {
     category: Category;

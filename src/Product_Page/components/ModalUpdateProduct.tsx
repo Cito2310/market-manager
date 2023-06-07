@@ -1,13 +1,14 @@
-import { useForm } from "react-hook-form";
-import { FormUpdateProduct } from "../../../Types/formData";
-import { exitModal } from "../../store/modal/modalSlice";
-import { startUpdateProductByBarcode } from "../../store/product/thunks";
-import { useAppDispatch, useAppSelector } from "../../store/store";
 import { useMemo } from "react";
+import { useForm } from "react-hook-form";
+
+import { useAppDispatch, useAppSelector } from "../../store";
+import { startUpdateProductByBarcode } from "../../store/product";
+import { exitModal } from "../../store/modal";
+
 import { ModalLayout } from "../../layout/ModalLayout";
-import { InputText } from "../../components/inputs/InputText";
-import { InputSelect } from "../../components/inputs/InputSelect";
-import { InputNumber } from "../../components/inputs/InputNumber";
+import { InputText, InputNumber, InputSelect } from "../../components";
+
+import { FormUpdateProduct } from "../../../Types";
 
 export const ModalUpdateProduct = () => {
     const dispatch = useAppDispatch();

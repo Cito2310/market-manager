@@ -1,10 +1,7 @@
-import { TopButtons } from "../../components/TopButtons";
-import { setModalProduct } from "../../store/modal/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import { CardProduct } from "../components/CardProduct";
-import { ModalCreateProduct } from "../components/ModalCreateProduct";
-import { ModalDeleteProduct } from "../components/ModalDeleteProduct";
-import { ModalUpdateProduct } from "../components/ModalUpdateProduct";
+import { setModalProduct } from "../../store/modal";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { TopButtons } from "../../components";
+import { ModalCreateProduct, ModalDeleteProduct, ModalUpdateProduct, CardProduct } from "../components";
 
 export const ProductPage = () => {
     const { products } = useAppSelector( state => state.product );

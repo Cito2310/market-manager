@@ -1,7 +1,7 @@
-import { fetchApi } from "../../helpers/fetchApi";
-import { AppDispatch, RootState, useAppSelector } from "../store";
+import { fetchApi } from "../../helpers";
+import { AppDispatch, RootState } from "../store";
 import { stopLoading, initLoading, setProducts, createProducts, deleteProductsByBarcode, setOnline } from "./productSlice";
-import { FormCreateProduct, FormUpdateProduct } from '../../../Types/formData';
+import { FormCreateProduct, FormUpdateProduct } from '../../../Types';
 
 export const startCreateProduct = ( formData: FormCreateProduct ) => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {

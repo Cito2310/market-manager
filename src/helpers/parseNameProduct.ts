@@ -1,4 +1,4 @@
-import { Product } from "../../Types/product";
+import { Product } from "../../Types";
 
 export const parseNameProduct = (product: Product): string => {
     const { brand, name, size, sizeUnit, subcategory, type } = product;

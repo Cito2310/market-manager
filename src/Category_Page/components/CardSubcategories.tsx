@@ -1,7 +1,6 @@
 import { UseFieldArrayRemove, UseFormReturn, useFieldArray } from "react-hook-form"
-import { ButtonSvg } from "../../components/ButtonSvg";
-import { FormCategory } from "../../../Types/formData"
-import { Category } from "../../../Types/category";
+import { ButtonSvg } from "../../components";
+import { Category, FormCategory } from "../../../Types";
 
 interface props {
     methods: UseFormReturn<FormCategory, any>;

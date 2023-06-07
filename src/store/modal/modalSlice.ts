@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Product } from '../../../Types/product';
+import { Product } from '../../../Types';
 
 export type ModalsCategory = "createCategory";
 export type ModalsProduct = "createProduct" | "updateProduct" | "deleteProduct";

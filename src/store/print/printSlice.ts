@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ProductInCart } from '../../../Types/ProductInCart';
+import { ProductInCart } from '../../../Types';
 
 interface printState {
     isActive: boolean;

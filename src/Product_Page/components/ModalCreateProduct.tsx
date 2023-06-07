@@ -1,13 +1,14 @@
-import { useForm } from "react-hook-form";
-import { ModalLayout } from "../../layout/ModalLayout"
-import { exitModal } from "../../store/modal/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../store/store"
-import { FormCreateProduct } from "../../../Types/formData";
 import { useMemo } from "react";
-import { InputText } from "../../components/inputs/InputText";
-import { InputNumber } from "../../components/inputs/InputNumber";
-import { InputSelect } from "../../components/inputs/InputSelect";
-import { startCreateProduct } from "../../store/product/thunks";
+import { useForm } from "react-hook-form";
+
+import { exitModal } from "../../store/modal";
+import { useAppDispatch, useAppSelector } from "../../store"
+import { startCreateProduct } from "../../store/product";
+
+import { ModalLayout } from "../../layout/ModalLayout"
+import { InputText, InputNumber, InputSelect } from "../../components";
+
+import { FormCreateProduct } from "../../../Types";
 
 const initalFormProduct: FormCreateProduct = {
     barcode: "",

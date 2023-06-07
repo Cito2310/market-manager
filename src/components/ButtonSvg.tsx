@@ -1,4 +1,4 @@
-import { SVGElements, Svg } from "./Svg";
+import { SVGElements, Svg } from "./";
 
 interface props {
     className: string;
