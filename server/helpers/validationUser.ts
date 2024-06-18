@@ -1,6 +1,6 @@
 import bcryptjs from 'bcryptjs';
 
-import { User } from '../users_api/userModels';
+import { User } from '../apis/user/userModels';
 import { CustomValidator } from 'express-validator';
 
 // check username exist
@@ -9,21 +9,6 @@ export const usernameExist: CustomValidator = async ( value: string ) => {
     if ( user ) throw new Error;
 
     return true
-}
-
-// check username exist
-export const emailExist: CustomValidator = async ( value: string ) => {
-    const user = await User.findOne({ email: value })
-    if ( user ) throw new Error;
-
-    return true
-}
-
-// check email is equal to req.user.email
-export const emailEqual: CustomValidator = async ( value: string, { req } ) => {
-    if ( value === req.user.email ) throw new Error;
-
-    return true;
 }
 
 // check password is equal to req.user.password

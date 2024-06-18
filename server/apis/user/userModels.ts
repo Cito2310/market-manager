@@ -1,9 +1,8 @@
 import { model, Schema } from "mongoose";
-import { IUserMongo } from '../types/TypesMoongose';
+import { IUserMongo } from "../../types/User";
 
 
 const userSchema = new Schema<IUserMongo>({
-    email: {type: String, required: true, lowercase: true},
     password: {type: String, required: true},
     username: {type: String, required: true},
 })

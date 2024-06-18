@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { User } from '../users_api/userModels';
+import { User } from '../apis/user/userModels';
 
 import { NextFunction, Request, Response } from 'express';
 import { Types } from 'mongoose';

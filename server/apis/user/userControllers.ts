@@ -3,16 +3,15 @@ import bcryptjs from "bcryptjs";
 
 import { User } from "./userModels";
 
-import { generatorJWT } from '../helpers/generatorJWT';
+import { generatorJWT } from '../../helpers/generatorJWT';
 
-import { IBodyUser, IBodyChangeDataUser, IBodyLogin } from '../types/InputBodyTypes';
-
+import { IBodyCreateUser, IBodyLogin } from './../../types/User';
 
 
 // Create User
 export const createUser = async (req: Request, res: Response) => {
     try {
-        const { _id, ...userData } = req.body as IBodyUser;
+        const { _id, ...userData } = req.body as IBodyCreateUser;
     
         // encrypt password
         const salt = bcryptjs.genSaltSync();
@@ -28,53 +27,6 @@ export const createUser = async (req: Request, res: Response) => {
         // return new user
         return res.json({ user: newUser, token });
         
-
-    } catch (error) { return res.status(500).json({ msg: "1500 - unexpected server error" })}
-}
-
-
-// ChangeDataUser - Need Token
-export const changeDataUser = async (req: Request, res: Response) => {
-    try {
-        const { _id: id, ...newData } = req.body as IBodyChangeDataUser;
-        const { _id } = req.user;
-
-        // change password && encrypt password
-        if ( newData.password ) {
-            const salt = bcryptjs.genSaltSync()
-            newData.password = bcryptjs.hashSync(newData.password, salt)
-        }
-
-        // find user and update
-        const userChanged = await User.findByIdAndUpdate( _id, newData );
-
-        // save user data
-        await userChanged?.save();
-
-        // return
-        return res.status(204).json()
-
-
-    } catch (error) { return res.status(500).json({ msg: "1500 - unexpected server error" })}
-}
-
-
-// Get User - Need Token
-export const getUser = async (req: Request, res: Response) => {
-    try {
-        return res.status(200).json(req.user);
-
-
-    } catch (error) { return res.status(500).json({ msg: "1500 - unexpected server error" })}
-}
-
-
-// Delete User - Need Token
-export const deleteUser = async (req: Request, res: Response) => {
-    try {
-        await User.findByIdAndDelete(req.user._id);
-        return res.status(204).json();
-
 
     } catch (error) { return res.status(500).json({ msg: "1500 - unexpected server error" })}
 }

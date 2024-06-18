@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import { dbConnection } from './database/config';
-import { routeUser } from './users_api/userRoutes';
+import { routeUser } from './apis/user/userRoutes';
 
 export class Server {
     private app = express()
