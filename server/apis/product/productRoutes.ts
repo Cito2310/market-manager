@@ -12,12 +12,12 @@ import { checkFields } from '../../middlewares/checkFields';
 import { validateJWT } from '../../middlewares/validateJWT';
 import { typeValid, uniqueBarcode, unitSizeValid } from "../../helpers/validationProduct";
 
-export const routeCategory = Router();
+export const routeProduct = Router();
 
 
 
 
-routeCategory.post("/", [
+routeProduct.post("/", [
     validateJWT,
 
     check("brand").trim()
@@ -30,10 +30,10 @@ routeCategory.post("/", [
         .isString().withMessage("category not is string")
         .isLength({max: 24}).withMessage("category max length 24"),
 
-    check("subcategory").trim()
-        .notEmpty().withMessage("subcategory is required")
-        .isString().withMessage("subcategory not is string")
-        .isLength({max: 24}).withMessage("subcategory max length 24"),
+    check("subCategory").trim()
+        .notEmpty().withMessage("subCategory is required")
+        .isString().withMessage("subCategory not is string")
+        .isLength({max: 24}).withMessage("subCategory max length 24"),
 
     check("majorCategory").trim()
         .notEmpty().withMessage("majorCategory is required")
@@ -72,10 +72,10 @@ routeCategory.post("/", [
         .isNumeric().withMessage("size not is number")
         .isLength({max: 24}).withMessage("size length can only be less than 24 characters"),
 
-    check("sizeUnit").trim()
-        .notEmpty().withMessage("sizeUnit is required")
-        .isString().withMessage("sizeUnit not is string")
-        .custom( unitSizeValid ).withMessage("sizeUnit invalid [kg, g, oz, cm3, l, ml, cc, u]"),
+    check("typeSize").trim()
+        .notEmpty().withMessage("typeSize is required")
+        .isString().withMessage("typeSize not is string")
+        .custom( unitSizeValid ).withMessage("typeSize invalid [kg, g, oz, cm3, l, ml, cc, u]"),
     
     checkFields
 ], createProduct)
@@ -83,12 +83,12 @@ routeCategory.post("/", [
 
 
 
-routeCategory.get("/", getProducts)
+routeProduct.get("/", getProducts)
 
 
 
 
-routeCategory.delete("/:barcodeProduct", [
+routeProduct.delete("/:barcodeProduct", [
     validateJWT,
 
     check("barcodeProduct")
@@ -102,7 +102,7 @@ routeCategory.delete("/:barcodeProduct", [
 
 
 
-routeCategory.put("/:idCategory", [ 
+routeProduct.put("/:idCategory", [ 
     validateJWT,
 
     check("barcodeProduct")
