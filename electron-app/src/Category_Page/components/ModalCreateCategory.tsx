@@ -3,6 +3,7 @@ import { ModalLayout } from "../../layout/ModalLayout"
 import { useAppDispatch } from "../../store";
 import { exitModal } from "../../store/modal";
 import { startCreateCategory } from "../../store/category";
+import { InputSelect, InputText } from "../../components";
 
 
 export const ModalCreateCategory = () => {
@@ -26,10 +27,21 @@ export const ModalCreateCategory = () => {
                 { color:"primary", label:"Crear", type:"submit" },
             ]}
         >
-                <input { ...register("name", { required: true }) }
-                    className="rounded px-2 p-1 border mt-1 w-full"
+            <div className="flex flex-col gap-2">
+                <InputText
+                    label="Nombre"
+                    register={register("name", { required: true })}
                     placeholder="Nueva categoria"
                 />
+
+
+                <InputSelect 
+                    label="Categoria Principal"
+                    register={register("type", { required: true })}
+                    options={["almacen", "limpieza", "perfumeria", "lacteos", "bebidas", "congelados", "bazar", "polleria", "fiambreria"]}
+                    className="capitalize"
+                />
+            </div>
         </ModalLayout>
     )
 }

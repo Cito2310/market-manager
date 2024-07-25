@@ -5,7 +5,8 @@ import { useAppDispatch } from "../../store";
 import { startDeleteCategoryById, startUpdateCategoryById } from "../../store/category";
 
 import { Button } from "../../components";
-import { CardSubcategories, CardCategoryTop } from "./";
+import { CardCategoryTop } from './CardCategoryTop';
+import { CardSubcategories } from './CardSubcategories';
 
 import { categoryToFormCategory } from "../../helpers";
 

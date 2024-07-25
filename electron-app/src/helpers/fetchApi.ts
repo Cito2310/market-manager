@@ -1,3 +1,5 @@
+import { VARIABLES } from '../VARIABLES';
+
 import axios from 'axios';
 interface props {
     method: "get" | "put" | "delete" | "post";
@@ -7,7 +9,7 @@ interface props {
 }
 
 export const fetchApi = async({ method, path, body, token }: props) => {
-    const baseUrl = "https://market-product-rest.onrender.com/";
+    const { baseUrl } = VARIABLES;
 
     const { data } = await axios({
         method: method,

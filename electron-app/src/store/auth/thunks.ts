@@ -6,6 +6,7 @@ export const startLogin = ( username: string, password: string ) => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
         
         dispatch( initLoading() );
+        
         const { token } = await fetchApi({
             method: "post",
             path: "api/user/login",

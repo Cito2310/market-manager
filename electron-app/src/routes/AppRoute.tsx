@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 
 import { CashRegisterPage } from "../CashRegister_Page"
-import { CategoryPage } from "../Category_Page"
+import { CategoryPage } from "../Category_Page/CategoryPage"
 import { ProductPage } from "../Product_Page"
 import { LoginPage } from "../Login_Page"
 
