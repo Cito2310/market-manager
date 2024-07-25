@@ -73,7 +73,6 @@ routeCategory.put("/:idCategory", [
     check("name").trim().optional()
         .isString().withMessage("name not is string")
         .isLength({max: 24}).withMessage("name max length 24")
-        .custom( notExistCategory ).withMessage("already exist category")
     ,
 
     check("type").trim().optional()
