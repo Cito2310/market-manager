@@ -1,14 +1,16 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
-
-import { ipConnection } from './ipcConnection';
+import { ipcConnections } from './ipcConnection';
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    // width: 800,
+    // height: 600,
+    // fullscreen: true,
+    // fullscreenable: true,
     webPreferences: {
       // contextIsolation: false,
+      // sandbox: false,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -19,7 +21,8 @@ function createWindow() {
   } else {
     win.loadURL('http://localhost:3000/index.html');
 
-    win.webContents.openDevTools();
+    win.maximize()
+    // win.webContents.openDevTools();
   }
 }
 
@@ -37,6 +40,7 @@ app.whenReady().then(() => {
       app.quit();
     }
   });
+  
+  ipcConnections();
 
-  ipConnection();
 });

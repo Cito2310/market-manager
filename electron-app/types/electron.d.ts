@@ -1,10 +1,12 @@
+import { Ticket, Product } from './';
+
 declare global {
     interface Window {
         electronAPI: {
-            basicOnIpc: ( value: string ) => unknown,
-            basicHandleIpc: ( value: string ) => unknown,
+            saveDataProduct: ( products: Product[] ) => Promise<void>,
+            getDataProductsOffline: () => Promise<Product[]>,
+            printPage: () => Promise<void>,
+            saveTicket: ( ticketData: Ticket ) => Promise<void>
         }
     }
 }
-
-export {}

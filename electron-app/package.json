@@ -1,7 +1,7 @@
 {
   "homepage": "./",
-  "name": "electron-react-template",
-  "version": "1.1.2",
+  "name": "market-manager",
+  "version": "3.13.3",
   "author": "",
   "description": "",
   "keywords": [
@@ -14,12 +14,16 @@
   "main": "build/electron/main.js",
   "private": true,
   "dependencies": {
-    "@types/node": "^18.17.5",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
+    "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1"
+    "react-hook-form": "^7.43.9",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.9.0",
+    "react-scripts": "^5.0.1",
+    "sass": "^1.58.1",
+    "uuid": "^9.0.0"
   },
   "scripts": {
     "dev": "concurrently \"cross-env BROWSER=none react-scripts start\" \"wait-on http://127.0.0.1:3000 && tsc -p electron -w\" \"wait-on http://127.0.0.1:3000 && tsc -p electron && electron .\"",
@@ -38,10 +42,17 @@
     }
   },
   "devDependencies": {
+    "@types/node": "^18.13.0",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/uuid": "^9.0.1",
+    "autoprefixer": "^10.4.14",
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
-    "electron": "^22.3.21",
+    "electron": "^22.2.0",
     "electron-builder": "^23.6.0",
+    "postcss-loader": "^7.3.1",
+    "tailwindcss": "^3.3.2",
     "typescript": "^4.9.5",
     "wait-on": "^7.0.1"
   },

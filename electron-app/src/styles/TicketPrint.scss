@@ -1,0 +1,31 @@
+.ticket-print {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.6em;
+    gap: 2px;
+    overflow-wrap: break-word;
+     
+    .product-item {
+        align-items: center;
+        border-bottom: 1px #a0a0a0 solid;
+        display: grid;
+        grid-template-columns: 3fr 1fr 2fr;
+        margin-top: 4px;
+
+        &.top {
+            font-weight: 700;
+            border-top: 1px #a0a0a0 solid;
+        }
+    }
+        
+    .center { text-align: center }
+    .column { display: flex; flex-direction: column }
+    .fw-700 { font-weight: 700 }
+    .txt-total { text-align: right; font-size: 1.2em; font-weight: 700; margin-top: 8px }
+    h1 { font-size: 1.5em; font-weight: 800 }
+        
+    @media print { margin: 0mm }
+}
+
+@media print { body {margin: 0mm} }
+@page { margin: 0mm }

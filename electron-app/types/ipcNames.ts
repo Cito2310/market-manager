@@ -1,3 +1,1 @@
-export type ipcNames = 
-    "basic-on-ipc" |
-    "basic-handle-ipc" 
+export type ipcNames = "save-data-products" | "get-data-products-offline" | "print-page" | "save-ticket";
