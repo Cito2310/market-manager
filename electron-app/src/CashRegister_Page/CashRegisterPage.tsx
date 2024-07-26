@@ -1,33 +1,10 @@
-import { useMemo } from "react";
-
-import { useAppDispatch, useAppSelector } from "../store/";
-import { setPrint } from "../store/print";
-import { resetCart } from "../store/cashRegister";
-import { exitModal, setModalCashRegister } from "../store/modal";
-
 import { Sidebar, TopItem, ItemProductCart, ModalNotFoundProduct, ModalResetCart } from "./components";
-import { useDetectBarcode, useKeyUp } from "../hooks";
 import { parseNumber } from "../helpers";
+import { useCashRegister } from "./hooks/useCashRegister";
 
 
 export const CashRegisterPage = () => {
-    const dispatch = useAppDispatch();
-    const currentModal = useAppSelector( state => state.modal.current )
-    const onExitModal = () => { dispatch( exitModal() ) };
-
-    const currentKeypress = useKeyUp();
-
-    const { productsCart } = useAppSelector( state => state.cashRegister );
-    const { barcode } = useDetectBarcode( currentKeypress );
-
-    const totalSum = useMemo( () => productsCart.reduce((prev, curr) => prev + curr.price * curr.amount, 0), [ productsCart ] )
-
-    const onResetCart = () => { dispatch( resetCart() ); onExitModal() };
-    const onModalReset = () => { dispatch( setModalCashRegister("resetCart") ) };
-    const onPrint = () => { 
-        dispatch( setPrint( productsCart )); 
-        dispatch( resetCart() );
-    };
+    const { barcode, currentModal, onExitModal, onModalReset, onPrint, onResetCart, productsCart, totalSum } = useCashRegister()
 
     return (
         <>

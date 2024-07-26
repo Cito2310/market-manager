@@ -1,16 +1,12 @@
-import { useState } from 'react';
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-
-import { useAppDispatch } from "../../store";
-import { startDeleteCategoryById, startUpdateCategoryById } from "../../store/category";
+import { FormProvider } from "react-hook-form";
 
 import { Button } from "../../components";
 import { CardCategoryTop } from './CardCategoryTop';
 import { CardSubcategories } from './CardSubcategories';
 
-import { categoryToFormCategory } from "../../helpers";
 
-import { Category, FormCategory } from "../../../Types";
+import { Category } from "../../../Types";
+import { useCardCategory } from '../hooks/useCardCategory';
 
 
 
@@ -24,25 +20,7 @@ interface props {
 
 
 export const CardCategory = ({ category }: props) => {
-    const dispatch = useAppDispatch()
-
-    const methods = useForm<FormCategory>({ defaultValues: categoryToFormCategory( category ) });
-    const { control, handleSubmit, reset } = methods;
-    const { append, fields, remove } = useFieldArray({ control, name: "subcategories" });
-
-    const [isEditing, setIsEditing] = useState(false);
-    const toggleEditing = () => {
-        setIsEditing(!isEditing); 
-        reset(categoryToFormCategory( category ));
-    };
-
-    const onSubmit = async( data: FormCategory ) => { 
-        await dispatch( startUpdateCategoryById( category._id, data ) );
-        setIsEditing( false ); 
-    };
-
-    const onRemoveCategory = async() => { await dispatch( startDeleteCategoryById( category._id ) )}
-    const onAppendSubcategory = () => append({ brands: [], name: "" }); 
+    const { handleSubmit, methods, onSubmit, isEditing, toggleEditing, onAppendSubcategory, onRemoveCategory, remove, fields } = useCardCategory( category );
 
 
     return (

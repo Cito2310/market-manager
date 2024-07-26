@@ -1,17 +1,9 @@
-import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../store";
-import { startLogin } from "../store/auth";
 import { ModalLayout } from "../layout/ModalLayout";
 import { InputText } from "../components";
+import { useLogin } from "./hooks/useLogin";
 
 export const LoginPage = () => {
-    const { register, getValues, handleSubmit } = useForm();
-    const { hasError, isLoading } = useAppSelector(state => state.auth.status);
-    const dispatch = useAppDispatch();
-
-    const submit = () => {
-        dispatch( startLogin( getValues("username"), getValues("password") ) )
-    }
+    const { handleSubmit, hasError, isLoading, submit, register } = useLogin()
 
     return (
         <div className="h-full">

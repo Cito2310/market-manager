@@ -36,8 +36,8 @@ export const PrintTicket = () => {
         <div className='bg-white fixed z-50 ticket-print w-[175px]'>
             <div className='column'>
                 <h1 className='center'>MERCADITO ALE</h1>
-                <p>Mz44 Pc4 444Vv Fontana Chaco</p>
-                <p>Fecha de emision: {ticketToPrint.date}</p>
+                <p>Dirección: San Martin y Tuyu</p>
+                <p>Fecha de emisión: {ticketToPrint.date}</p>
                 <p>ID Ticket: {ticketToPrint.idTicket}</p>
             </div>
 

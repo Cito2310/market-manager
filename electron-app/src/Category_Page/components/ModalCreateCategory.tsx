@@ -1,21 +1,10 @@
-import { useForm } from "react-hook-form"
 import { ModalLayout } from "../../layout/ModalLayout"
-import { useAppDispatch } from "../../store";
-import { exitModal } from "../../store/modal";
-import { startCreateCategory } from "../../store/category";
 import { InputSelect, InputText } from "../../components";
+import { useCreateCategory } from "../hooks/useCreateCategory";
 
 
 export const ModalCreateCategory = () => {
-    const dispatch = useAppDispatch();
-    const { register, handleSubmit } = useForm();
-
-    const onSubmit = async(data: any) => {
-        await dispatch( startCreateCategory( data ) );
-        onExit()
-    }
-
-    const onExit = () => dispatch( exitModal() );
+    const { handleSubmit, onExit, onSubmit, register } = useCreateCategory();
 
     return (
         <ModalLayout
