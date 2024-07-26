@@ -11,7 +11,7 @@ interface props {
 export const InputSelect = ({ register, label, className, options, emptyField }: props) => {
     return (
 
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
 
             { label && <label className="font-medium ml-1 mb-0.5">{ label }</label> }
 

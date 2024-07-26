@@ -51,6 +51,7 @@ export const PrintTicket = () => {
                 {
                     productsToPrint.map((product , index) => 
                         <li key={index} className='product-item'>
+                    {/* @ts-ignore */}
                             <p className="capitalize">{ parseNameProduct( product ) }</p>
                             <p className='text-center'>{ product.type === "weight" ? product.amount+"Kg" : product.amount}</p>
                             <p className='text-center'>$ { parseNumber( product.price * product.amount ) }</p>

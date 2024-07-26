@@ -10,7 +10,7 @@ interface props {
 export const CardProduct = ({ product }: props) => {
     const dispatch = useAppDispatch();
 
-    const { barcode, brand, category, name, price, size, sizeUnit, subcategory, type } = product;
+    const { barcode, brand, category, name, price, size, typeSize, subCategory, type } = product;
 
     const onDelete = () => {
         dispatch( selectProduct( product ) );
@@ -25,7 +25,7 @@ export const CardProduct = ({ product }: props) => {
     return (
         <div className="bg-card_bg p-3 shadow-md rounded-md text-txt-black min-w-[400px] flex-1">
             <div className="flex justify-between gap-3">
-                <h2 className="uppercase text-lg font-Montserrat font-medium text-black">{`${brand} ${subcategory} ${name} ${size}${sizeUnit}`}</h2>
+                <h2 className="uppercase text-lg font-Montserrat font-medium text-black">{`${brand} ${name} ${size}${typeSize}`}</h2>
 
                 <div className="flex gap-2">
                     <ButtonSvg element="trash" onClick={onDelete} className="bg-card_btn text-card_btnText w-7"/>
@@ -35,7 +35,7 @@ export const CardProduct = ({ product }: props) => {
 
             <div className="flex justify-between mt-1 items-end">
                 <div>
-                    <p className="capitalize font-Montserrat font-medium">{ category }</p>
+                    <p className="capitalize font-Montserrat font-medium">{ category + " " + subCategory }</p>
                     <p className="font-Montserrat font-medium text-sm">{`${barcode} ${type}`}</p>
                 </div>
 

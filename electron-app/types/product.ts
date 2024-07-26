@@ -1,3 +1,5 @@
+import { TypeCategory } from "./category";
+
 export interface Product {
     barcode: string;
     brand: string;
@@ -5,7 +7,15 @@ export interface Product {
     name: string;
     price: number;
     size: number;
-    sizeUnit: "kg" | "g" | "oz" | "cm3" | "l" | "ml" | "cc" | "u";
-    subcategory: string;
+    typeSize: "kg" | "g" | "oz" | "cm3" | "l" | "ml" | "cc" | "u";
+    subCategory: string;
     type: "weight" | "unit";
+    majorCategory: TypeCategory
+}
+
+
+// ProductInType
+export interface ProductInType {
+    name: string;
+    products: Product[];
 }

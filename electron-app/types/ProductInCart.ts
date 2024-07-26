@@ -5,8 +5,8 @@ export interface ProductInCart {
     name: string;
     price: number;
     size: number;
-    sizeUnit: "kg" | "g" | "oz" | "cm3" | "l" | "ml" | "cc" | "u";
-    subcategory: string;
+    typeSize: "kg" | "g" | "oz" | "cm3" | "l" | "ml" | "cc" | "u";
+    subCategory: string;
     type: "weight" | "unit";
     amount: number;
 }

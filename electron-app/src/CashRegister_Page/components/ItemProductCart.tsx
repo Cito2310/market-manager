@@ -12,7 +12,7 @@ interface props {
 
 
 export const ItemProductCart = ({ productCart, index }: props) => {
-    const { amount, barcode, brand, category, name, price, size, sizeUnit, subcategory, type } = productCart;
+    const { amount, barcode, brand, category, name, price, size, typeSize, subCategory, type } = productCart;
     const isPair = index % 2 === 0;
 
     const dispatch = useAppDispatch();
@@ -25,6 +25,7 @@ export const ItemProductCart = ({ productCart, index }: props) => {
                 grid grid-cols-[1fr_7em_7em_7em_1.6em] px-3 py-1 items-center 
                 ${ isPair && "bg-[#f0f0f0]" }`
                 }>
+                    {/* @ts-ignore */}
             <p className="capitalize">{ parseNameProduct( productCart ) }</p>
             {
                 type === "weight" 
