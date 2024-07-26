@@ -4,7 +4,7 @@ import { Svg } from "../components/Svg"
 
 interface props {
     buttons?: ButtonProps[],
-    children: JSX.Element | JSX.Element[],
+    children?: JSX.Element | JSX.Element[],
     onExit?: () => void,
     onSubmit?: ( event: React.FormEvent<HTMLFormElement> ) => void,
     title: string,

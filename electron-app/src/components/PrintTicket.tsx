@@ -33,7 +33,7 @@ export const PrintTicket = () => {
     
 
     return (
-        <div className='bg-white fixed z-50 ticket-print'>
+        <div className='bg-white fixed z-50 ticket-print w-[175px]'>
             <div className='column'>
                 <h1 className='center'>MERCADITO ALE</h1>
                 <p>Mz44 Pc4 444Vv Fontana Chaco</p>

@@ -156,10 +156,10 @@ routeProduct.put("/:idCategory", [
         .isNumeric().withMessage("size not is number")
         .isLength({max: 24}).withMessage("size length can only be less than 24 characters"),
 
-    check("sizeUnit").trim().optional()
-        .notEmpty().withMessage("sizeUnit is required")
-        .isString().withMessage("sizeUnit not is string")
-        .custom( unitSizeValid ).withMessage("sizeUnit invalid [kg, g, oz, cm3, l, ml, cc, u]"),
+    check("typeSize").trim().optional()
+        .notEmpty().withMessage("typeSize is required")
+        .isString().withMessage("typeSize not is string")
+        .custom( unitSizeValid ).withMessage("typeSize invalid [kg, g, oz, cm3, l, ml, cc, u]"),
     
 
     checkFields
