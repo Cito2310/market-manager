@@ -26,6 +26,7 @@ const initalFormProduct: FormCreateProduct = {
 export const ModalCreateProduct = () => {
     const dispatch = useAppDispatch();
     const { data: dataCategory } = useAppSelector( state => state.category );
+    const { hasError } = useAppSelector(state => state.product.status)
 
     const onExit = () => dispatch( exitModal() );
     const onSubmit = async(data: FormCreateProduct) => {
@@ -33,7 +34,7 @@ export const ModalCreateProduct = () => {
         data.majorCategory = majorCategory;
 
         await dispatch( startCreateProduct( data ) );
-        onExit();
+        if ( hasError === false )onExit();
     };
 
     const { register, handleSubmit, getValues, watch } = useForm<FormCreateProduct>({ defaultValues: initalFormProduct });

@@ -62,16 +62,20 @@ export const startCreateCategory = (dataForm: { name: string }) => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
         
         dispatch( initLoading() );
-        const { token } = getState().auth;
 
-        const data = await fetchApi({
-            method: "post",
-            path: `api/category`,
-            token: token!,
-            body: dataForm
-        })
+        try {
+            const { token } = getState().auth;
+    
+            const data = await fetchApi({
+                method: "post",
+                path: `api/category`,
+                token: token!,
+                body: dataForm
+            })
 
-        dispatch( createCategory( data ) );
+            dispatch( createCategory( data ) );
+        } catch (error) {}
+
         dispatch( stopLoading() );
 
     };

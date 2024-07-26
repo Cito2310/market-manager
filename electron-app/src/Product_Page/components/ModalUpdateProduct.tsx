@@ -1,8 +1,8 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { useAppDispatch, useAppSelector } from "../../store";
-import { startUpdateProductByBarcode } from "../../store/product";
+import { startUpdateProductByBarcode, startCreateProduct } from "../../store/product";
 import { exitModal } from "../../store/modal";
 
 import { ModalLayout } from "../../layout/ModalLayout";
@@ -14,6 +14,7 @@ export const ModalUpdateProduct = () => {
     const dispatch = useAppDispatch();
     const { selectedProduct } = useAppSelector( state => state.modal );
     const { data: dataCategory } = useAppSelector( state => state.category );
+    const [countSubmit, setCountSubmit] = useState(0);
 
     const initialFormProduct: FormUpdateProduct = {
         brand: selectedProduct!.brand,
@@ -33,8 +34,12 @@ export const ModalUpdateProduct = () => {
         data.majorCategory = majorCategory;
 
         await dispatch( startUpdateProductByBarcode( selectedProduct!.barcode, data ) );
+
+        setCountSubmit(countSubmit + 1)
+
         onExit();
     };
+    
 
     const { register, handleSubmit, getValues, watch } = useForm<FormUpdateProduct>({ defaultValues: initialFormProduct });
     const getSubcategories = useMemo(() => dataCategory.find( category => category.name === getValues().category )?.subcategories, [ watch() ])

@@ -102,7 +102,7 @@ routeProduct.delete("/:barcodeProduct", [
 
 
 
-routeProduct.put("/:idCategory", [ 
+routeProduct.put("/:barcodeProduct", [ 
     validateJWT,
 
     check("brand").trim().optional()

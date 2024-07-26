@@ -48,8 +48,8 @@ export const productSlice = createSlice({
             state.products = state.products.filter( product => product.barcode !== action.payload )
         },
 
-        initLoading: ( state ) => { state.status.isLoading = true },
-        stopLoading: ( state ) => { state.status.isLoading = false },
+        setLoading: (state, action: {payload: boolean}) => { state.status.isLoading = action.payload },
+        setError: (state, action: {payload: boolean}) => { state.status.hasError = action.payload },
         setOnline: ( state ) => { state.status.isOnline = true },
 
     }
@@ -60,8 +60,8 @@ export const {
     deleteProductsByBarcode, 
     setProducts, 
     updateProductsByBarcode,
-    initLoading,
-    stopLoading,
     setOnline,
+    setError,
+    setLoading,
 
 } = productSlice.actions;

@@ -5,13 +5,15 @@ import { startDeleteProductByBarcode } from "../../store/product";
 
 export const ModalDeleteProduct = () => {
     const dispatch = useAppDispatch();
+    const { hasError } = useAppSelector(state => state.product.status)
     const { selectedProduct } = useAppSelector( state => state.modal );
     const onExit = () => { dispatch( exitModal() ) };
 
     const onDeleteProduct = async( event: React.FormEvent<HTMLFormElement> ) => {
         event.preventDefault();
         await dispatch( startDeleteProductByBarcode( selectedProduct!.barcode ) );
-        onExit();
+        if ( hasError === false )onExit();
+
     }
 
     return (
