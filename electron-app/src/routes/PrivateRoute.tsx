@@ -1,5 +1,5 @@
 import { useAppSelector } from "../store"
-import { LoginPage } from "../Login_Page";
+import { LoginPage } from "../Login_Page/LoginPage";
 
 interface props {
     children: JSX.Element

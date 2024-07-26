@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom"
 
-import { CashRegisterPage } from "../CashRegister_Page"
-import { CategoryPage } from "../Category_Page/CategoryPage"
+import { CashRegisterPage } from "../CashRegister_Page/CashRegisterPage"
 import { ProductPage } from "../Product_Page/ProductPage"
-import { LoginPage } from "../Login_Page"
+import { CategoryPage } from "../Category_Page/CategoryPage"
+import { LoginPage } from "../Login_Page/LoginPage"
 
 import { PrivateRoute } from "./"
 

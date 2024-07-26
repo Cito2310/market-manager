@@ -29,6 +29,7 @@ export const authSlice = createSlice({
         initLoading: ( state ) => { state.status.isLoading = true },
         stopLoading: ( state ) => { state.status.isLoading = false },
         setError: ( state ) => { state.status.hasError = true },
+        removeError: ( state ) => { state.status.hasError = false },
 
     }
 });
@@ -36,6 +37,7 @@ export const authSlice = createSlice({
 export const {
     initLoading,
     setError,
+    removeError,
     setToken,
     stopLoading
     

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 
-import { useAppDispatch, useAppSelector } from "../../store/";
-import { setPrint } from "../../store/print";
-import { resetCart } from "../../store/cashRegister";
-import { exitModal, setModalCashRegister } from "../../store/modal";
+import { useAppDispatch, useAppSelector } from "../store/";
+import { setPrint } from "../store/print";
+import { resetCart } from "../store/cashRegister";
+import { exitModal, setModalCashRegister } from "../store/modal";
 
-import { Sidebar, TopItem, ItemProductCart, ModalNotFoundProduct, ModalResetCart } from "../components";
-import { useDetectBarcode, useKeyUp } from "../../hooks";
-import { parseNumber } from "../../helpers";
+import { Sidebar, TopItem, ItemProductCart, ModalNotFoundProduct, ModalResetCart } from "./components";
+import { useDetectBarcode, useKeyUp } from "../hooks";
+import { parseNumber } from "../helpers";
 
 
 export const CashRegisterPage = () => {

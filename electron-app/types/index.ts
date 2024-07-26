@@ -1,4 +1,3 @@
-export * from "./ProductInCart";
 export * from "./category";
 export * from "./formData";
 export * from "./ipcNames";

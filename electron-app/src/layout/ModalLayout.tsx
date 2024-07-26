@@ -8,6 +8,8 @@ interface props {
     onExit?: () => void,
     onSubmit?: ( event: React.FormEvent<HTMLFormElement> ) => void,
     title: string,
+    hasError?: boolean,
+    msgError?: string,
 }
 
 export const ModalLayout = ({
@@ -15,7 +17,9 @@ export const ModalLayout = ({
     title,
     buttons,
     onExit,
-    onSubmit
+    onSubmit,
+    hasError,
+    msgError
 
 }: props) => {
     return (
@@ -37,10 +41,13 @@ export const ModalLayout = ({
 
                     { children }
 
-                    <div className="flex gap-3 mt-3 justify-end">
-                        {
-                            buttons?.map( (buttonProps, index) => <Button key={index} {...buttonProps} /> )
-                        }
+                    <div className="mt-3">
+                        <div className="flex gap-3 justify-end">
+                            {
+                                buttons?.map( (buttonProps, index) => <Button key={index} {...buttonProps} /> )
+                            }
+                        </div>
+                        {hasError && <p className="text-red-600">Hubo un error !{msgError && ` - ${msgError}`}</p>} 
                     </div>
 
                 </form>

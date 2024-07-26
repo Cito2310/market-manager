@@ -4,13 +4,13 @@ export interface Product {
     barcode: string;
     brand: string;
     category: string;
+    majorCategory: TypeCategory
     name: string;
     price: number;
     size: number;
-    typeSize: "kg" | "g" | "oz" | "cm3" | "l" | "ml" | "cc" | "u";
     subCategory: string;
     type: "weight" | "unit";
-    majorCategory: TypeCategory
+    typeSize: "kg" | "g" | "oz" | "cm3" | "l" | "ml" | "cc" | "u";
 }
 
 
@@ -18,4 +18,10 @@ export interface Product {
 export interface ProductInType {
     name: string;
     products: Product[];
+}
+
+
+// ProductInCart
+export interface ProductInCart extends Product {
+    amount: number;
 }
