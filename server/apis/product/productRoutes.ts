@@ -105,13 +105,6 @@ routeProduct.delete("/:barcodeProduct", [
 routeProduct.put("/:idCategory", [ 
     validateJWT,
 
-    check("barcodeProduct")
-        .isString().withMessage("barcode not is string")
-        .isLength({max: 20}).withMessage("barcode max length 20")
-        .not().custom( uniqueBarcode ).withMessage("barcode not exist"),
-
-
-
     check("brand").trim().optional()
         .notEmpty().withMessage("brand is required")
         .isString().withMessage("brand not is string")
