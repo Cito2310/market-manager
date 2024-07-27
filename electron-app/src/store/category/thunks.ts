@@ -1,7 +1,8 @@
 import { FormCategory } from "../../../Types";
 import { deleteCategoryById, initLoading, setCategories, stopLoading, updateCategory, createCategory } from "./categorySlice";
-import { fetchApi, formCategoryToCategory } from "../../helpers";
+import { fetchApi } from "../../helpers";
 import { AppDispatch, RootState } from "../store";
+import { formCategoryToCategory } from "../../Category_Page/helpers/formCategoryParse";
 
 export const startGetCategories = () => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
@@ -27,15 +28,18 @@ export const startUpdateCategoryById = ( id: string, dataForm: FormCategory ) =>
         const { token } = getState().auth;
         const parseData = formCategoryToCategory( dataForm );
 
-        const data = await fetchApi({
-            method: "put",
-            path: `api/category/${ id }`,
-            token: token!,
-            body: parseData,
-        })
+        try {
+            const data = await fetchApi({
+                method: "put",
+                path: `api/category/${ id }`,
+                token: token!,
+                body: parseData,
+            })
+            
+            dispatch( updateCategory( data ) );
+        } catch (error) { console.log(error) }
 
         dispatch( stopLoading() );
-        dispatch( updateCategory( data ) );
     };
 };
 
@@ -46,14 +50,17 @@ export const startDeleteCategoryById = ( id:string ) => {
 
         const { token } = getState().auth;
 
-        await fetchApi({
-            method: "delete",
-            path: `api/category/${ id }`,
-            token: token!,
-        });
+        try {
+            await fetchApi({
+                method: "delete",
+                path: `api/category/${ id }`,
+                token: token!,
+            });
+            
+            dispatch( deleteCategoryById( id ) );
+        } catch (error) { console.log(error) }
 
         dispatch( stopLoading() );
-        dispatch( deleteCategoryById( id ) );
 
     };
 };
@@ -74,7 +81,7 @@ export const startCreateCategory = (dataForm: { name: string }) => {
             })
 
             dispatch( createCategory( data ) );
-        } catch (error) {}
+        } catch (error) { console.log(error) }
 
         dispatch( stopLoading() );
 

@@ -1,9 +1,9 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { useAppDispatch } from "../../store";
 import { Category, FormCategory } from "../../../Types";
-import { categoryToFormCategory } from "../../helpers";
 import { useState } from "react";
 import { startDeleteCategoryById, startUpdateCategoryById } from "../../store/category";
+import { categoryToFormCategory } from "../helpers/formCategoryParse";
 
 export const useCardCategory = ( category: Category ) => {
     const dispatch = useAppDispatch()

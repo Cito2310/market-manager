@@ -82,7 +82,6 @@ routeCategory.put("/:idCategory", [
     ,
 
     check("subcategories").optional()
-        .isArray({min: 1}).withMessage("subcategories need array with min one subcategory")
         .custom( arrayOnlySubcategories ).withMessage("subcategories content item not object valid")
     ,
 

@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form"
-import { ButtonSvg } from "../../components"
+import { ButtonSvg, InputSelect } from "../../components"
 import { Category } from "../../../Types"
 
 interface props {
@@ -20,6 +20,12 @@ export const CardCategoryTop = ({ category, isEditing, toggleEditing, onRemoveCa
                 placeholder="Categoria"
                 className="uppercase text-2xl font-semibold font-Montserrat ml-1 w-full focus:outline-none"
             /> 
+
+            <InputSelect 
+                register={register("type")}
+                options={["almacen", "limpieza", "perfumeria", "lacteos", "bebidas", "congelados", "bazar", "polleria", "fiambreria"]}
+                className="capitalize"
+            />
 
             <div className="flex gap-2">
                 <ButtonSvg element="trash" onClick={ onRemoveCategory } className="w-8 text-lg bg-card_bg text-card_btnText" />
