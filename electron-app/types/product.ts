@@ -13,15 +13,13 @@ export interface Product {
     typeSize: "kg" | "g" | "oz" | "cm3" | "l" | "ml" | "cc" | "u";
 }
 
+// ProductInCart
+export interface ProductInCart extends Product {
+    amount: number;
+}
 
 // ProductInType
 export interface ProductInType {
     name: string;
-    products: Product[];
-}
-
-
-// ProductInCart
-export interface ProductInCart extends Product {
-    amount: number;
+    products: Product[]
 }

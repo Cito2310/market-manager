@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from "../store";
 import { TopButtons } from "../components";
 import { ModalCreateProduct, ModalDeleteProduct, ModalUpdateProduct, CardProduct } from "./components";
 import { ProductInType } from "../../Types";
+import { getProductInType } from "./helpers/getProductInType";
+import { sortProduct } from "./helpers/sortProduct";
 
 export const ProductPage = () => {
     const { products } = useAppSelector( state => state.product );
@@ -19,20 +21,7 @@ export const ProductPage = () => {
                     {element: "plus", onClick: onSetModalCreateProduct},
                 ]}
             />
-            { products
-            .reduce((prev, curr): ProductInType[]=>{
-                let copyPrev = structuredClone(prev);
-                const existType = copyPrev.find(v => v.name === curr.majorCategory)
-                const existIndex = copyPrev.findIndex(v => v.name === curr.majorCategory)
-
-                if (existType) { copyPrev[existIndex].products.push(curr) }
-                if (!existType) { copyPrev.push({ name: curr.majorCategory, products: [ curr ] }) }
-
-                return copyPrev;
-
-
-            }, [] as ProductInType[] )
-            .map( majorCategory => 
+            { getProductInType( sortProduct(products) ).map( majorCategory => 
                 <section key={majorCategory.name} className="">
                     <h2 className="uppercase font-Montserrat font-bold text-[1.8em] ml-1" >{majorCategory.name}</h2>
                     <div className="flex flex-wrap gap-5">
