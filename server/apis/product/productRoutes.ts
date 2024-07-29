@@ -52,7 +52,7 @@ routeProduct.post("/", [
     check("name").trim()
         .notEmpty().withMessage("name is required")
         .isString().withMessage("name not is string")
-        .isLength({max: 48}).withMessage("name max length 48"),
+        .isLength({max: 100}).withMessage("name max length 100"),
 
     check("price").trim()
         .notEmpty().withMessage("price is required")
@@ -130,7 +130,7 @@ routeProduct.put("/:barcodeProduct", [
     check("name").trim().optional()
         .notEmpty().withMessage("name is required")
         .isString().withMessage("name not is string")
-        .isLength({max: 48}).withMessage("name max length 48"),
+        .isLength({max: 100}).withMessage("name max length 100"),
 
     check("price").trim().optional()
         .notEmpty().withMessage("price is required")
