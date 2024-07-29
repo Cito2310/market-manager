@@ -73,7 +73,7 @@ export const updateCategoryByBarcode = async( req: Request, res: Response ) => {
 
         const { __V, _id, ...updateProductData } = req.body as IBodyUpdateProduct;
         
-        const product = await Product.findOneAndUpdate({ barcode: barcodeProduct }, updateProductData, {  });
+        const product = await Product.findOneAndUpdate({ barcode: barcodeProduct }, updateProductData, { new: true });
 
         return res.status(200).json(product);
 
