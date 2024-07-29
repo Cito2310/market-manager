@@ -39,9 +39,9 @@ export const productSlice = createSlice({
         },
 
         updateProductsByBarcode: ( state, action: { payload: { barcode: string, productUpdate: Product } } ) => {
-            state.products = state.products.map( product => 
-                ( product.barcode === action.payload.barcode ) ? action.payload.productUpdate : product
-            )
+            const findProductIndex = state.products.findIndex( product => product.barcode === action.payload.barcode );
+
+            if (findProductIndex !== -1) state.products[findProductIndex] = action.payload.productUpdate;
         },
 
         deleteProductsByBarcode: ( state, action: { payload: string } ) => {

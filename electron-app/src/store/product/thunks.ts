@@ -1,7 +1,7 @@
 import { fetchApi } from "../../helpers";
 import { AppDispatch, RootState } from "../store";
-import { setProducts, createProducts, deleteProductsByBarcode, setOnline, setError, setLoading  } from "./productSlice";
-import { FormCreateProduct, FormUpdateProduct } from '../../../Types';
+import { setProducts, createProducts, deleteProductsByBarcode, setOnline, setError, setLoading, updateProductsByBarcode  } from "./productSlice";
+import { FormCreateProduct, FormUpdateProduct, Product } from '../../../Types';
 
 export const startCreateProduct = ( formData: FormCreateProduct ) => {
     return async( dispatch: AppDispatch, getState: () => RootState ) => {
@@ -32,12 +32,14 @@ export const startUpdateProductByBarcode = ( barcode: string, dataForm: FormUpda
         const { token } = getState().auth;
         
         try {
-            await fetchApi({
+            const data: Product = await fetchApi({
                 method: "put",
                 path: `api/product/${barcode}`,
                 body: dataForm,
                 token: token!
             })
+            dispatch(updateProductsByBarcode({ barcode, productUpdate: data }))
+
         } catch (error) {}
                 
         dispatch( setLoading(false) );
