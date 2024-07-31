@@ -7,19 +7,22 @@ import { TopButtonProduct } from "./components/TopButtonProduct";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { joinTextProduct } from "./helpers/joinTextProduct";
+import { Product } from "../../Types";
+
+const findProduct = (products: Product[], searchTerm: string) => sortProduct(products.filter( product => RegExp(searchTerm, "i").test(joinTextProduct(product)) ))
 
 export const ProductPage = () => {
     const { products } = useAppSelector( state => state.product );
     const { current } = useAppSelector( state => state.modal );
     const dispatch = useAppDispatch();
-
-    const [productsFiltered, setProductsFiltered] = useState(sortProduct(products));
-
     const { register, getValues } = useForm()
+
+    const [productsFiltered, setProductsFiltered] = useState(sortProduct(getValues().search ? findProduct(products, getValues().search) : products));
+
 
     const onSetModalCreateProduct = () => dispatch( setModalProduct( "createProduct" ) );
 
-    const onSearch = () => setProductsFiltered(sortProduct (products.filter( product => RegExp(getValues().search).test(joinTextProduct(product)) )))
+    const onSearch = () => setProductsFiltered(findProduct(products, getValues().search))
     
     useEffect(() => { setProductsFiltered(sortProduct(products)) }, [products])
     

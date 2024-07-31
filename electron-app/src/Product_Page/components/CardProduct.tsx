@@ -2,6 +2,7 @@ import { selectProduct, setModalProduct } from "../../store/modal";
 import { useAppDispatch } from "../../store";
 import { ButtonSvg } from "../../components";
 import { Product } from "../../../Types"
+import { setProductPrice, startPrintPrice } from "../../store/printPrice";
 
 interface props {
     product: Product
@@ -22,6 +23,10 @@ export const CardProduct = ({ product }: props) => {
         dispatch( setModalProduct("updateProduct") );
     }
 
+    const onPrint = () => {
+        dispatch( setProductPrice(product) );
+    }
+
     return (
         <div className="bg-card_bg p-3 shadow-md rounded-md text-txt-black min-w-[400px] flex-1">
             <div className="flex justify-between gap-3">
@@ -30,6 +35,7 @@ export const CardProduct = ({ product }: props) => {
                 <div className="flex gap-2">
                     <ButtonSvg element="trash" onClick={onDelete} className="bg-card_btn text-card_btnText w-7"/>
                     <ButtonSvg element="pen" onClick={onUpdate} className="bg-card_btn text-card_btnText w-7"/>
+                    <ButtonSvg element="print" onClick={onPrint} className="bg-card_btn text-card_btnText w-7"/>
                 </div>
             </div>
 

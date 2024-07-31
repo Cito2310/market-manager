@@ -7,6 +7,7 @@ import { modalSlice } from './modal';
 import { productSlice } from './product';
 import { cashRegisterSlice } from './cashRegister';
 import { printSlice } from './print';
+import { printPriceSlice } from './printPrice';
 
 export const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
         product: productSlice.reducer,
         cashRegister: cashRegisterSlice.reducer,
         print: printSlice.reducer,
+        printPrice: printPriceSlice.reducer
     }
 })
 
