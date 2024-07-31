@@ -52,7 +52,7 @@ export const ModalCreateProduct = () => {
             onExit={onExit}
         >
             <div className="text-txt-black flex-col flex gap-2">
-                <InputText register={ register( "barcode", { required: true } ) } label="Codigo de barra" placeholder="Codigo de barra" className="capitalize" />
+                <InputText autofocus={true} register={ register( "barcode", { required: true } ) } label="Codigo de barra" placeholder="Codigo de barra" className="capitalize" />
 
                 <InputSelect
                     className="capitalize" emptyField

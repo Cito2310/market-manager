@@ -6,14 +6,16 @@ interface props {
     placeholder?: string;
     className?: string;
     password?: boolean
+    autofocus?: boolean;
 }
 
-export const InputText = ({ register, label, placeholder, className, password }: props) => (
+export const InputText = ({ register, label, placeholder, className, password, autofocus }: props) => (
     <div className="flex flex-col">
 
         { label && <label className="font-medium ml-1 mb-0.5">{ label }</label> }
 
         <input {...register} 
+            autoFocus={ autofocus }
             placeholder={ placeholder }
             type={ password ? "password" : "text" }
             className={`border rounded p-1.5 px-3 border-[#eeeeee] shadow-sm focus:outline-none ${className}`}
