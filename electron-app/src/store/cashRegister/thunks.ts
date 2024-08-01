@@ -11,8 +11,7 @@ export const startAddProductToCart = (barcode: string) => {
         if ( barcode.startsWith("20") && barcode.length === 13 ) {
             const prefix = barcode.slice(0,2);
             const idProduct = barcode.slice(2,7);
-            const weight = Number( barcode.slice(7,12) );
-            const weightToKg = weight / 1000;
+            const weight =  Number( barcode.slice(7,12)) /1000;
     
             const findProduct = products.find( product => product.barcode === idProduct );
 
@@ -20,9 +19,10 @@ export const startAddProductToCart = (barcode: string) => {
                 dispatch( setModalCashRegister("notFoundProduct") );
                 return false;
             }
+
             dispatch( addProductToCart({ 
                 product: findProduct, 
-                weight: weightToKg,
+                weight: weight,
             }) )
             return true;
         }

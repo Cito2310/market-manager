@@ -32,6 +32,12 @@ export const cashRegisterSlice = createSlice({
 
             const existProductInCart = state.productsCart.find( productInCart => productInCart.barcode === product.barcode );
 
+            if (weight && existProductInCart === undefined) {
+                const newProduct: ProductInCart = {...product, amount: weight}
+                state.productsCart.push( newProduct );
+                return;
+            }
+
             if ( existProductInCart === undefined ) {
                 const newProduct: ProductInCart = { ...product, amount: 1 };
                 state.productsCart.push( newProduct );
