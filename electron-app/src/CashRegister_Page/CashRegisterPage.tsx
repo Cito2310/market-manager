@@ -30,6 +30,7 @@ export const CashRegisterPage = () => {
                     onPrint={ onPrint }
                     onReset={ onModalReset }
                     barcode={ barcode }
+                    totalSum={ totalSum }
                 />
             </section>
 
