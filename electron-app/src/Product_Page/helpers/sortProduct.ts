@@ -1,5 +1,8 @@
 import { Product } from "../../../Types";
 
+// FUNCION
+// Recibe todos los productos y los ordena
+// Ordena primero por categoria -> subcategoria -> marca -> nombre
 export const sortProduct = (products: Product[]) => {
     let copyProducts = structuredClone(products)
 
@@ -12,6 +15,9 @@ export const sortProduct = (products: Product[]) => {
         
         if (a.brand > b.brand) return 1;
         if (a.brand < b.brand) return -1;
+
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
 
         return 0;
     })
