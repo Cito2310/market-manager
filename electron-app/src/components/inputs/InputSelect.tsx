@@ -20,7 +20,9 @@ export const InputSelect = ({ register, label, className, options, emptyField }:
             >
                 { emptyField && <option></option> }
                 {
-                    options.map( value => <option value={value} key={value}>{ value }</option>)
+                    options
+                    .sort((a,b) => a.localeCompare(b) )
+                    .map( value => <option value={value} key={value}>{ value }</option>)
                 }
             </select>
             
