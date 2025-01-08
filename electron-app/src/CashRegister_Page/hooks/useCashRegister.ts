@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import { useSound } from './../../hooks/internal/useSound';
+import { useEffect, useMemo } from "react";
 import { useDetectBarcode, useKeyUp } from "../../hooks";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { exitModal, setModalCashRegister } from "../../store/modal";
@@ -23,6 +24,14 @@ export const useCashRegister = () => {
         dispatch( setPrint( productsCart )); 
         dispatch( resetCart() );
     };
+
+    // SECCION DE CODIGO
+    // Ejecuta un sonido caracteristico cada vez que se agrega un producto
+    const play = useSound("add-product");
+    useEffect(() => {
+        if (productsCart.length !== 0) { play() }
+    }, [productsCart])
+    // FIN DE SECCION DE CODIGO
 
     return {
         onPrint,
