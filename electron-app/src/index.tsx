@@ -9,11 +9,11 @@ import { store } from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <HashRouter>
             <Provider store={ store }>
                 <AppMarketManager />
             </Provider>
         </HashRouter>
-    </React.StrictMode>
+    // </React.StrictMode>
 );
