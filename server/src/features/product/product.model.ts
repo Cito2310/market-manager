@@ -1,4 +1,3 @@
-// No verificado por humano
 import { Schema, model } from "mongoose";
 import { Batch, Product, SIZE_UNITS } from "../../../../shared/product.schema.js";
 import { ToMongo } from "../../types/toMongo.js";

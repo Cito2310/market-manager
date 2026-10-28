@@ -103,5 +103,5 @@ export type Sell = z.infer<typeof sellSchema>;
 export type Inventory = z.infer<typeof inventorySchema>;
 export type Product = z.infer<typeof productSchema>;
 export type ProductApi = Product & { __v: number };
-export type ProductInput = z.input<typeof productInputSchema>;
-export type ProductUpdate = z.input<typeof productUpdateSchema>;
+export type ProductInput = z.infer<typeof productInputSchema>;
+export type ProductUpdate = z.infer<typeof productUpdateSchema>;
