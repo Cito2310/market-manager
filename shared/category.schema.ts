@@ -1,3 +1,4 @@
+// No verificado por humano
 import { z } from "zod";
 import { auditableSchema } from "./auditable.schema.js";
 import { nameSchema, objectIdSchema, uniqueNamesArray } from "./common.schema.js";
@@ -66,7 +67,6 @@ export type Section = z.infer<typeof sectionSchema>;
 export type Brand = z.infer<typeof brandSchema>;
 export type Subcategory = z.infer<typeof subcategorySchema>;
 export type Category = z.infer<typeof categorySchema>;
-export type CategoryMongo = Omit<Category, "_id">;
 export type CategoryApi = Category & { __v: number };
 export type CategoryInput = z.input<typeof categoryInputSchema>;
 export type CategoryUpdate = z.input<typeof categoryUpdateSchema>;

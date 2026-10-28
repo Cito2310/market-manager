@@ -1,8 +1,9 @@
+// No verificado por humano
 import { Schema, model } from "mongoose";
-import { Brand, CategoryMongo, SECTIONS, Subcategory } from "../../../../shared/category.schema.js";
-import { WithAuditRefs } from "../../types/withAuditRefs.js";
+import { Brand, Category, SECTIONS, Subcategory } from "../../../../shared/category.schema.js";
+import { ToMongo } from "../../types/toMongo.js";
 
-type CategoryRecord = WithAuditRefs<CategoryMongo>;
+type CategoryMongo = ToMongo<Category>;
 
 const brandSchema = new Schema<Brand>({
     name: { type: String, required: true, trim: true, lowercase: true }
@@ -13,7 +14,7 @@ const subcategorySchema = new Schema<Subcategory>({
     brands: { type: [brandSchema], default: [] }
 });
 
-const categorySchema = new Schema<CategoryRecord>(
+const categorySchema = new Schema<CategoryMongo>(
     {
         section: { type: String, enum: SECTIONS, required: true, trim: true, lowercase: true },
         name: { type: String, required: true, trim: true, lowercase: true },
@@ -25,4 +26,4 @@ const categorySchema = new Schema<CategoryRecord>(
     { timestamps: true, optimisticConcurrency: true }
 );
 
-export const CategoryModel = model<CategoryRecord>("Category", categorySchema);
+export const CategoryModel = model<CategoryMongo>("Category", categorySchema);

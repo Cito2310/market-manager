@@ -1,10 +1,11 @@
+// No verificado por humano
 import { Schema, model } from "mongoose";
-import { ROLES, UserMongo } from "../../../../shared/auth.schema.js";
-import { WithAuditRefs } from "../../types/withAuditRefs.js";
+import { ROLES, User } from "../../../../shared/auth.schema.js";
+import { ToMongo } from "../../types/toMongo.js";
 
-export type UserRecord = WithAuditRefs<UserMongo>;
+export type UserMongo = ToMongo<User> & { passwordHash: string };
 
-const userSchema = new Schema<UserRecord>(
+const userSchema = new Schema<UserMongo>(
     {
         username: { type: String, required: true, unique: true, trim: true, lowercase: true },
         name: { type: String, required: true, trim: true, lowercase: true },
@@ -23,4 +24,4 @@ const userSchema = new Schema<UserRecord>(
     }
 );
 
-export const UserModel = model<UserRecord>("User", userSchema);
+export const UserModel = model<UserMongo>("User", userSchema);

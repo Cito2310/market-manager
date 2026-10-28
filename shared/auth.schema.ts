@@ -1,3 +1,4 @@
+// No verificado por humano
 import { z } from "zod";
 import { auditableSchema } from "./auditable.schema.js";
 import { nameSchema, objectIdSchema } from "./common.schema.js";
@@ -49,6 +50,5 @@ export const deleteUserAdminInputSchema = z.object({});
 // TYPES
 export type Role = z.infer<typeof roleSchema>;
 export type User = z.infer<typeof userSchema>;
-export type UserMongo = Omit<User, "_id"> & { passwordHash: string };
 export type RegisterUserInput = z.input<typeof registerUserInputSchema>;
 export type LoginInput = z.infer<typeof loginInputSchema>;
