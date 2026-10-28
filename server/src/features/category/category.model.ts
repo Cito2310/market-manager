@@ -1,7 +1,5 @@
-// No verificado por humano
 import { Schema, model } from "mongoose";
 import { Brand, CategoryMongo, SECTIONS, Subcategory } from "../../../../shared/category.schema.js";
-
 
 const brandSchema = new Schema<Brand>({
     name: { type: String, required: true, trim: true, lowercase: true }

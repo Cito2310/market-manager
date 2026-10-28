@@ -5,7 +5,8 @@ type Target = "body" | "params";
 
 type ValidationSchemas = Partial<Record<Target, z.ZodType>>;
 
-export const validate = (schemas: ValidationSchemas) =>
+export const validate =
+    (schemas: ValidationSchemas) =>
     (req: Request, res: Response, next: NextFunction): void => {
         for (const [target, schema] of Object.entries(schemas) as [Target, z.ZodType][]) {
             const result = schema.safeParse(req[target]);
