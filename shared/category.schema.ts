@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { auditableSchema } from "./auditable.schema.js";
+import { nameSchema, objectIdSchema, uniqueNamesArray } from "./common.schema.js";
 
 // CONSTANT
 export const SECTIONS = [
@@ -13,18 +14,6 @@ export const SECTIONS = [
     "pollería",
     "fiambrería",
 ] as const;
-
-
-// SUB-SCHEMA
-const nameSchema = z.string().trim().toLowerCase().min(2).max(50)
-
-const objectIdSchema = z.string().regex(/^[0-9a-f]{24}$/i, { error: "Invalid id" });
-
-const hasUniqueNames = (items: { name: string }[]): boolean =>
-    new Set(items.map((item) => item.name)).size === items.length;
-
-const uniqueNamesArray = <T extends z.ZodType<{ name: string }>>(item: T, error: string) =>
-    z.array(item).refine(hasUniqueNames, { error });
 
 
 // SCHEMA
@@ -69,6 +58,10 @@ export const categoryInputSchema = categorySchema
         active: z.boolean().default(true)
     });
 
+export const categoryUpdateSchema = categoryInputSchema.extend({
+    __v: z.number().int().nonnegative()
+});
+
 
 // TYPES
 export type Section = z.infer<typeof sectionSchema>;
@@ -78,3 +71,4 @@ export type Category = z.infer<typeof categorySchema>;
 export type CategoryMongo = Omit<Category, "_id">;
 export type CategoryApi = Category & { __v: number };
 export type CategoryInput = z.input<typeof categoryInputSchema>;
+export type CategoryUpdate = z.input<typeof categoryUpdateSchema>;

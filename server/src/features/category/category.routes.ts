@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { createdByRules, updatedByRules } from "../../helpers/validationRules.js";
-import { checkFields } from "../../middlewares/checkFields.js";
-import { categoryRules, idRules } from "./category.validators.js";
+import { validate } from "../../middlewares/validate.js";
+import { categoryInputSchema, categoryUpdateSchema } from "../../../../shared/category.schema.js";
+import { idParamsSchema } from "../../../../shared/common.schema.js";
 import { getCategories } from "./controllers/getCategories.js";
 import { createCategory } from "./controllers/createCategory.js";
 import { updateCategory } from "./controllers/updateCategory.js";
@@ -14,24 +14,10 @@ export const categoryRoutes = Router();
 categoryRoutes.get("/", getCategories);
 
 
-categoryRoutes.post("/", 
-    [
-        ...categoryRules, 
-        createdByRules, 
-        updatedByRules, 
-        checkFields
-], createCategory);
+categoryRoutes.post("/", validate({ body: categoryInputSchema }), createCategory);
 
 
-categoryRoutes.put("/:id", [
-    idRules, 
-    ...categoryRules, 
-    updatedByRules, 
-    checkFields
-], updateCategory);
+categoryRoutes.put("/:id", validate({ params: idParamsSchema, body: categoryUpdateSchema }), updateCategory);
 
 
-categoryRoutes.delete("/:id", [
-    idRules, 
-    checkFields
-], deleteCategory);
+categoryRoutes.delete("/:id", validate({ params: idParamsSchema }), deleteCategory);

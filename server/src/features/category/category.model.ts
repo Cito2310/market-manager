@@ -1,14 +1,16 @@
+// No verificado por humano
 import { Schema, model } from "mongoose";
-import { CategoryMongo, SECTIONS, Subcategory } from "../../../../shared/category.schema.js";
+import { Brand, CategoryMongo, SECTIONS, Subcategory } from "../../../../shared/category.schema.js";
 
 
-const subcategorySchema = new Schema<Subcategory>(
-    {
-        name: { type: String, required: true, trim: true, lowercase: true },
-        brands: { type: [{ type: String, trim: true, lowercase: true }], default: [] }
-    },
-    { _id: false }
-);
+const brandSchema = new Schema<Brand>({
+    name: { type: String, required: true, trim: true, lowercase: true }
+});
+
+const subcategorySchema = new Schema<Subcategory>({
+    name: { type: String, required: true, trim: true, lowercase: true },
+    brands: { type: [brandSchema], default: [] }
+});
 
 const categorySchema = new Schema<CategoryMongo>(
     {

@@ -7,7 +7,7 @@
 - Antes de realizar algo, presentar un plan al usuario y esperar su confirmación
 - Usar arrow functions: `const fn = () => {}` en lugar de `function fn() {}`
 - No escribir comentarios
-- Añadir un comentario arriba "No verificado por humano", y cada vez que se realice un cambio en un archivo si este comentario dice "Verificado por humano" cambiarlo por "No verificado por humano"
+- Añadir un comentario arriba "No verificado por humano", y cada vez que se realice un cambio en un archivo si no existe este comentario lo creas (Si no esta significa que fue verificado por un humano)
 
 ## Estructura de archivos
 - Separar archivos por **features** (no por tipo de archivo global).
