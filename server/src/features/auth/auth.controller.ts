@@ -17,9 +17,9 @@ export const login = async (req: Request, res: Response) => {
     if (!user) throw new HttpError(400, "Login invalid");
 
     const samePassword = compareSync(password, user.passwordHash);
-    if (!samePassword) throw new HttpError(400, "login invalid");
+    if (!samePassword) throw new HttpError(400, "Login invalid");
 
-    if (!user.active) throw new HttpError(403, "user is inactive");
+    if (!user.active) throw new HttpError(403, "User is inactive");
 
     const token: string = await generatorJWT({ id: user._id });
 
@@ -28,11 +28,12 @@ export const login = async (req: Request, res: Response) => {
 
 export const registerUser = async (req: Request, res: Response) => {
     const { password, ...bodyUser } = req.body as RegisterUserInput;
+    const { _id } = req.user;
 
     const salt = genSaltSync();
     const passwordHash = hashSync(password, salt);
 
-    const newUser = new UserModel({ passwordHash, ...bodyUser });
+    const newUser = new UserModel({ passwordHash, ...bodyUser, createdBy: _id, updatedBy: _id });
     await newUser.save();
 
     const token = await generatorJWT({ id: newUser._id });
@@ -42,17 +43,13 @@ export const registerUser = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request<{ id: string }>, res: Response) => {
     const { id } = req.params;
-    const { _id, role, username } = req.user;
+    const { _id, role } = req.user;
 
     const isSelf = _id.equals(id);
-    if (role !== "admin" && !isSelf) throw new HttpError(403, "insufficient permissions");
+    if (role !== "admin" && !isSelf) throw new HttpError(403, "Insufficient permissions");
 
-    const user = await UserModel.findByIdAndUpdate(
-        id,
-        { active: false, updatedBy: username },
-        { returnDocument: "after" }
-    );
-    if (!user) throw new HttpError(404, "user not found");
+    const user = await UserModel.findByIdAndUpdate(id, { active: false, updatedBy: _id }, { returnDocument: "after" });
+    if (!user) throw new HttpError(404, "User not found");
 
     res.status(200).json(user);
 };

@@ -1,10 +1,11 @@
 import { z } from "zod";
+import { objectIdSchema } from "./common.schema.js";
 
 export const auditableSchema = z.object({
     createdAt: z.coerce.date(),
     updatedAt: z.coerce.date(),
-    createdBy: z.string().trim().toLowerCase().min(1).max(50),
-    updatedBy: z.string().trim().toLowerCase().min(1).max(50)
+    createdBy: objectIdSchema,
+    updatedBy: objectIdSchema
 });
 
 export type Auditable = z.infer<typeof auditableSchema>;

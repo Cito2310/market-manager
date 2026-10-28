@@ -12,13 +12,19 @@ const seedAdmin = async (): Promise<void> => {
         username,
         password,
         name,
-        role: "admin",
-        createdBy: "system",
-        updatedBy: "system"
+        role: "admin"
     });
 
+    const _id = new mongoose.Types.ObjectId();
+
     await connectDB();
-    await UserModel.create({ ...admin, passwordHash: hashSync(plainPassword, genSaltSync()) });
+    await UserModel.create({
+        _id,
+        ...admin,
+        passwordHash: hashSync(plainPassword, genSaltSync()),
+        createdBy: _id,
+        updatedBy: _id
+    });
     console.log(`Admin "${admin.username}" created`);
     await mongoose.disconnect();
 };

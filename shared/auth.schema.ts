@@ -30,14 +30,12 @@ export const userSchema = z
     .extend(auditableSchema.shape);
 
 // INPUT-SCHEMA
-export const registerUserInputSchema = z
-    .object({
-        username: usernameSchema,
-        name: nameSchema,
-        password: passwordSchema,
-        role: roleSchema.default("cashier")
-    })
-    .extend(auditableSchema.pick({ createdBy: true, updatedBy: true }).shape);
+export const registerUserInputSchema = z.object({
+    username: usernameSchema,
+    name: nameSchema,
+    password: passwordSchema,
+    role: roleSchema.default("cashier")
+});
 
 export const loginInputSchema = z.object({
     username: usernameSchema,
