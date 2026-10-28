@@ -45,8 +45,10 @@ export const categorySchema = z
 const brandInputSchema = brandSchema.partial({ _id: true });
 
 const subcategoryInputSchema = subcategorySchema.partial({ _id: true }).extend({
-    brands: uniqueNamesArray(brandInputSchema, "Brands must be unique inside the subcategory").default([])
+    brands: uniqueNamesArray(brandInputSchema, "Brands must be unique inside the subcategory").optional()
 });
+
+const subcategoryUpdateSchema = subcategoryInputSchema.required({ brands: true });
 
 export const categoryInputSchema = categorySchema
     .omit({ _id: true, createdAt: true, updatedAt: true, createdBy: true, updatedBy: true })
@@ -54,11 +56,13 @@ export const categoryInputSchema = categorySchema
         subcategories: uniqueNamesArray(
             subcategoryInputSchema,
             "Subcategory names must be unique inside the category"
-        ).default([]),
-        active: z.boolean().default(true)
+        ).optional(),
+        active: z.boolean().optional()
     });
 
 export const categoryUpdateSchema = categoryInputSchema.extend({
+    subcategories: uniqueNamesArray(subcategoryUpdateSchema, "Subcategory names must be unique inside the category"),
+    active: z.boolean(),
     __v: z.number().int().nonnegative()
 });
 

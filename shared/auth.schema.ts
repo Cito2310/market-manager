@@ -35,17 +35,13 @@ export const registerUserInputSchema = z.object({
     username: usernameSchema,
     name: nameSchema,
     password: passwordSchema,
-    role: roleSchema.default("cashier")
+    role: roleSchema.optional()
 });
 
 export const loginInputSchema = z.object({
     username: usernameSchema,
     password: z.string().min(1)
 });
-
-export const deleteUserInputSchema = z.object({});
-
-export const deleteUserAdminInputSchema = z.object({});
 
 // TYPES
 export type Role = z.infer<typeof roleSchema>;
