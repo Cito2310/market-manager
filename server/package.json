@@ -1,0 +1,25 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "tsx watch src/index.ts",
+        "build": "tsc",
+        "start": "node dist/server/src/index.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "express-validator": "^7.3.2",
+        "mongoose": "^9.9.3"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.6",
+        "@types/node": "^20.14.2",
+        "tsx": "^4.16.2",
+        "typescript": "^5.5.3"
+    }
+}
