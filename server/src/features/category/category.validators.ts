@@ -1,7 +1,8 @@
 import { body, param } from "express-validator";
-import { SECTIONS } from "../../../../shared/Category.js";
-import type { Subcategory } from "../../../../shared/Category.js";
+// import { SECTIONS } from "../../../../shared/Category.js";
+// import type { Subcategory } from "../../../../shared/Category.js";
 import { stringRules } from "../../helpers/validationRules.js";
+import { SECTIONS, Subcategory } from "../../../../shared/category.schema.js";
 
 const NAME_OPTIONS = { min: 2, max: 50 };
 

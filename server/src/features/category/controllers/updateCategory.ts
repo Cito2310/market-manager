@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import type { CategoryApi } from "../../../../../shared/types/Category.js";
 import { CategoryModel } from "../category.model.js";
+import { CategoryApi } from "../../../../../shared/category.schema.js";
 
 // El front manda el category completo, con _id y __v incluidos
 export const updateCategory = async (

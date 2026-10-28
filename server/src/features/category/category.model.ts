@@ -1,7 +1,5 @@
 import { Schema, model } from "mongoose";
-import type { HydratedDocument } from "mongoose";
-import { SECTIONS } from "../../../../shared/Category.js";
-import type { CategoryMongo, Subcategory } from "../../../../shared/Category.js";
+import { CategoryMongo, SECTIONS, Subcategory } from "../../../../shared/category.schema.js";
 
 
 const subcategorySchema = new Schema<Subcategory>(

@@ -1,0 +1,8 @@
+{
+    "name": "market-manager",
+    "private": true,
+    "workspaces": [
+        "server",
+        "shared"
+    ]
+}

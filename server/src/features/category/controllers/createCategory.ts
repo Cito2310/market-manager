@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import type { CategoryInput } from "../../../../../shared/types/Category.js";
 import { CategoryModel } from "../category.model.js";
+import { CategoryInput } from "../../../../../shared/category.schema.js";
 
 export const createCategory = async (
     req: Request<Record<string, string>, unknown, CategoryInput>,
