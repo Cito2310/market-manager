@@ -1,7 +1,8 @@
+// No verificado por humano
 import { NextFunction, Request, Response } from "express";
 import { z } from "zod";
 
-type Target = "body" | "params";
+type Target = "body" | "params" | "query";
 
 type ValidationSchemas = Partial<Record<Target, z.ZodType>>;
 
@@ -21,7 +22,11 @@ export const validate =
                 return;
             }
 
-            req[target] = result.data as Request[Target];
+            if (target === "query") {
+                Object.defineProperty(req, "query", { value: result.data, writable: true, configurable: true });
+            } else {
+                req[target] = result.data as Request[Target];
+            }
         }
 
         next();

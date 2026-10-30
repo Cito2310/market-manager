@@ -18,7 +18,7 @@ const priceSchema = z.number().nonnegative();
 
 export const batchSchema = z.object({
     _id: objectIdSchema,
-    quantity: z.number().nonnegative(),
+    quantity: z.number(),
     expirationDate: z.coerce.date().optional(),
     receivedAt: z.coerce.date()
 });
@@ -84,12 +84,10 @@ export const productInputSchema = productSchema
         active: z.boolean().optional()
     });
 
-const batchUpdateSchema = batchInputSchema.required({ receivedAt: true });
-
 export const productUpdateSchema = productInputSchema.extend({
     details: detailsSchema,
     sell: sellSchema,
-    inventory: inventorySchema.extend({ batches: z.array(batchUpdateSchema) }),
+    inventory: inventorySchema.omit({ batches: true }),
     active: z.boolean(),
     __v: z.number().int().nonnegative()
 });

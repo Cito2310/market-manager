@@ -32,7 +32,12 @@ export const updateProduct = async (req: Request<{ id: string }>, res: Response)
 
     await assertCategoryRefs(bodyProduct.details);
 
-    product.overwrite({ ...bodyProduct, createdBy: product.createdBy, updatedBy: _id });
+    product.overwrite({
+        ...bodyProduct,
+        inventory: { ...bodyProduct.inventory, batches: product.inventory.batches },
+        createdBy: product.createdBy,
+        updatedBy: _id
+    });
     await product.save();
 
     res.status(200).json(product);
