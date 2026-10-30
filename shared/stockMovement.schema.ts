@@ -26,7 +26,8 @@ export const stockMovementSchema = z
         productId: objectIdSchema,
         type: stockMovementTypeSchema,
         quantity: nonZeroQuantitySchema,
-        note: noteSchema.optional()
+        note: noteSchema.optional(),
+        occurredAt: z.coerce.date()
     })
     .extend(auditableSchema.pick({ createdAt: true, createdBy: true }).shape);
 
@@ -65,7 +66,12 @@ export const stockMovementInputSchema = z.discriminatedUnion("type", [
     })
 ]);
 
-export const saleBatchInputSchema = z.array(saleInputSchema).min(1).max(100);
+const saleBatchItemSchema = saleInputSchema.extend({
+    occurredAt: z.coerce.date(),
+    createdBy: objectIdSchema
+});
+
+export const saleBatchInputSchema = z.array(saleBatchItemSchema).min(1);
 
 export const stockMovementQuerySchema = z
     .object({

@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { HttpError } from "../../middlewares/errors/HttpError.js";
 import { StockMovementModel } from "./stockMovement.model.js";
 import { ProductModel } from "../product/product.model.js";
+import { UserModel } from "../auth/auth.model.js";
 import {
     SaleBatchInput,
     StockMovementDeleteQuery,
@@ -19,9 +20,9 @@ const DELETE_BATCH_SIZE = 10000;
 export const getStockMovements = async (req: Request, res: Response) => {
     const { from, to, productId } = req.query as StockMovementQuery;
 
-    const filter = { createdAt: getDateRange(from, to), ...(productId && { productId: { $in: productId } }) };
+    const filter = { occurredAt: getDateRange(from, to), ...(productId && { productId: { $in: productId } }) };
 
-    const stockMovements = await StockMovementModel.find(filter).sort({ createdAt: -1 });
+    const stockMovements = await StockMovementModel.find(filter).sort({ occurredAt: -1 });
     res.status(200).json(stockMovements);
 };
 
@@ -66,40 +67,57 @@ export const createStockMovement = async (req: Request, res: Response) => {
 };
 
 export const createSaleStockMovements = async (req: Request, res: Response) => {
-    const saleInputs = req.body as SaleBatchInput;
-    const userId = req.user._id;
+    const saleInputs = (req.body as SaleBatchInput)
+        .map((saleInput, index) => ({ saleInput, index }))
+        .sort((a, b) => a.saleInput.occurredAt.getTime() - b.saleInput.occurredAt.getTime());
 
-    const productIds = [...new Set(saleInputs.map(({ productId }) => productId))];
+    const productIds = [...new Set(saleInputs.map(({ saleInput }) => saleInput.productId))];
+    const userIds = [...new Set(saleInputs.map(({ saleInput }) => saleInput.createdBy))];
 
-    const newStockMovements = await mongoose.connection.transaction(async (session) => {
+    const users = await UserModel.find({ _id: { $in: userIds } }, { _id: 1 }).lean();
+    const existingUserIds = new Set(users.map(({ _id }) => String(_id)));
+
+    const result = await mongoose.connection.transaction(async (session) => {
         const products = await ProductModel.find({ _id: { $in: productIds } }).session(session);
-        if (products.length !== productIds.length) throw new HttpError(404, "Product not found");
-
         const productsById = new Map(products.map((product) => [String(product._id), product]));
 
-        saleInputs.forEach((saleInput) => {
+        const accepted: SaleBatchInput = [];
+        const rejected: { index: number; productId: string; reason: string }[] = [];
+
+        for (const { saleInput, index } of saleInputs) {
             const product = productsById.get(saleInput.productId);
-            if (product) consumeByExpiration(product.inventory.batches, -saleInput.quantity);
-        });
+
+            if (!product) {
+                rejected.push({ index, productId: saleInput.productId, reason: "Product not found" });
+                continue;
+            }
+
+            if (!existingUserIds.has(saleInput.createdBy)) {
+                rejected.push({ index, productId: saleInput.productId, reason: "User not found" });
+                continue;
+            }
+
+            consumeByExpiration(product.inventory.batches, -saleInput.quantity);
+            accepted.push(saleInput);
+        }
 
         for (const product of products) {
             await product.save({ session });
         }
 
-        return StockMovementModel.insertMany(
-            saleInputs.map((saleInput) => ({ ...saleInput, createdBy: userId })),
-            { session }
-        );
+        const newStockMovements = await StockMovementModel.insertMany(accepted, { session });
+
+        return { accepted: newStockMovements, rejected };
     });
 
-    res.status(201).json(newStockMovements);
+    res.status(200).json(result);
 };
 
 export const deleteStockMovements = async (req: Request, res: Response) => {
     const { before } = req.query as unknown as StockMovementDeleteQuery;
 
-    const found = await StockMovementModel.find({ createdAt: { $lt: before } })
-        .sort({ createdAt: 1 })
+    const found = await StockMovementModel.find({ occurredAt: { $lt: before } })
+        .sort({ occurredAt: 1 })
         .limit(DELETE_BATCH_SIZE + 1)
         .lean();
 
