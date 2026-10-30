@@ -1,9 +1,12 @@
+// No verificado por humano
 import { z } from "zod";
 import { auditableSchema } from "./auditable.schema.js";
 import { objectIdSchema } from "./common.schema.js";
 
 // CONSTANT
 export const STOCK_MOVEMENT_TYPES = ["sale", "purchase", "adjustment", "shrinkage", "return"] as const;
+
+export const MIN_DELETE_AGE_DAYS = 90;
 
 // SCHEMA
 const stockMovementTypeSchema = z.enum(STOCK_MOVEMENT_TYPES);
@@ -33,16 +36,18 @@ const baseInputSchema = z.object({
     note: noteSchema.optional()
 });
 
+const saleInputSchema = baseInputSchema.extend({
+    type: z.enum(["sale"]),
+    quantity: negativeQuantitySchema
+});
+
 export const stockMovementInputSchema = z.discriminatedUnion("type", [
     baseInputSchema.extend({
         type: z.enum(["purchase"]),
         quantity: positiveQuantitySchema,
         expirationDate: z.coerce.date().optional()
     }),
-    baseInputSchema.extend({
-        type: z.enum(["sale"]),
-        quantity: negativeQuantitySchema
-    }),
+    saleInputSchema,
     baseInputSchema.extend({
         batchId: objectIdSchema,
         type: z.enum(["shrinkage"]),
@@ -60,6 +65,8 @@ export const stockMovementInputSchema = z.discriminatedUnion("type", [
     })
 ]);
 
+export const saleBatchInputSchema = z.array(saleInputSchema).min(1).max(100);
+
 export const stockMovementQuerySchema = z
     .object({
         from: z.coerce.date().optional(),
@@ -71,8 +78,18 @@ export const stockMovementQuerySchema = z
     })
     .refine(({ from, to }) => !from || !to || from <= to, { error: "'from' must be before 'to'" });
 
+export const stockMovementDeleteQuerySchema = z.object({
+    before: z.coerce
+        .date()
+        .refine((before) => before.getTime() <= Date.now() - MIN_DELETE_AGE_DAYS * 24 * 60 * 60 * 1000, {
+            error: `'before' must be at least ${MIN_DELETE_AGE_DAYS} days ago`
+        })
+});
+
 // TYPES
 export type StockMovementType = z.infer<typeof stockMovementTypeSchema>;
 export type StockMovement = z.infer<typeof stockMovementSchema>;
 export type StockMovementInput = z.infer<typeof stockMovementInputSchema>;
+export type SaleBatchInput = z.infer<typeof saleBatchInputSchema>;
 export type StockMovementQuery = z.infer<typeof stockMovementQuerySchema>;
+export type StockMovementDeleteQuery = z.infer<typeof stockMovementDeleteQuerySchema>;
